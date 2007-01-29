@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<merge>
+    <staticxml>cluster-list.xml</staticxml>
+    <configxml>cluster-config.xml</configxml>
+</merge>
