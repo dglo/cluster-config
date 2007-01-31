@@ -15,37 +15,29 @@
   <name>cluster-config</name>
 
   <scm>
-    <connection>scm:svn:http://code.icecube.wisc.edu/daq/projects/cluster-config/trunk</connection>
+    <connection>scm:svn:http://code.icecube.wisc.edu/daq/meta-projects/cluster-config/trunk</connection>
   </scm>
 
   <build>
     <plugins>
-
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
-	<artifactId>xml-maven-plugin</artifactId>
-	<executions>
-	  <execution>
+        <artifactId>exec-maven-plugin</artifactId>
+        <executions>
+
+          <execution>
+            <id>deploy-pdaq</id>
+            <configuration>
+              <executable>deploy-pdaq</executable>
+            </configuration>
+            <phase>install</phase>
             <goals>
-              <goal>transform</goal>
+              <goal>exec</goal>
             </goals>
           </execution>
-        </executions>
-        <configuration>
-          <transformationSets>
-            <transformationSet>
-              <dir>src/main/xml</dir>
-              <stylesheet>src/main/xml/daq-node-list.xsl</stylesheet>
-              <includes>
-                <include>cluster-config.xml</include>
-              </includes>
-              <outputDir>${project.build.directory}/generated-resources/xml/xslt</outputDir>
-            </transformationSet>
-          </transformationSets>
-        </configuration>
-      </plugin>
 
+        </executions>
+      </plugin>
     </plugins>
   </build>
-
 </project>
