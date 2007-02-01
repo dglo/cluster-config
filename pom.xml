@@ -20,6 +20,34 @@
 
   <build>
     <plugins>
+
+<!--
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>xml-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>transform</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <transformationSets>
+            <transformationSet>
+              <dir>src/main/xml</dir>
+              <stylesheet>src/main/xml/daq-node-list.xsl</stylesheet>
+              <includes>
+                <include>sps-sim-config.xml</include>
+                <include>sps-sim-config-reduced.xml</include>
+              </includes>
+              <outputDir>${project.build.directory}/generated-resources/xml/xslt</outputDir>
+            </transformationSet>
+          </transformationSets>
+        </configuration>
+      </plugin>
+-->
+
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
