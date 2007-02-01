@@ -1,33 +1,30 @@
 #!/usr/bin/env bash
 
+DEPLOYMENT=$1
+
+if [ -z "$DEPLOYMENT" ]; then
+   echo "Usage: $0 <deployment-name>"
+   echo "   E.g. $0 sps-sim-config"
+   exit
+fi
+
+#echo "Launching deployment for $DEPLOYMENT."
+
 SCRIPT_DIR=$(dirname $(readlink -f $0))
 REL_PATH_TO_WS=".."
 WS_DIR=$(cd $SCRIPT_DIR/$REL_PATH_TO_WS; pwd)
-CLUSTER=$(uname -n | sed 's/\(sp.*s.*\)-\(.*\)/\1/')
 RSYNC_FLAGS="-azv"
+CFG_FILE="$WS_DIR/cluster-config/target/generated-resources/xml/xslt/${DEPLOYMENT}.xml"
+if [ ! -f $CFG_FILE ]; then
+   echo "Could not find ${CFG_FILE}!  Sorry..."
+   exit
+fi
+source $CFG_FILE
 
 echo "**********************************************"
 echo " Running: $0"
 echo "   for cluster: $CLUSTER"
 echo "**********************************************"
-
-case $CLUSTER in
-  sps)
-    NODES="sps-expcont sps-dbs sps-evbuilder sps-gtrigger sps-iitrigger sps-2ndbuild sps-ichub21 sps-ichub29 sps-ichub30 sps-ichub39"
-    ;;
-  spts64)
-    NODES="spts64-expcont spts64-evbuilder spts64-stringproc01 sps-ichub21 sps-ichub29"
-    ;;
-  spts)
-    NODES="spts-expcont spts-evbuilder spts-stringproc01 spts-ichub21 spts-ichub29"
-    ;;
-  splts)
-    NODES="splts-expcont splts-evbuilder splts-stringproc01 splts-ichub21 splts-ichub29"
-    ;;
-  *)
-    NODES=""  # would be localhost but we don't deploy in this case.
-    ;;
-esac
 
 ####################### Parallelizing stuff #####################
 

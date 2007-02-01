@@ -23,24 +23,14 @@ machine names in use within the cluster. -->
     <xsl:text>&quot;</xsl:text>
     <xsl:value-of select="$newline"/>
 
-    <xsl:text>DB_NODES=&quot;</xsl:text>
-    <xsl:apply-templates select="cluster[@name=$cluster-name]">
-      <xsl:with-param name="rank" select="1" />
-    </xsl:apply-templates>
-    <xsl:text>&quot;</xsl:text>
-    <xsl:value-of select="$newline"/>
-
     <xsl:text>NODES=&quot;</xsl:text>
-    <xsl:apply-templates select="cluster[@name=$cluster-name]">
-      <xsl:with-param name="rank" select="2" />
-    </xsl:apply-templates>
+    <xsl:apply-templates select="cluster[@name=$cluster-name]" />
     <xsl:text>&quot;</xsl:text>
     <xsl:value-of select="$newline"/>
   </xsl:template>
 
   <xsl:template match="cluster[@name=$cluster-name]">
-    <xsl:param name="rank">2</xsl:param>
-    <xsl:for-each select="location[@rank=$rank]/address">
+    <xsl:for-each select="location/address">
       <xsl:value-of select="host"/>
       <xsl:if test = "not(position()=last())" >
         <xsl:text> </xsl:text>
