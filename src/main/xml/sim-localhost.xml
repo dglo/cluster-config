@@ -1,0 +1,52 @@
+<icecube>
+
+  <cluster name="localhost">
+
+    <!-- Each location element corresponds to a host (and the iceboss
+      instance on it) and lists the services and ejbs on that
+      host. The rank attribute orders locations, for example the DB or
+      ExpCont node might need to be handled differently within the
+      cluster. -->
+    <location name="localhost">
+      <address>
+        <host>localhost</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>1001</id>
+      </module>
+      <module>
+        <name>StringHub</name>
+        <id>1002</id>
+      </module>
+      <module>
+        <name>StringHub</name>
+        <id>1003</id>
+      </module>
+
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+      </module>
+
+    </location>
+
+  </cluster>
+
+</icecube>
