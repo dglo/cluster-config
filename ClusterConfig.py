@@ -16,11 +16,10 @@ class deployNode:
     def addComp(self, comp): self.comps.append(comp)
     
 class deployConfig:
-    CONFIGDIR = "./src/main/xml"
-    def __init__(self, configName):
+    def __init__(self, configDir, configName):
         self.nodes = []
         
-        self.configFile = deployConfig.CONFIGDIR + "/" + configName + ".xml"
+        self.configFile = configDir + "/" + configName + ".xml"
         if not exists(self.configFile): raise ConfigNotFoundException(self.configFile)
         parsed = minidom.parse(self.configFile)
         icecube = parsed.getElementsByTagName("icecube")

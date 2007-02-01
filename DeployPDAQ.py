@@ -17,8 +17,9 @@ def main():
                    doParallel = False,
                    dryRun     = False)
     opt, args = p.parse_args()
-                                    
-    config = deployConfig(opt.configName)
+
+    configDir = abspath("./src/main/xml")
+    config = deployConfig(configDir, opt.configName)
     print "NODES:"
     for node in config.nodes:
         print "  %s(%s)" % (node.hostName, node.locName),

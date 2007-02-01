@@ -31,7 +31,7 @@ class PCmd:
             self.run_thread()
         
 class ParallelShell:
-    def __init__(self, doParallel = False, dryRun = False):
+    def __init__(self, doParallel = True, dryRun = False):
         self.pcmds      = []
         self.doParallel = doParallel
         self.dryRun     = dryRun
@@ -54,6 +54,6 @@ class ParallelShell:
     def showAll(self):
         for c in self.pcmds:
             if not c.done:
-                print "NOT DONE: "+ str(c)
+                print "PENDING: "+ str(c)
             elif re.search(r"\S+", c.result):
                 print c.result
