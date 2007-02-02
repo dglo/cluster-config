@@ -14,7 +14,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1001</id>
+        <id>21</id>
       </module>
     </location>
 
@@ -25,7 +25,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1002</id>
+        <id>29</id>
       </module>
     </location>
 
@@ -36,7 +36,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1003</id>
+        <id>30</id>
       </module>
     </location>
 
@@ -47,7 +47,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1004</id>
+        <id>38</id>
       </module>
     </location>
 
@@ -58,7 +58,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1005</id>
+        <id>39</id>
       </module>
     </location>
 
@@ -69,7 +69,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1006</id>
+        <id>40</id>
       </module>
     </location>
 
@@ -80,7 +80,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1007</id>
+        <id>46</id>
       </module>
     </location>
 
@@ -91,7 +91,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1008</id>
+        <id>47</id>
       </module>
     </location>
 
@@ -102,7 +102,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1009</id>
+        <id>48</id>
       </module>
     </location>
 
@@ -113,7 +113,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1010</id>
+        <id>49</id>
       </module>
     </location>
 
@@ -124,7 +124,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1011</id>
+        <id>50</id>
       </module>
     </location>
 
@@ -135,7 +135,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1012</id>
+        <id>56</id>
       </module>
     </location>
 
@@ -146,7 +146,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1013</id>
+        <id>57</id>
       </module>
     </location>
 
@@ -157,7 +157,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1014</id>
+        <id>58</id>
       </module>
     </location>
 
@@ -168,10 +168,11 @@
 
       <module>
         <name>StringHub</name>
-        <id>1015</id>
+        <id>59</id>
       </module>
     </location>
 
+<!--
     <location name="ichub64">
       <address>
         <host>sps-ichub64</host>
@@ -179,9 +180,10 @@
 
       <module>
         <name>StringHub</name>
-        <id>1016</id>
+        <id>64</id>
       </module>
     </location>
+-->
 
     <location name="ichub65">
       <address>
@@ -190,7 +192,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1017</id>
+        <id>65</id>
       </module>
     </location>
 
@@ -201,7 +203,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1018</id>
+        <id>66</id>
       </module>
     </location>
 
@@ -212,10 +214,11 @@
 
       <module>
         <name>StringHub</name>
-        <id>1019</id>
+        <id>67</id>
       </module>
     </location>
 
+<!--
     <location name="ichub71">
       <address>
         <host>sps-ichub71</host>
@@ -226,6 +229,7 @@
         <id>1021</id>
       </module>
     </location>
+-->
 
     <location name="ichub72">
       <address>
@@ -234,7 +238,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1022</id>
+        <id>72</id>
       </module>
     </location>
 
@@ -245,7 +249,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1023</id>
+        <id>73</id>
       </module>
     </location>
 
@@ -256,7 +260,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1024</id>
+        <id>74</id>
       </module>
     </location>
 
@@ -267,10 +271,11 @@
 
       <module>
         <name>StringHub</name>
-        <id>1025</id>
+        <id>78</id>
       </module>
     </location>
 
+<!--
     <location name="ichub79">
       <address>
         <host>sps-ichub79</host>
@@ -278,26 +283,10 @@
 
       <module>
         <name>StringHub</name>
-        <id>1026</id>
+        <id>79</id>
       </module>
     </location>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-->
 
     <location name="ithub01">
       <address>
@@ -306,7 +295,7 @@
 
       <module>
         <name>StringHub</name>
-        <id>1010</id>
+        <id>81</id>
       </module>
     </location>
 
@@ -321,23 +310,35 @@
       </module>
     </location>
 
+    <location name="ithub03">
+      <address>
+        <host>sps-ithub03</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>83</id>
+      </module>
+    </location>
+
+    <location name="ithub04">
+      <address>
+        <host>sps-ithub04</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>84</id>
+      </module>
+    </location>
+
     <location name="2ndbuild">
       <address>
         <host>sps-2ndbuild</host>
       </address>
 
       <module>
-        <name>snBuilder</name>
-        <id>0</id>
-      </module>
-
-      <module>
-        <name>tcalBuilder</name>
-        <id>0</id>
-      </module>
-
-      <module>
-        <name>monitorBuilder</name>
+        <name>SecondaryBuilders</name>
         <id>0</id>
       </module>
 
@@ -365,10 +366,12 @@
         <id>0</id>
       </module>
 
+<!--
       <module>
         <name>iceTopTrigger</name>
         <id>0</id>
       </module>
+-->
 
       <module>
         <name>globalTrigger</name>
@@ -380,10 +383,12 @@
       <address>
         <host>sps-dbs</host>
       </address>
+    </location>
 
-      <module>
-        <name>not-sure-what-john-said-would-be-here</name>
-      </module>
+    <location name="amanda">
+      <address>
+        <host>sps-amanda</host>
+      </address>
     </location>
 
   </cluster>

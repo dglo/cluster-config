@@ -17,7 +17,7 @@ class PCmd:
     
     def run_thread(self):
         if self.dryRun:
-            self.result = "OK"
+            self.result = ""
             self.done   = True
         else:
             px = popen("%s 2>&1" % self.cmd, "r")
