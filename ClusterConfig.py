@@ -28,6 +28,11 @@ class deployConfig:
         if len(cluster) != 1: raise MalformedDeployConfigException(self.configFile)
         self.clusterName = cluster[0].attributes[ "name" ].value
 
+        # Get location of SPADE output
+        logDirForSpade = cluster[0].getElementsByTagName("logDirForSpade")
+        if len(logDirForSpade) != 1: raise MalformedDeployConfigException(self.configFile+" (logDirForSpade)")
+        self.logDirForSpade = logDirForSpade[0].childNodes[0].data
+        
         locations = cluster[0].getElementsByTagName("location")
         for nodeXML in locations:
             

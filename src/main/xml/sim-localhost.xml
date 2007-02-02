@@ -2,6 +2,9 @@
 
   <cluster name="localhost">
 
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>spade</logDirForSpade>
+
     <!-- Each location element corresponds to a host (and the iceboss
       instance on it) and lists the services and ejbs on that
       host. The rank attribute orders locations, for example the DB or
