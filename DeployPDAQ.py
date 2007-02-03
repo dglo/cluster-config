@@ -3,10 +3,20 @@
 import optparse
 from ClusterConfig import *
 from ParallelShell import *
-from os import getcwd, environ
-from os.path import abspath
+from os import environ, getcwd
+from os.path import abspath, isdir, join, split
 
-    
+def find_top():
+    curDir = getcwd()
+    [parentDir, baseName] = split(curDir)
+    for dir in [curDir, parentDir]:
+        if isdir(join(dir, 'config')) and \
+                isdir(join(dir, 'cluster-config')) and \
+                isdir(join(dir, 'dash')):
+                    return dir
+
+    raise Exception, 'Couldn''t find pDAQ trunk'
+
 def main():
     "Main program"
     p = optparse.OptionParser()
@@ -18,7 +28,9 @@ def main():
                    dryRun     = False)
     opt, args = p.parse_args()
 
-    configDir = abspath("./src/main/xml")
+    top = find_top()
+
+    configDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
     config = deployConfig(configDir, opt.configName)
     print "NODES:"
     for node in config.nodes:
@@ -27,8 +39,7 @@ def main():
             print "%s:%d " % (comp.compName, comp.compID),
         print
 
-    top = abspath("..")
-    m2  = environ["HOME"]+"/.m2"
+    m2  = join(environ["HOME"], '.m2')
 
     parallel = ParallelShell(opt.doParallel, opt.dryRun)
 
