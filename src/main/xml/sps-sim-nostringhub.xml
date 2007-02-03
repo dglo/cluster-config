@@ -1,0 +1,79 @@
+<!-- Everything except stringhubs -->
+
+<icecube>
+
+  <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <!-- Each location element corresponds to a host (and the iceboss
+      instance on it) and lists the services and ejbs on that
+      host. The rank attribute orders locations, for example the DB or
+      ExpCont node might need to be handled differently within the
+      cluster. -->
+
+    <location name="2ndbuild">
+      <address>
+        <host>sps-2ndbuild</host>
+      </address>
+
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+      </module>
+
+    </location>
+
+    <location name="evbuilder">
+      <address>
+        <host>sps-evbuilder</host>
+      </address>
+
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+      </module>
+
+    </location>
+
+    <location name="expcont">
+      <address>
+        <host>sps-expcont</host>
+      </address>
+
+    </location>
+
+    <location name="gtrigger">
+      <address>
+        <host>sps-gtrigger</host>
+      </address>
+
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+      </module>
+
+    </location>
+
+    <location name="iitrigger">
+      <address>
+        <host>sps-iitrigger</host>
+      </address>
+
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+      </module>
+
+    </location>
+
+    <location name="dbs">
+      <address>
+        <host>sps-dbs</host>
+      </address>
+    </location>
+
+  </cluster>
+
+</icecube>
