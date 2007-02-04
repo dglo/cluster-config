@@ -1,10 +1,37 @@
 #!/usr/bin/env python
 
+from os import listdir
+from re import search
 from os.path import exists
 from xml.dom import minidom
 
 class ConfigNotFoundException(Exception): pass
 class MalformedDeployConfigException(Exception): pass
+
+def showConfigs(configDir):
+    l = listdir(configDir)
+    cfgs = []
+    for f in l:
+        match = search(r'^(.+?)\.xml$', f)
+        if not match: continue
+        cfgs.append(match.group(1))
+
+    ok = []
+    remarks = {}
+    for cname in cfgs:
+        try:
+            config = deployConfig(configDir, cname)
+            ok.append(cname)
+            remarks[cname] = config.remarks
+        except Exception, e: pass # print cname+ `e`
+
+    ok.sort()
+    for cname in ok:
+        print "%40s === " % cname,
+        if remarks[cname]: print remarks[cname]
+        else: print
+    
+
 
 class deployComponent:
     def __init__(self, compName, compID): self.compName = compName; self.compID = compID

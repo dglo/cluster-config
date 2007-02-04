@@ -18,29 +18,6 @@ def find_top():
 
     raise Exception, 'Couldn''t find pDAQ trunk'
 
-def showConfigs(configDir):
-    l = listdir(configDir)
-    cfgs = []
-    for f in l:
-        match = search(r'^(.+?)\.xml$', f)
-        if not match: continue
-        cfgs.append(match.group(1))
-
-    ok = []
-    remarks = {}
-    for cname in cfgs:
-        try:
-            config = deployConfig(configDir, cname)
-            ok.append(cname)
-            remarks[cname] = config.remarks
-        except Exception, e: pass # print cname+ `e`
-
-    ok.sort()
-    for cname in ok:
-        print "%40s === " % cname,
-        if remarks[cname]: print remarks[cname]
-        else: print
-    
 def main():
     "Main program"
     usage = "%prog [options]"
