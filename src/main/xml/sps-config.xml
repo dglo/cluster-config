@@ -1,6 +1,9 @@
-<icecube>
+<icecube configName="sps-config" remarks="Default SPS configuration">
 
   <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
 
     <!-- Each location element corresponds to a host (and the iceboss
       instance on it) and lists the services and ejbs on that

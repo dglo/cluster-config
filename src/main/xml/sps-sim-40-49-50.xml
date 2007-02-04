@@ -1,4 +1,4 @@
-<icecube>
+<icecube remarks="SPS simulation with hubs 40, 49, 50">
 
   <cluster name="sps">
 

@@ -1,4 +1,4 @@
-<icecube>
+<icecube remarks="SPS 3 string sim. config, evbuilder running local">
 
   <cluster name="sps">
 

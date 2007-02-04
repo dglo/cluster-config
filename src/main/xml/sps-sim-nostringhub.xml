@@ -1,6 +1,4 @@
-<!-- Everything except stringhubs -->
-
-<icecube>
+<icecube remarks="SPS running without stringhubs">
 
   <cluster name="sps">
 

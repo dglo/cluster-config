@@ -1,4 +1,4 @@
-<icecube>
+<icecube remarks="Default SPS Configuration [SIM]">
 
   <cluster name="sps">
 
@@ -345,9 +345,6 @@
         <host>sps-dbs</host>
       </address>
 
-      <module>
-        <name>not-sure-what-john-said-would-be-here</name>
-      </module>
     </location>
 
   </cluster>

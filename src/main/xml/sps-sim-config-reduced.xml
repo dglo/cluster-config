@@ -1,4 +1,4 @@
-<icecube>
+<icecube remarks="Reduced configuration for three SPS hubs">
 
   <cluster name="sps">
 

@@ -24,6 +24,12 @@ class deployConfig:
         parsed = minidom.parse(self.configFile)
         icecube = parsed.getElementsByTagName("icecube")
         if len(icecube) != 1: raise MalformedDeployConfigException(self.configFile)
+
+        # Get "remarks" string if available
+        try:
+            self.remarks = icecube[0].attributes["remarks"].value
+        except Exception, e: self.remarks = None
+        
         cluster = icecube[0].getElementsByTagName("cluster")
         if len(cluster) != 1: raise MalformedDeployConfigException(self.configFile)
         self.clusterName = cluster[0].attributes[ "name" ].value
