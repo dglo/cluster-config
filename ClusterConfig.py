@@ -8,6 +8,8 @@ from xml.dom import minidom
 class ConfigNotFoundException(Exception): pass
 class MalformedDeployConfigException(Exception): pass
 
+GLOBAL_DEFAULT_LOG_LEVEL = "INFO"
+
 def showConfigs(configDir):
     l = listdir(configDir)
     cfgs = []
@@ -32,16 +34,18 @@ def showConfigs(configDir):
         else: print
     
 
-
 class deployComponent:
-    def __init__(self, compName, compID): self.compName = compName; self.compID = compID
+    def __init__(self, compName, compID, logLevel):
+        self.compName = compName; self.compID = compID; self.logLevel = logLevel
+
     def compName(self): return self.compName
     def compID(self):   return self.compID
-    
+    def logLevel(self): return self.logLevel
+
 class deployNode:
     def __init__(self, locName, hostName): self.locName = locName; self.hostName = hostName; self.comps = []
     def addComp(self, comp): self.comps.append(comp)
-    
+
 class deployConfig:
     def __init__(self, configDir, configName):
         self.nodes = []
@@ -62,21 +66,20 @@ class deployConfig:
         self.clusterName = cluster[0].attributes[ "name" ].value
 
         # Get location of SPADE output
-        logDirForSpade = cluster[0].getElementsByTagName("logDirForSpade")
-        if len(logDirForSpade) != 1: raise MalformedDeployConfigException(self.configFile+" (logDirForSpade)")
-        self.logDirForSpade = logDirForSpade[0].childNodes[0].data
+        self.logDirForSpade = getElementSingleTagName(cluster[0], "logDirForSpade")
+
+        # Get default log level
+        try:
+            self.defaultLogLevel = getElementSingleTagName(cluster[0], "defaultLogLevel")
+        except:
+            self.defaultLogLevel = GLOBAL_DEFAULT_LOG_LEVEL
         
         locations = cluster[0].getElementsByTagName("location")
         for nodeXML in locations:
-            
             name = nodeXML.attributes["name"].value
             # Get address
             address = nodeXML.getElementsByTagName("address")
-            if len(address) != 1: raise MalformedDeployConfigException(self.configFile)
-            hostXML = address[0].getElementsByTagName("host")
-            if len(hostXML) != 1: raise MalformedDeployConfigException(self.configFile)
-            if len(hostXML[0].childNodes) != 1: raise MalformedDeployConfigException(self.configFile)
-            hostname = hostXML[0].childNodes[0].data
+            hostname = getElementSingleTagName(address[0], "host")
 
             thisNode = deployNode(name, hostname)
             self.nodes.append(thisNode)
@@ -85,13 +88,17 @@ class deployConfig:
             components = []
             modules = nodeXML.getElementsByTagName("module")
             for compXML in modules:
-                nameXML = compXML.getElementsByTagName("name")
-                if len(nameXML) != 1: raise MalformedDeployConfigException(self.configFile)
-                if len(nameXML[0].childNodes) != 1: raise MalformedDeployConfigException(self.configFile)
-                compName = nameXML[0].childNodes[0].data
-                idXML = compXML.getElementsByTagName("id")
-                if len(idXML) != 1: raise MalformedDeployConfigException(self.configFile)
-                if len(idXML[0].childNodes) != 1: raise MalformedDeployConfigException(self.configFile)
-                compID = int(idXML[0].childNodes[0].data)
-                
-                thisNode.addComp(deployComponent(compName, compID))
+                compName = getElementSingleTagName(compXML, "name")
+                compID   = int(getElementSingleTagName(compXML, "id"))
+                try:
+                    logLevel = getElementSingleTagName(compXML, "logLevel")
+                except:
+                    logLevel = self.defaultLogLevel
+                thisNode.addComp(deployComponent(compName, compID, logLevel))
+
+def getElementSingleTagName(root, name):
+    elems = root.getElementsByTagName(name)
+    if len(elems) != 1: raise MalformedDeployConfigException("Expected exactly one %s" % name)
+    if len(elems[0].childNodes) != 1:
+        MalformedDeployConfigException("Expected exactly one child node of %s" %name)
+    return elems[0].childNodes[0].data
