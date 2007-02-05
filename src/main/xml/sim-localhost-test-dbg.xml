@@ -7,7 +7,7 @@
 
     <!-- Set default debug level for this configuration: can be overridden by 
          individual components -->
-    <defaultLogLevel>FATAL</defaultLogLevel>
+    <defaultLogLevel>WARN</defaultLogLevel>
 
     <!-- Each location element corresponds to a host (and the iceboss
       instance on it) and lists the services and ejbs on that
@@ -22,6 +22,7 @@
       <module>
         <name>StringHub</name>
         <id>1001</id>
+	<logLevel>FATAL</logLevel>
       </module>
 
       <module>
@@ -32,17 +33,19 @@
       <module>
         <name>StringHub</name>
         <id>1003</id>
-	<logLevel>INFO</logLevel>
+	<logLevel>ERROR</logLevel>
       </module>
 
       <module>
         <name>StringHub</name>
         <id>1004</id>
+        <logLevel>INFO</logLevel>
       </module>
 
       <module>
         <name>StringHub</name>
         <id>1005</id>
+        <logLevel>DEBUG</logLevel>
       </module>
 
       <module>
