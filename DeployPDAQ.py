@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+# DeployPDAQ.py
+# Jacobsen Feb. 2007
+#
+# Deploy valid pDAQ cluster configurations to any cluster
+
 import optparse
 from ClusterConfig import *
 from ParallelShell import *
@@ -37,13 +42,13 @@ def main():
 
     top = find_top()
 
-    configDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
+    configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
 
-    if opt.doList: showConfigs(configDir); raise SystemExit
+    if opt.doList: showConfigs(configXMLDir); raise SystemExit
     
     if opt.configName == None: p.print_help(); raise SystemExit    
 
-    config = deployConfig(configDir, opt.configName)
+    config = deployConfig(configXMLDir, opt.configName)
     print "NODES:"
     for node in config.nodes:
         print "  %s(%s)" % (node.hostName, node.locName),
@@ -51,12 +56,24 @@ def main():
             print "%s:%d " % (comp.compName, comp.compID),
         print
 
+    # Remember this config
+    hereFile = abspath(join(top, 'cluster-config', '.config'))
+    if not opt.dryRun:
+        fd = open(hereFile, 'w')
+        print >>fd, opt.configName
+        fd.close()
+
     m2  = join(environ["HOME"], '.m2')
 
     parallel = ParallelShell(opt.doParallel, opt.dryRun)
 
-    print "COMMANDS:"
+    done = False
     for node in config.nodes:
+
+        # Ignore localhost - already "deployed"
+        if node.hostName == "localhost": continue
+        if not done: print "COMMANDS:"; done = True
+        
         rsynccmd = "rsync -az %s %s:" % (top, node.hostName)
         print "  "+rsynccmd
         parallel.add(rsynccmd)
