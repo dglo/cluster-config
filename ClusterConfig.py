@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+#
+# ClusterConfig.py
+#
+# J. Jacobsen, NPX Designs, Inc. for UW-IceCube
+#
+# February, 2007
+
 from os import listdir
 from re import search
 from os.path import exists
@@ -11,6 +18,7 @@ class MalformedDeployConfigException(Exception): pass
 GLOBAL_DEFAULT_LOG_LEVEL = "INFO"
 
 def showConfigs(configDir):
+    "Utility to show all available cluster configurations in configDir"
     l = listdir(configDir)
     cfgs = []
     for f in l:
@@ -35,18 +43,32 @@ def showConfigs(configDir):
     
 
 class deployComponent:
+    "Record-keeping class for deployed components"
     def __init__(self, compName, compID, logLevel):
-        self.compName = compName; self.compID = compID; self.logLevel = logLevel
-
-    def compName(self): return self.compName
-    def compID(self):   return self.compID
-    def logLevel(self): return self.logLevel
+        self.compName = compName;
+        self.compID   = compID;
+        self.logLevel = logLevel
 
 class deployNode:
-    def __init__(self, locName, hostName): self.locName = locName; self.hostName = hostName; self.comps = []
+    "Record-keeping class for host targets"
+    def __init__(self, locName, hostName):
+        self.locName  = locName;
+        self.hostName = hostName;
+        self.comps    = []
+        
     def addComp(self, comp): self.comps.append(comp)
 
+def getElementSingleTagName(root, name):
+    "Fetch a single element tag name of form <tagName>yowsa!</tagName>"
+    elems = root.getElementsByTagName(name)
+    if len(elems) != 1:
+        raise MalformedDeployConfigException("Expected exactly one %s" % name)
+    if len(elems[0].childNodes) != 1:
+        raise MalformedDeployConfigException("Expected exactly one child node of %s" %name)
+    return elems[0].childNodes[0].data
+
 class deployConfig:
+    "Class for parsing and storing pDAQ cluster configurations stored in XML files"
     def __init__(self, configDir, configName):
         self.nodes = []
         
@@ -96,9 +118,3 @@ class deployConfig:
                     logLevel = self.defaultLogLevel
                 thisNode.addComp(deployComponent(compName, compID, logLevel))
 
-def getElementSingleTagName(root, name):
-    elems = root.getElementsByTagName(name)
-    if len(elems) != 1: raise MalformedDeployConfigException("Expected exactly one %s" % name)
-    if len(elems[0].childNodes) != 1:
-        MalformedDeployConfigException("Expected exactly one child node of %s" %name)
-    return elems[0].childNodes[0].data
