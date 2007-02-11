@@ -12,16 +12,7 @@ from os import environ, getcwd, listdir
 from os.path import abspath, isdir, join, split
 from re import search
 
-def find_top():
-    curDir = getcwd()
-    [parentDir, baseName] = split(curDir)
-    for dir in [curDir, parentDir]:
-        if isdir(join(dir, 'config')) and \
-                isdir(join(dir, 'cluster-config')) and \
-                isdir(join(dir, 'dash')):
-                    return dir
-
-    raise Exception, 'Couldn''t find pDAQ trunk'
+from locate_pdaq import find_pdaq_trunk
 
 def main():
     "Main program"
@@ -40,7 +31,7 @@ def main():
                    dryRun     = False)
     opt, args = p.parse_args()
 
-    top = find_top()
+    top = find_pdaq_trunk()
 
     configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
 
