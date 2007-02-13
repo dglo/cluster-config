@@ -335,6 +335,17 @@
       </module>
     </location>
 
+    <location name="ittrigger">
+      <address>
+        <host>sps-ittrigger</host>
+      </address>
+
+      <module>
+        <name>iceTopTrigger</name>
+        <id>0</id>
+      </module>
+    </location>
+
     <location name="gtrigger">
       <address>
         <host>sps-gtrigger</host>
