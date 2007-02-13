@@ -44,7 +44,11 @@ def main():
     for node in config.nodes:
         print "  %s(%s)" % (node.hostName, node.locName),
         for comp in node.comps:
-            print "%s:%d " % (comp.compName, comp.compID),
+            print "%s:%d" % (comp.compName, comp.compID),
+            if comp.compName == "StringHub":
+                if comp.isIcetop: print "[icetop]",
+                else: print "[in-ice]",
+            print " ",
         print
 
     # Remember this config

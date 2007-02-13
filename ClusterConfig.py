@@ -44,11 +44,12 @@ def showConfigs(configDir):
 
 class deployComponent:
     "Record-keeping class for deployed components"
-    def __init__(self, compName, compID, logLevel):
+    def __init__(self, compName, compID, logLevel, iceTop = False):
         self.compName = compName;
         self.compID   = compID;
         self.logLevel = logLevel
-
+        self.isIcetop = iceTop
+        
 class deployNode:
     "Record-keeping class for host targets"
     def __init__(self, locName, hostName):
@@ -116,5 +117,10 @@ class deployConfig:
                     logLevel = getElementSingleTagName(compXML, "logLevel")
                 except:
                     logLevel = self.defaultLogLevel
-                thisNode.addComp(deployComponent(compName, compID, logLevel))
+                iceTop = False
+                try:
+                    itElems = compXML.getElementsByTagName("isIcetop")
+                    if len(itElems) > 0: iceTop = True
+                except: pass
+                thisNode.addComp(deployComponent(compName, compID, logLevel, iceTop))
 
