@@ -8,7 +8,7 @@
 import optparse
 from ClusterConfig import *
 from ParallelShell import *
-from os import environ, getcwd, listdir
+from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 from re import search
 
@@ -26,11 +26,24 @@ def main():
                  help="Don't actually do anything - just print steps")
     p.add_option("-p", "--parallel",     action="store_true",           dest="doParallel",
                  help="Run rsyncs in parallel")
+    p.add_option("-q", "--quiet",        action="store_true",           dest="quiet",
+                 help="Run quietly")
+    p.add_option("-s", "--serial",       action="store_true",           dest="doSerial",
+                 help="Run rsyncs serially")
+    p.add_option("-v", "--verbose",      action="store_true",           dest="verbose",
+                 help="Be chatty")
     p.set_defaults(configName = None,
-                   doParallel = False,
+                   doParallel = True,
+                   doSerial   = False,
+                   verbose    = True,
+                   quiet      = False,
                    dryRun     = False)
     opt, args = p.parse_args()
 
+    if opt.doSerial: opt.doParallel = False
+    if opt.quiet:    opt.verbose    = False
+    if opt.dryRun:   opt.verbose    = True
+    
     top = find_pdaq_trunk()
 
     configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
@@ -40,16 +53,18 @@ def main():
     if opt.configName == None: p.print_help(); raise SystemExit    
 
     config = deployConfig(configXMLDir, opt.configName)
-    print "NODES:"
-    for node in config.nodes:
-        print "  %s(%s)" % (node.hostName, node.locName),
-        for comp in node.comps:
-            print "%s:%d" % (comp.compName, comp.compID),
-            if comp.compName == "StringHub":
-                if comp.isIcetop: print "[icetop]",
-                else: print "[in-ice]",
-            print " ",
-        print
+
+    if opt.verbose:
+        print "NODES:"
+        for node in config.nodes:
+            print "  %s(%s)" % (node.hostName, node.locName),
+            for comp in node.comps:
+                print "%s:%d" % (comp.compName, comp.compID),
+                if comp.compName == "StringHub":
+                    if comp.isIcetop: print "[icetop]",
+                    else: print "[in-ice]",
+                print " ",
+            print
 
     # Remember this config
     hereFile = abspath(join(top, 'cluster-config', '.config'))
@@ -60,24 +75,35 @@ def main():
 
     m2  = join(environ["HOME"], '.m2')
 
-    parallel = ParallelShell(opt.doParallel, opt.dryRun)
+    if opt.doParallel:
+        parallel = ParallelShell(opt.doParallel, opt.dryRun)
 
     done = False
     for node in config.nodes:
 
         # Ignore localhost - already "deployed"
         if node.hostName == "localhost": continue
-        if not done: print "COMMANDS:"; done = True
+        if not done and opt.verbose:
+            print "COMMANDS:"
+            done = True
         
         rsynccmd = "rsync -az %s %s:" % (top, node.hostName)
-        print "  "+rsynccmd
-        parallel.add(rsynccmd)
+        if opt.verbose: print "  "+rsynccmd
+        if opt.doParallel:
+            parallel.add(rsynccmd)
+        else:
+            if not opt.dryRun: system(rsynccmd)
+            
         rsynccmd = "rsync -az %s %s:" % (m2, node.hostName)
-        print "  "+rsynccmd
-        parallel.add(rsynccmd)
+        if opt.verbose: print "  "+rsynccmd
+        if opt.doParallel:
+            parallel.add(rsynccmd)
+        else:
+            if not opt.dryRun: system(rsynccmd)
 
-    parallel.start()
-    parallel.wait()
-    parallel.showAll()
+    if opt.doParallel:
+        parallel.start()
+        parallel.wait()
+        parallel.showAll()
     
 if __name__ == "__main__": main()
