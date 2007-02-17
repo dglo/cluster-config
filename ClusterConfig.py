@@ -91,6 +91,12 @@ class deployConfig:
         # Get location of SPADE output
         self.logDirForSpade = getElementSingleTagName(cluster[0], "logDirForSpade")
 
+        # Get location of SPADE/logs copies
+        try:
+            self.logDirCopies = getElementSingleTagName(cluster[0], "logDirCopies")
+        except:
+            self.logDirCopies = None
+            
         # Get default log level
         try:
             self.defaultLogLevel = getElementSingleTagName(cluster[0], "defaultLogLevel")
