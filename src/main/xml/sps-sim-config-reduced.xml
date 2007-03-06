@@ -3,7 +3,8 @@
   <cluster name="sps">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
-    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+    <logDirForSpade>spade</logDirForSpade>
+    <defaultLogLevel>WARN</defaultLogLevel>
 
     <!-- Each location element corresponds to a host (and the iceboss
       instance on it) and lists the services and ejbs on that
@@ -18,6 +19,7 @@
       <module>
         <name>StringHub</name>
         <id>1001</id>
+        <logLevel>INFO</logLevel>
       </module>
     </location>
 

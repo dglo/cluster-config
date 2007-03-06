@@ -96,6 +96,7 @@
       <module>
         <name>amandaTrigger</name>
         <id>0</id>
+	<logLevel>DEBUG</logLevel>
       </module>
     </location>
 

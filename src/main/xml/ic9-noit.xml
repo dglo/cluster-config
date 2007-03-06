@@ -171,7 +171,24 @@
       <address>
         <host>sps-amanda</host>
       </address>
+
+      <module>
+	  <name>StringHub</name>
+	  <id>0</id>
+      </module>
     </location>
+
+    <location name="ittrigger">
+      <address>
+        <host>sps-ittrigger</host>
+      </address>
+
+      <module>
+        <name>amandaTrigger</name>
+        <id>0</id>
+      </module>
+    </location>
+
 
   </cluster>
 
