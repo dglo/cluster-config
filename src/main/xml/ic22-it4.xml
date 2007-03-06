@@ -3,7 +3,8 @@
   <cluster name="sps">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
-    <logDirForSpade>spade</logDirForSpade>
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
 
     <defaultLogLevel>INFO</defaultLogLevel>
 
@@ -344,7 +345,9 @@
         <name>iceTopTrigger</name>
         <id>0</id>
       </module>
+
     </location>
+
 
     <location name="gtrigger">
       <address>
@@ -355,17 +358,18 @@
         <name>globalTrigger</name>
         <id>0</id>
       </module>
+
+      <module>
+        <name>amandaTrigger</name>
+        <id>0</id>
+	<logLevel>WARN</logLevel>
+      </module>
+
     </location>
 
     <location name="expcont">
       <address>
         <host>sps-expcont</host>
-      </address>
-    </location>
-
-    <location name="dbs">
-      <address>
-        <host>sps-dbs</host>
       </address>
     </location>
 
@@ -379,19 +383,6 @@
 	  <id>0</id>
       </module>
     </location>
-
-    <location name="ittrigger">
-      <address>
-        <host>sps-ittrigger</host>
-      </address>
-
-      <module>
-        <name>amandaTrigger</name>
-        <id>0</id>
-	<logLevel>DEBUG</logLevel>
-      </module>
-    </location>
-
 
   </cluster>
 
