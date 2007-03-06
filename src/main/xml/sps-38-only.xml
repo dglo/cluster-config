@@ -1,32 +1,87 @@
-<icecube configName="sps-38-only" remarks="SPS String 38 only">
+<icecube remarks="SPS String 38 only">
 
   <cluster name="sps">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
     <logDirForSpade>spade</logDirForSpade>
 
-    <location name="ichub38" host="sps-ichub38">
-      <module name="StringHub" id="38"/>
+    <!-- Each location element corresponds to a host (and the iceboss
+      instance on it) and lists the services and ejbs on that
+      host. The rank attribute orders locations, for example the DB or
+      ExpCont node might need to be handled differently within the
+      cluster. -->
+
+    <location name="ichub38">
+      <address>
+        <host>sps-ichub38</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>38</id>
+      </module>
     </location>
 
-    <location name="2ndbuild" host="sps-2ndbuild">
-      <module name="SecondaryBuilders"/>
+    <location name="2ndbuild">
+      <address>
+        <host>sps-2ndbuild</host>
+      </address>
+
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+      </module>
+
     </location>
 
-    <location name="evbuilder" host="sps-evbuilder">
-      <module name="eventBuilder"/>
+    <location name="evbuilder">
+      <address>
+        <host>sps-evbuilder</host>
+      </address>
+
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+      </module>
+
     </location>
 
-    <location name="expcont" host="sps-expcont"/>
-
-    <location name="gtrigger" host="sps-gtrigger">
-      <module name="globalTrigger"/>
+    <location name="expcont">
+      <address>
+        <host>sps-expcont</host>
+      </address>
     </location>
 
-    <location name="iitrigger" host="sps-iitrigger">
-      <module name="inIceTrigger"/>
+    <location name="gtrigger">
+      <address>
+        <host>sps-gtrigger</host>
+      </address>
+
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+      </module>
+
     </location>
 
-    <location name="dbs" host="sps-dbs"/>
+    <location name="iitrigger">
+      <address>
+        <host>sps-iitrigger</host>
+      </address>
+
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+      </module>
+
+    </location>
+
+    <location name="dbs">
+      <address>
+        <host>sps-dbs</host>
+      </address>
+    </location>
+
   </cluster>
+
 </icecube>

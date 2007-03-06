@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE project [
+    <!ENTITY LOCAL_PRECOMPILE_JAVA ",genClusterConfig">
+    <!ENTITY common-targets SYSTEM "file:../tools/resources/common-targets.xml">
+    <!ENTITY % pjt-defns SYSTEM "file:../tools/resources/java-defns.xml">
+    %pjt-defns;
+]>
+
+<project name="cluster-config" default="report" >
+  <description>Build the library and documentation for the "cluster-config" project.</description>
+  &common-targets;
+  &pjt-targets;
+
+  <!-- taskdef name="host" classname="icecube.tools.ant.Host"/ -->
+
+  <target name="clusterXmlSpecified" depends="setProperties" unless="XML">
+    <property name="XML" value="${jar_resources_dir}/cluster-config.xml"/>
+  </target>
+
+  <target name="clusterXmlExist" depends="clusterXmlSpecified">
+    <available property="cluster.xml.exists" file="${XML}" type="file"/>
+    <fail message="The file ${XML} does not exist" unless="cluster.xml.exists"/>
+  </target>
+
+  <target name="clusterSpecified" unless="CLUSTER">
+    <exec executable="/bin/sh" os="Linux" outputproperty="cluster.guess">
+      <arg value="-c" />
+      <arg value="uname -n | sed 's/\(sp.*s.*\)-\(.*\)/\1/'" />
+    </exec>
+    <condition property="CLUSTER" value="${cluster.guess}" else="merc">
+      <or>
+        <equals arg1="${cluster.guess}" arg2="sps" />
+        <equals arg1="${cluster.guess}" arg2="spts" />
+        <equals arg1="${cluster.guess}" arg2="spts64" />
+        <equals arg1="${cluster.guess}" arg2="splts" />
+      </or>
+    </condition>    
+  </target>
+
+  <target name="genClusterConfig" depends="dependencyPath,clusterXmlExist,clusterSpecified"
+          description="Generate all the cluster configuration files" >
+
+    <!-- host property="ant.build.host"/ -->
+    <!-- echo message="ant.build.host is: ${ant.build.host}"/ -->
+    <!-- fail message="CLUSTER not set or discovered!" unless="CLUSTER"/ -->
+    <!-- echo message="CLUSTER is: ${CLUSTER}" / -->
+
+    <!-- Generate the NODES definition for deploy-daq.sh -->
+    <xslt in="${XML}"
+          out="${build_dir}/daq-node-list"
+          style="${jar_resources_dir}/daq-node-list.xsl">
+      <param name="cluster-name" expression="${CLUSTER}"/>
+    </xslt>
+
+    <!-- Generate the SP_MAP definition for deploy-daq.sh -->
+    <xslt in="${XML}"
+          out="${build_dir}/daq-service-project-map"
+          style="${jar_resources_dir}/daq-service-project-map.xsl">
+      <param name="cluster-name" expression="${CLUSTER}"/>
+    </xslt>
+
+    <!-- Generate the cluster description for the Exp. Cont. scripts. -->
+    <xslt in="${XML}"
+          out="${build_dir}/locations_${CLUSTER}.py"
+          style="${jar_resources_dir}/locations_cluster.xsl">
+      <param name="cluster-name" expression="${CLUSTER}"/>
+    </xslt>
+
+    <!-- Generate all the *-service.xml files -->
+    <xslt in="${XML}"
+          out="${build_dir}/cluster-services.log"
+          style="${jar_resources_dir}/cluster-services.xsl">
+      <param name="cluster-name" expression="${CLUSTER}"/>
+    </xslt>
+
+    <!-- Generate all the daq-<location>-app.xml files -->
+    <xslt in="${XML}"
+          out="${build_dir}/daq-location-app.log"
+          style="${jar_resources_dir}/daq-location-app.xsl">
+      <param name="cluster-name" expression="${CLUSTER}"/>
+    </xslt>
+
+    <!-- Generate all the daq-<location>-jboss.xml files -->
+    <xslt in="${XML}"
+          out="${build_dir}/daq-location-jboss.log"
+          style="${jar_resources_dir}/daq-location-jboss.xsl">
+      <param name="cluster-name" expression="${CLUSTER}"/>
+    </xslt>
+
+    <!-- Generate the componentsInConfig.sql file -->
+    <xslt in="${XML}"
+          out="${build_dir}/componentsInConfig.sql"
+          style="${jar_resources_dir}/componentsInConfig.xsl">
+      <param name="cluster-name" expression="${CLUSTER}"/>
+    </xslt>
+
+  </target>
+
+  <target name="genPortalClusterInfo"
+          depends="dependencyPath,clusterXmlExist,clusterSpecified"
+          description="Generate the XML backend for MBeans that will provide cluster configuration info via JSPs in a Portal context">
+    <exec executable="/bin/sh" os="Linux" outputproperty="ws.name">
+      <arg value="-c" />
+      <arg value="(cd .. &amp;&amp; basename `pwd`)" />
+    </exec>
+    <exec executable="/bin/sh" os="Linux" outputproperty="build.num">
+      <arg value="-c" />
+      <arg value="jar xf ../lib/globalTrig-prod-conf.jar META-INF/MANIFEST.MF;cat META-INF/MANIFEST.MF | grep Implementation-Version | sed -e 's/[()]//g' | awk '{print $4}'" />
+    </exec>
+    <exec executable="/bin/sh" os="Linux" outputproperty="build.host">
+      <arg value="-c" />
+      <arg value="cat META-INF/MANIFEST.MF | grep Implementation-Version | awk '{print $2}'" />
+    </exec>
+    <delete dir="META-INF"/> 
+
+    <echo message="CLUSTER is: ${CLUSTER}" />
+    <echo message="WORKSPACE is: ${ws.name}" />
+    <echo message="BUILD NUM is: ${build.num}" />
+    <echo message="BUILD HOST is: ${build.host}" />
+
+    <!-- Generate the first pass XML of all physical nodes present in -->
+    <!--  a given cluster                                             -->
+    <xslt in="${jar_resources_dir}/PortalClusterInfoMerge.xml"
+          out="${build_dir}/PortalClusterInfo.xml"
+          style="${jar_resources_dir}/PortalClusterInfo.xsl">
+      <param name="cluster-name" expression="${CLUSTER}"/>
+      <param name="ws-name" expression="${ws.name}"/>
+      <param name="build-number" expression="${build.num}"/>
+      <param name="build-host" expression="${build.host}"/>
+    </xslt>
+  </target>
+</project>

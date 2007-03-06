@@ -3,41 +3,129 @@
   <cluster name="spts64">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
-    <logDirForSpade>/mnt/data/spade/pdaq/runs</logDirForSpade>
-    <logDirCopies>/mnt/data/pdaqlocal</logDirCopies>
+    <logDirForSpade>spade</logDirForSpade>
 
     <defaultLogLevel>INFO</defaultLogLevel>
 
-    <location name="ichub21" host="spts64-ichub21">
-      <module name="StringHub" id="2021"/>
+    <!-- Each location element corresponds to a host (and the iceboss
+      instance on it) and lists the services and ejbs on that
+      host. The rank attribute orders locations, for example the DB or
+      ExpCont node might need to be handled differently within the
+      cluster. -->
+    <location name="ichub21">
+      <address>
+        <host>spts64-ichub21</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>21</id>
+      </module>
     </location>
 
-    <location name="ichub29" host="spts64-ichub29">
-      <module name="StringHub" id="2029"/>
+    <location name="ichub29">
+      <address>
+        <host>spts64-ichub29</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>29</id>
+      </module>
     </location>
 
-    <location name="ithub01" host="spts64-ithub01">
-      <module name="StringHub" id="2081"/>
+    <location name="ithub01">
+      <address>
+        <host>spts64-ithub01</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>81</id>
+	<isIcetop/>
+      </module>
     </location>
 
-    <location name="expcont" host="spts64-expcont">
-      <module name="SecondaryBuilders"/>
+    <location name="2ndbuild">
+      <address>
+        <host>spts64-expcont</host>
+      </address>
+
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+      </module>
     </location>
 
-    <location name="evbuilder" host="spts64-evbuilder">
-      <module name="eventBuilder"/>
+    <location name="evbuilder">
+      <address>
+        <host>spts64-evbuilder</host>
+      </address>
+
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+      </module>
     </location>
 
-    <location name="iitrigger" host="spts64-iitrigger">
-      <module name="inIceTrigger"/>
+    <location name="iitrigger">
+      <address>
+        <host>spts64-iitrigger</host>
+      </address>
+
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+      </module>
     </location>
 
-    <location name="ittrigger" host="spts64-ittrigger">
-      <module name="iceTopTrigger"/>
+    <location name="ittrigger">
+      <address>
+        <host>spts64-ittrigger</host>
+      </address>
+
+      <module>
+        <name>iceTopTrigger</name>
+        <id>0</id>
+      </module>
     </location>
 
-    <location name="gtrigger" host="spts64-gtrigger">
-      <module name="globalTrigger"/>
+    <location name="gtrigger">
+      <address>
+        <host>spts64-gtrigger</host>
+      </address>
+
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+      </module>
     </location>
+
+    <location name="expcont">
+      <address>
+        <host>spts64-expcont</host>
+      </address>
+    </location>
+
+    <location name="dbs">
+      <address>
+        <host>spts64-dbs</host>
+      </address>
+    </location>
+
+    <location name="ittrigger">
+      <address>
+        <host>spts64-ittrigger</host>
+      </address>
+
+      <module>
+        <name>amandaTrigger</name>
+        <id>0</id>
+	<logLevel>DEBUG</logLevel>
+      </module>
+    </location>
+
+
   </cluster>
+
 </icecube>

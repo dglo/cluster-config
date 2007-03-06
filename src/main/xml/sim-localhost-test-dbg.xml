@@ -1,5 +1,4 @@
-<icecube configName="sim-localhost-test-dbg"
-         remarks="Localhost configuration, testing configuration of debug levels">
+<icecube remarks="Localhost configuration, testing configuration of debug levels">
 
   <cluster name="localhost">
 
@@ -10,24 +9,67 @@
          individual components -->
     <defaultLogLevel>WARN</defaultLogLevel>
 
-    <location name="localhost" host="localhost">
-      <module name="StringHub" id="1001">
-        <logLevel>FATAL</logLevel>
+    <!-- Each location element corresponds to a host (and the iceboss
+      instance on it) and lists the services and ejbs on that
+      host. The rank attribute orders locations, for example the DB or
+      ExpCont node might need to be handled differently within the
+      cluster. -->
+    <location name="localhost">
+      <address>
+        <host>localhost</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>1001</id>
+	<logLevel>FATAL</logLevel>
       </module>
-      <module name="StringHub" id="1002"/>
-      <module name="StringHub" id="1003">
-        <logLevel>ERROR</logLevel>
+
+      <module>
+        <name>StringHub</name>
+        <id>1002</id>
       </module>
-      <module name="StringHub" id="1004">
+
+      <module>
+        <name>StringHub</name>
+        <id>1003</id>
+	<logLevel>ERROR</logLevel>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1004</id>
         <logLevel>INFO</logLevel>
       </module>
-      <module name="StringHub" id="1005">
+
+      <module>
+        <name>StringHub</name>
+        <id>1005</id>
         <logLevel>DEBUG</logLevel>
       </module>
-      <module name="SecondaryBuilders"/>
-      <module name="eventBuilder"/>
-      <module name="globalTrigger"/>
-      <module name="inIceTrigger"/>
+
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+      </module>
+
     </location>
+
   </cluster>
+
 </icecube>

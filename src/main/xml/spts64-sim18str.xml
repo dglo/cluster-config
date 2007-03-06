@@ -1,100 +1,239 @@
-<icecube configName="spts64-sim18str"
-         remarks="18 string simulation for SPTS64">
+<icecube configName="spts64-001" remarks="First try at an SPTS64 config">
 
   <cluster name="spts64">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
-    <logDirForSpade>/mnt/data/spade/pdaq/runs</logDirForSpade>
-    <logDirCopies>/mnt/data/pdaqlocal</logDirCopies>
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
 
     <defaultLogLevel>INFO</defaultLogLevel>
 
-    <location name="ichub21" host="spts64-ichub21">
-      <module name="StringHub" id="1001"/>
+    <!-- Each location element corresponds to a host (and the iceboss
+      instance on it) and lists the services and ejbs on that
+      host. The rank attribute orders locations, for example the DB or
+      ExpCont node might need to be handled differently within the
+      cluster. -->
+    <location name="ichub21">
+      <address>
+        <host>spts64-ichub21</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>1001</id>
+      </module>
     </location>
 
-    <location name="ichub29" host="spts64-ichub29">
-      <module name="StringHub" id="1002"/>
+    <location name="ichub29">
+      <address>
+        <host>spts64-ichub29</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>1002</id>
+      </module>
     </location>
 
-    <location name="ithub01" host="spts64-ithub01">
-      <module name="StringHub" id="1003"/>
+    <location name="ithub01">
+      <address>
+        <host>spts64-ithub01</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>1003</id>
+      </module>
     </location>
 
-    <location name="ichub30" host="spts64-ichub30">
-      <module name="StringHub" id="1004"/>
+    <location name="sp01">
+      <address>
+        <host>spts64-stringproc01</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>1004</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1005</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1006</id>
+      </module>
+
     </location>
 
-    <location name="sp01" host="spts64-stringproc01">
-      <module name="StringHub" id="1005"/>
+    <location name="sp02">
+      <address>
+        <host>spts64-stringproc02</host>
+      </address>
+    
+      <module>
+        <name>StringHub</name>
+        <id>1007</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1008</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1009</id>
+      </module>
     </location>
 
-    <location name="sp02" host="spts64-stringproc02">
-      <module name="StringHub" id="1006"/>
+    <location name="sp03">
+      <address>
+        <host>spts64-stringproc03</host>
+      </address>
+      
+      <module>
+        <name>StringHub</name>
+        <id>1010</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1011</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1012</id>
+      </module>
+
     </location>
 
-    <location name="sp03" host="spts64-stringproc03">
-      <module name="StringHub" id="1007"/>
+    <location name="sp04">
+      <address>
+        <host>spts64-stringproc04</host>
+      </address>
+      
+      <module>
+        <name>StringHub</name>
+        <id>1013</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1014</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1015</id>
+      </module>
+
     </location>
 
-    <location name="sp04" host="spts64-stringproc04">
-      <module name="StringHub" id="1008"/>
+    <location name="sp05">
+      <address>
+        <host>spts64-stringproc05</host>
+      </address>
+      
+      <module>
+        <name>StringHub</name>
+        <id>1016</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1017</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>1018</id>
+      </module>
+
     </location>
 
-    <location name="sp06" host="spts64-stringproc06">
-      <module name="StringHub" id="1009"/>
+    <location name="2ndbuild">
+      <address>
+        <host>spts64-expcont</host>
+      </address>
+
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+      </module>
     </location>
 
-    <location name="sp07" host="spts64-stringproc07">
-      <module name="StringHub" id="1010"/>
+    <location name="evbuilder">
+      <address>
+        <host>spts64-evbuilder</host>
+      </address>
+
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+      </module>
     </location>
 
-    <location name="fpslave01" host="spts64-fpslave01">
-      <module name="StringHub" id="1011"/>
+    <location name="iitrigger">
+      <address>
+        <host>spts64-iitrigger</host>
+      </address>
+
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+      </module>
     </location>
 
-    <location name="fpslave02" host="spts64-fpslave02">
-      <module name="StringHub" id="1012"/>
+    <location name="ittrigger">
+      <address>
+        <host>spts64-ittrigger</host>
+      </address>
+
+      <module>
+        <name>iceTopTrigger</name>
+        <id>0</id>
+      </module>
     </location>
 
-    <location name="fpslave03" host="spts64-fpslave03">
-      <module name="StringHub" id="1013"/>
+    <location name="gtrigger">
+      <address>
+        <host>spts64-gtrigger</host>
+      </address>
+
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+      </module>
     </location>
 
-    <location name="fpslave04" host="spts64-fpslave04">
-      <module name="StringHub" id="1014"/>
+    <location name="expcont">
+      <address>
+        <host>spts64-expcont</host>
+      </address>
     </location>
 
-    <location name="fpslave05" host="spts64-fpslave05">
-      <module name="StringHub" id="1015"/>
+    <location name="dbs">
+      <address>
+        <host>spts64-dbs</host>
+      </address>
     </location>
 
-    <location name="2ndbuild" host="spts64-2ndbuild">
-      <module name="StringHub" id="1016"/>
+    <location name="ittrigger">
+      <address>
+        <host>spts64-ittrigger</host>
+      </address>
+
+      <module>
+        <name>amandaTrigger</name>
+        <id>0</id>
+	<logLevel>DEBUG</logLevel>
+      </module>
     </location>
 
-    <location name="icetop01" host="spts64-icetop01">
-      <module name="StringHub" id="1017"/>
-    </location>
 
-    <location name="ittrigger" host="spts64-ittrigger">
-      <module name="StringHub" id="1018"/>
-    </location>
-
-    <location name="expcont" host="spts64-expcont">
-      <module name="SecondaryBuilders"/>
-    </location>
-
-    <location name="evbuilder" host="spts64-evbuilder">
-      <module name="eventBuilder"/>
-    </location>
-
-    <location name="iitrigger" host="spts64-iitrigger">
-      <module name="inIceTrigger"/>
-    </location>
-
-    <location name="gtrigger" host="spts64-gtrigger">
-      <module name="globalTrigger"/>
-    </location>
   </cluster>
+
 </icecube>

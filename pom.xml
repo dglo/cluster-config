@@ -11,19 +11,16 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>cluster-config</artifactId>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
   <name>cluster-config</name>
-  <description>The cluster configuration sub-system of the Surface Data Acquisition system for the IceCube Project.</description>
 
   <scm>
-    <connection>scm:svn:http://code.icecube.wisc.edu/daq/projects/${project.name}/trunk</connection>
-    <developerConnection>scm:svn:http://code.icecube.wisc.edu/daq/projects/${project.name}/trunk</developerConnection>
-    <tag>HEAD</tag>
-    <url>http://code.icecube.wisc.edu/daq/projects/${project.name}</url>
+    <connection>scm:svn:http://code.icecube.wisc.edu/daq/meta-projects/cluster-config/trunk</connection>
   </scm>
 
   <build>
     <plugins>
+
 <!--
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -49,6 +46,7 @@
           </transformationSets>
         </configuration>
       </plugin>
+-->
 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -67,20 +65,6 @@
           </execution>
 
         </executions>
-      </plugin>
--->
-      <plugin>
-        <artifactId>maven-clean-plugin</artifactId>
-        <configuration>
-          <filesets>
-            <fileset>
-              <directory>.</directory>
-              <includes>
-                <include>*.pyc</include>
-              </includes>
-            </fileset>
-          </filesets>
-        </configuration>
       </plugin>
     </plugins>
   </build>
