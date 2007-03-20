@@ -64,6 +64,11 @@
         <id>1059</id>
       </module>
 
+      <module>
+        <name>StringHub</name>
+        <id>1000</id>
+      </module>
+
     </location>
 
     <location name="sp03">
