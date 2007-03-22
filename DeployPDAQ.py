@@ -29,7 +29,14 @@ def getDeployedClusterConfig(clusterFile):
             return ret.rstrip('\r\n')
         except:
             return None
-                                                
+
+def getUniqueHostNames(config):
+    # There's probably a much better way to do this
+    retHash = {}
+    for node in config.nodes:
+        retHash[str(node.hostName)] = 1
+    return retHash.keys()
+
 def main():
     "Main program"
     usage = "%prog [options]"
@@ -104,22 +111,24 @@ def main():
         parallel = ParallelShell(opt.doParallel, opt.dryRun)
 
     done = False
-    for node in config.nodes:
 
+    rsyncNodes = getUniqueHostNames(config)
+
+    for nodeName in rsyncNodes:
         # Ignore localhost - already "deployed"
-        if node.hostName == "localhost": continue
+        if nodeName == "localhost": continue
         if not done and opt.verbose:
             print "COMMANDS:"
             done = True
         
-        rsynccmd = "rsync -az %s %s:" % (top, node.hostName)
+        rsynccmd = "rsync -az %s %s:" % (top, nodeName)
         if opt.verbose: print "  "+rsynccmd
         if opt.doParallel:
             parallel.add(rsynccmd)
         else:
             if not opt.dryRun: system(rsynccmd)
             
-        rsynccmd = "rsync -az %s %s:" % (m2, node.hostName)
+        rsynccmd = "rsync -az %s %s:" % (m2, nodeName)
         if opt.verbose: print "  "+rsynccmd
         if opt.doParallel:
             parallel.add(rsynccmd)
