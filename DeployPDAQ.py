@@ -69,11 +69,12 @@ def main():
 
     configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
 
-    if opt.doList: showConfigs(configXMLDir); raise SystemExit
-    
     if opt.configName == None:
         opt.configName = getDeployedClusterConfig(join(metaDir, 'cluster-config', '.config'))
-        if opt.configName == None: p.print_help(); raise SystemExit    
+
+    if opt.doList: showConfigs(configXMLDir, opt.configName); raise SystemExit
+    
+    if opt.configName == None: p.print_help(); raise SystemExit    
 
     config = deployConfig(configXMLDir, opt.configName)
 
