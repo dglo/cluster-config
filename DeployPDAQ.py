@@ -12,6 +12,24 @@ from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 from re import search
 
+# Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
+if environ.has_key("PDAQ_HOME"):
+    metaDir = environ["PDAQ_HOME"]
+else:
+    from locate_pdaq import find_pdaq_trunk
+    metaDir = find_pdaq_trunk()
+
+def getDeployedClusterConfig(clusterFile):
+        "Get cluster configuration name persisted in clusterFile"
+        # FIXME - this is duplicated in DAQLaunch.py
+        try:
+            f = open(clusterFile, "r")
+            ret = f.readline()
+            f.close()
+            return ret.rstrip('\r\n')
+        except:
+            return None
+                                                
 def main():
     "Main program"
     usage = "%prog [options]"
@@ -53,11 +71,14 @@ def main():
 
     if opt.doList: showConfigs(configXMLDir); raise SystemExit
     
-    if opt.configName == None: p.print_help(); raise SystemExit    
+    if opt.configName == None:
+        opt.configName = getDeployedClusterConfig(join(metaDir, 'cluster-config', '.config'))
+        if opt.configName == None: p.print_help(); raise SystemExit    
 
     config = deployConfig(configXMLDir, opt.configName)
 
     if opt.verbose:
+        print "CONFIG: %s" % opt.configName
         print "NODES:"
         for node in config.nodes:
             print "  %s(%s)" % (node.hostName, node.locName),
