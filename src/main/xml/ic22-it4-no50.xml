@@ -1,4 +1,4 @@
-<icecube configName="sps-config" remarks="IC22 with IceTop and AMANDA">
+<icecube configName="sps-config" remarks="IC22 with IceTop and AMANDA - no hub 50">
 
   <cluster name="sps">
 
@@ -6,7 +6,7 @@
     <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
     <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
 
-    <defaultLogLevel>WARN</defaultLogLevel>
+    <defaultLogLevel>INFO</defaultLogLevel>
 
     <!-- Each location element corresponds to a host (and the iceboss
       instance on it) and lists the services and ejbs on that
@@ -134,7 +134,7 @@
 	<logLevel>WARN</logLevel>
       </module>
     </location>
-
+<!--
     <location name="ichub50">
       <address>
         <host>sps-ichub50</host>
@@ -146,7 +146,7 @@
 	<logLevel>WARN</logLevel>
       </module>
     </location>
-
+-->
     <location name="ichub56">
       <address>
         <host>sps-ichub56</host>
@@ -351,7 +351,7 @@
       <module>
         <name>eventBuilder</name>
         <id>0</id>
-	<logLevel>ERROR</logLevel>
+	<logLevel>WARN</logLevel>
       </module>
     </location>
 

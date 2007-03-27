@@ -12,8 +12,6 @@ from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 from re import search
 
-from locate_pdaq import find_pdaq_trunk
-
 def main():
     "Main program"
     usage = "%prog [options]"
@@ -44,7 +42,12 @@ def main():
     if opt.quiet:    opt.verbose    = False
     if opt.dryRun:   opt.verbose    = True
     
-    top = find_pdaq_trunk()
+    # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
+    if environ.has_key("PDAQ_HOME"):
+        top = environ["PDAQ_HOME"]
+    else:
+        from locate_pdaq import find_pdaq_trunk
+        top = find_pdaq_trunk()
 
     configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
 
