@@ -17,7 +17,7 @@ class MalformedDeployConfigException(Exception): pass
 
 GLOBAL_DEFAULT_LOG_LEVEL = "INFO"
 
-def showConfigs(configDir):
+def showConfigs(configDir, configToUse=None):
     "Utility to show all available cluster configurations in configDir"
     l = listdir(configDir)
     cfgs = []
@@ -37,7 +37,10 @@ def showConfigs(configDir):
 
     ok.sort()
     for cname in ok:
-        print "%40s === " % cname,
+        sep = "==="
+        if configToUse and cname == configToUse:
+            sep = "<=>"
+        print "%40s %3s " % (cname, sep),
         if remarks[cname]: print remarks[cname]
         else: print
     
