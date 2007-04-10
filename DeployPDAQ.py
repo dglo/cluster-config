@@ -121,14 +121,14 @@ def main():
             print "COMMANDS:"
             done = True
         
-        rsynccmd = "rsync -az %s %s:" % (top, nodeName)
+        rsynccmd = "rsync -azL %s %s:" % (top, nodeName)
         if opt.verbose: print "  "+rsynccmd
         if opt.doParallel:
             parallel.add(rsynccmd)
         else:
             if not opt.dryRun: system(rsynccmd)
             
-        rsynccmd = "rsync -az %s %s:" % (m2, nodeName)
+        rsynccmd = "rsync -azL %s %s:" % (m2, nodeName)
         if opt.verbose: print "  "+rsynccmd
         if opt.doParallel:
             parallel.add(rsynccmd)
