@@ -46,27 +46,32 @@ def main():
     p.add_option("-l", "--list-configs", action="store_true",           dest="doList",
                  help="List available configs")
     p.add_option("-n", "--dry-run",      action="store_true",           dest="dryRun",
-                 help="Don't actually do anything - just print steps")
+                 help="Don't actually do anything - just print steps (disables quiet)")
     p.add_option("-p", "--parallel",     action="store_true",           dest="doParallel",
-                 help="Run rsyncs in parallel")
+                 help="Run rsyncs in parallel (default)")
     p.add_option("-q", "--quiet",        action="store_true",           dest="quiet",
                  help="Run quietly")
     p.add_option("-s", "--serial",       action="store_true",           dest="doSerial",
-                 help="Run rsyncs serially")
+                 help="Run rsyncs serially (overrides parallel)")
     p.add_option("-v", "--verbose",      action="store_true",           dest="verbose",
                  help="Be chatty")
     p.set_defaults(configName = None,
                    doParallel = True,
                    doSerial   = False,
-                   verbose    = True,
+                   verbose    = False,
                    quiet      = False,
                    dryRun     = False)
     opt, args = p.parse_args()
 
     if opt.doSerial: opt.doParallel = False
-    if opt.quiet:    opt.verbose    = False
-    if opt.dryRun:   opt.verbose    = True
+    if opt.dryRun:   opt.quiet = False
+
+    traceLevel = 0
+    if opt.quiet:                 traceLevel = -1
+    if opt.verbose:               traceLevel = 1
+    if opt.quiet and opt.verbose: traceLevel = 0
     
+
     # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
     if environ.has_key("PDAQ_HOME"):
         top = environ["PDAQ_HOME"]
@@ -80,12 +85,12 @@ def main():
         opt.configName = getDeployedClusterConfig(join(metaDir, 'cluster-config', '.config'))
 
     if opt.doList: showConfigs(configXMLDir, opt.configName); raise SystemExit
-    
-    if opt.configName == None: p.print_help(); raise SystemExit    
+
+    if opt.configName == None: p.print_help(); raise SystemExit
 
     config = deployConfig(configXMLDir, opt.configName)
 
-    if opt.verbose:
+    if traceLevel >= 0:
         print "CONFIG: %s" % opt.configName
         print "NODES:"
         for node in config.nodes:
@@ -107,8 +112,9 @@ def main():
 
     m2  = join(environ["HOME"], '.m2')
 
-    if opt.doParallel:
-        parallel = ParallelShell(opt.doParallel, opt.dryRun)
+    parallel = ParallelShell(parallel=opt.doParallel, dryRun=opt.dryRun,
+                             verbose=(traceLevel > 0 or opt.dryRun),
+                             trace=(traceLevel > 0))
 
     done = False
 
@@ -117,27 +123,20 @@ def main():
     for nodeName in rsyncNodes:
         # Ignore localhost - already "deployed"
         if nodeName == "localhost": continue
-        if not done and opt.verbose:
+        if not done and traceLevel >= 0:
             print "COMMANDS:"
             done = True
-        
-        rsynccmd = "rsync -azL %s %s:" % (top, nodeName)
-        if opt.verbose: print "  "+rsynccmd
-        if opt.doParallel:
-            parallel.add(rsynccmd)
-        else:
-            if not opt.dryRun: system(rsynccmd)
-            
-        rsynccmd = "rsync -azL %s %s:" % (m2, nodeName)
-        if opt.verbose: print "  "+rsynccmd
-        if opt.doParallel:
-            parallel.add(rsynccmd)
-        else:
-            if not opt.dryRun: system(rsynccmd)
 
+        rsynccmd = "rsync -azL %s %s:" % (top, nodeName)
+        if traceLevel >= 0: print "  "+rsynccmd
+        parallel.add(rsynccmd)
+
+        rsynccmd = "rsync -azL %s %s:" % (m2, nodeName)
+        if traceLevel >= 0: print "  "+rsynccmd
+        parallel.add(rsynccmd)
+
+    parallel.start()
     if opt.doParallel:
-        parallel.start()
         parallel.wait()
-        parallel.showAll()
-    
+
 if __name__ == "__main__": main()
