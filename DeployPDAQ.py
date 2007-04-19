@@ -127,11 +127,11 @@ def main():
             print "COMMANDS:"
             done = True
 
-        rsynccmd = "rsync -azL %s %s:" % (top, nodeName)
+        rsynccmd = "rsync -azL --delete %s %s:" % (top, nodeName)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
-        rsynccmd = "rsync -azL %s %s:" % (m2, nodeName)
+        rsynccmd = "rsync -azL --delete %s %s:" % (m2, nodeName)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
