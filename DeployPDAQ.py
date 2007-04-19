@@ -43,10 +43,14 @@ def main():
     p = optparse.OptionParser()
     p.add_option("-c", "--config-name",  action="store", type="string", dest="configName",
                  help="REQUIRED: Configuration name")
+    p.add_option("", "--delete",       action="store_true",           dest="delete",
+                 help="Run rsync's with --delete")
     p.add_option("-l", "--list-configs", action="store_true",           dest="doList",
                  help="List available configs")
     p.add_option("-n", "--dry-run",      action="store_true",           dest="dryRun",
-                 help="Don't actually do anything - just print steps (disables quiet)")
+                 help="Don't run rsyncs, just print as they would be run (disables quiet)")
+    p.add_option("", "--deep-dry-run",   action="store_true",           dest="deepDryRun",
+                 help="Run rsync's with --dry-run (implies verbose and serial)")
     p.add_option("-p", "--parallel",     action="store_true",           dest="doParallel",
                  help="Run rsyncs in parallel (default)")
     p.add_option("-q", "--quiet",        action="store_true",           dest="quiet",
@@ -60,17 +64,29 @@ def main():
                    doSerial   = False,
                    verbose    = False,
                    quiet      = False,
-                   dryRun     = False)
+                   delete     = False,
+                   dryRun     = False,
+                   deepDryRun = False)
     opt, args = p.parse_args()
 
+    ## Work through options implications ##
+    # A deep-dry-run implies verbose and serial
+    if opt.deepDryRun:
+        opt.doSerial = True
+        opt.verbose = True
+        opt.quiet = False
+
+    # Serial overrides parallel
     if opt.doSerial: opt.doParallel = False
+
+    # dry-run implies we want to see what is happening
     if opt.dryRun:   opt.quiet = False
 
+    # Map quiet/verbose to a 3-value tracelevel
     traceLevel = 0
     if opt.quiet:                 traceLevel = -1
     if opt.verbose:               traceLevel = 1
     if opt.quiet and opt.verbose: traceLevel = 0
-    
 
     # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
     if environ.has_key("PDAQ_HOME"):
@@ -78,6 +94,9 @@ def main():
     else:
         from locate_pdaq import find_pdaq_trunk
         top = find_pdaq_trunk()
+
+    rsyncCmdStub = "rsync -azL%s%s" % (opt.delete and ' --delete' or '',
+                                       opt.deepDryRun and ' --dry-run' or '')
 
     configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
 
@@ -127,11 +146,11 @@ def main():
             print "COMMANDS:"
             done = True
 
-        rsynccmd = "rsync -azL --delete %s %s:" % (top, nodeName)
+        rsynccmd = "%s %s %s:" % (rsyncCmdStub, top, nodeName)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
-        rsynccmd = "rsync -azL --delete %s %s:" % (m2, nodeName)
+        rsynccmd = "%s %s %s:" % (rsyncCmdStub, m2, nodeName)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
