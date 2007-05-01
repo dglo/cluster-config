@@ -9,13 +9,17 @@
 
 from os import listdir
 from re import search
-from os.path import exists
+from os.path import exists, join
 from xml.dom import minidom
 
 class ConfigNotFoundException(Exception): pass
 class MalformedDeployConfigException(Exception): pass
 
 GLOBAL_DEFAULT_LOG_LEVEL = "INFO"
+
+def xmlOf(name):
+    if not search(r'^(.+?)\.xml$', name): return name+".xml"
+    return name
 
 def showConfigs(configDir, configToUse=None):
     "Utility to show all available cluster configurations in configDir"
@@ -76,7 +80,7 @@ class deployConfig:
     def __init__(self, configDir, configName):
         self.nodes = []
         
-        self.configFile = configDir + "/" + configName + ".xml"
+        self.configFile = xmlOf(join(configDir,configName))
         if not exists(self.configFile): raise ConfigNotFoundException(self.configFile)
         parsed = minidom.parse(self.configFile)
         icecube = parsed.getElementsByTagName("icecube")
