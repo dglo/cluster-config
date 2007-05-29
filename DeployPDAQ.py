@@ -19,17 +19,6 @@ else:
     from locate_pdaq import find_pdaq_trunk
     metaDir = find_pdaq_trunk()
 
-def getDeployedClusterConfig(clusterFile):
-        "Get cluster configuration name persisted in clusterFile"
-        # FIXME - this is duplicated in DAQLaunch.py
-        try:
-            f = open(clusterFile, "r")
-            ret = f.readline()
-            f.close()
-            return ret.rstrip('\r\n')
-        except:
-            return None
-
 def getUniqueHostNames(config):
     # There's probably a much better way to do this
     retHash = {}
@@ -101,7 +90,9 @@ def main():
     configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
 
     if opt.configName == None:
-        opt.configName = getDeployedClusterConfig(join(metaDir, 'cluster-config', '.config'))
+        opt.configName = getDeployedClusterConfig(join(metaDir,
+                                                       'cluster-config',
+                                                       '.config'))
 
     if opt.doList: showConfigs(configXMLDir, opt.configName); raise SystemExit
 

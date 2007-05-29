@@ -17,6 +17,16 @@ class MalformedDeployConfigException(Exception): pass
 
 GLOBAL_DEFAULT_LOG_LEVEL = "INFO"
 
+def getDeployedClusterConfig(clusterFile):
+    "Get cluster configuration name persisted in clusterFile"
+    try:
+        f = open(clusterFile, "r")
+        ret = f.readline()
+        f.close()
+        return ret.rstrip('\r\n')
+    except:
+        return None
+    
 def xmlOf(name):
     if not search(r'^(.+?)\.xml$', name): return name+".xml"
     return name
