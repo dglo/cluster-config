@@ -97,6 +97,9 @@ class PCmd(object):
         if not self.dryRun:
             self.subproc.wait()
             if self.verbose: print "ParallelShell: %s" % self
+            return self.subproc.returncode
+        else:
+            return 0
 
 class ParallelShell(object):
     """ Class to implement multiple shell commands in parallel. """
@@ -110,7 +113,7 @@ class ParallelShell(object):
         self.dryRun     = dryRun
         self.verbose    = verbose
         self.trace      = trace
-
+        
     def add(self, cmd):
         """ Add command to list of pending operations. """
         self.pcmds.append(PCmd(cmd, self.parallel, self.dryRun, self.verbose, self.trace))
@@ -124,10 +127,17 @@ class ParallelShell(object):
         """ Wait for all started commands to complete.  If the
         commands are backgrounded (or fork then return in their
         parent) then this will return immediately. """
+        ret = []
         for c in self.pcmds:
-            if c.subproc != None: c.wait()
+            status = 0
+            if c.subproc != None:
+                status = c.wait()
+            ret.append(status)
+        return ret
 
     def showAll(self):
         """ Show commands and (if running or finished) with their
         process IDs and (if finished) with return codes. """
         for c in self.pcmds: print c
+
+            
