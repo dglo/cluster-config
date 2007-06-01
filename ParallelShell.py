@@ -2,7 +2,7 @@
 
 # ParallelShell.py
 # J. Jacobsen & K. Beattie, for UW-IceCube
-# February & April, 2007
+# February, April, June 2007
 
 """ This module implements a means to run multiple shell commands in parallel.
 
@@ -23,33 +23,48 @@ from returning before the commands finish, otherwise the interpreter
 will return while the commands continue to run.
 """
 
-import re
-import subprocess
-import sys
-import time
+import re, subprocess, sys, time, os, os.path
 
 class PCmd(object):
     """ Class for handling individual shell commands to be executed in
     parallel. """
-    def __init__(self, cmd, parallel=True, dryRun=False, verbose=False, trace=False):
-        """  Construct a PCmd object with the given options:
+
+    # class variable to guarantee unique filenames
+    counter = 0
+    
+    def __init__(self, cmd, parallel=True, dryRun=False,
+                 verbose=False, trace=False, timeout = None):
+        """
+        Construct a PCmd object with the given options:
         cmd - The command to run as a string.
         parallel - If True don't wait for command to return when
                    started, otherwise wait. Default: True
-        dryRun - If True, don't actually start command.  Only usefull
-                 if verbose is also True. Default: False
-        verbose - If True, print command as they are run along with
-                  process IDs and return codes. Default: False
-        trace - If True, use inherited parent's stdout and stderr.  If
-                False (the default) modifiy command string to redirect
-                stdout & err to /dev/null. """
+        dryRun   - If True, don't actually start command.  Only usefull
+                   if verbose is also True. Default: False
+        verbose  - If True, print command as they are run along with
+                   process IDs and return codes. Default: False
+        trace    - If True, use inherited parent's stdout and stderr.  If
+                   False (the default) modifiy command string to redirect
+                   stdout & err to /dev/null. 
+        timeout  - If not None, number of seconds to wait before killing
+                   process
+        """           
+                   
         self.cmd        = cmd
         self.subproc    = None
         self.parallel   = parallel
         self.dryRun     = dryRun
         self.verbose    = verbose
         self.trace      = trace
+        self.timeout    = timeout
+        self.counter    = PCmd.counter
+        self.pid        = os.getpid()
+        self.outFile    = os.path.join("/","tmp","__pcmd__%d__%d.txt" % (self.pid,
+                                                                         self.counter))
+        self.output     = ""
 
+        PCmd.counter += 1
+        
     def __str__(self):
         """ Return info about this command, the pid used and return code. """
         state_str = "%s%s%s%s" % (self.parallel and 'p' or '', self.dryRun and 'd' or '',
@@ -73,7 +88,7 @@ class PCmd(object):
                 controlop = ""
             else:
                 controlop = ";"
-            self.cmd = "{ %s %c } > /dev/null 2>&1" % (self.cmd, controlop)
+            self.cmd = "{ %s %c } 2>&1 > %s " % (self.cmd, controlop, self.outFile)
 
         if self.subproc != None:
             raise RuntimeError("Attempt to start a running command!")
@@ -94,16 +109,28 @@ class PCmd(object):
             raise RuntimeError("Attempt to wait for unstarted command!")
 
         if self.verbose: print "ParallelShell: Waiting for %s" % self
-        if not self.dryRun:
-            self.subproc.wait()
-            if self.verbose: print "ParallelShell: %s" % self
-            return self.subproc.returncode
+        if self.dryRun:  return 0
+        
+        self.subproc.wait()
+        if self.verbose: print "ParallelShell: %s" % self
+
+        # Harvest results
+        if self.trace:
+            self.output = "Output not available: went to stdout!"
         else:
-            return 0
+            try:
+                for l in file(self.outFile): self.output += l
+                os.unlink(self.outFile)
+            except Exception, e:
+                self.output = "Could not read or delete result file %s (%s)!" % (self.outFile, e)
+            
+        return self.subproc.returncode
+
+    def getResult(self): return self.output
 
 class ParallelShell(object):
     """ Class to implement multiple shell commands in parallel. """
-    def __init__(self, parallel=True, dryRun=False, verbose=False, trace=False):
+    def __init__(self, parallel=True, dryRun=False, verbose=False, trace=False, timeout=None):
         """ Construct a new ParallelShell object for managing multiple
         shell commands to be run in parallel.  The parallel, dryRun,
         verbose and trace options are identical to and used for each
@@ -113,10 +140,13 @@ class ParallelShell(object):
         self.dryRun     = dryRun
         self.verbose    = verbose
         self.trace      = trace
+        self.timeout    = timeout
         
     def add(self, cmd):
         """ Add command to list of pending operations. """
-        self.pcmds.append(PCmd(cmd, self.parallel, self.dryRun, self.verbose, self.trace))
+        self.pcmds.append(PCmd(cmd, self.parallel, self.dryRun,
+                               self.verbose, self.trace, self.timeout))
+        return len(self.pcmds)-1 # Start w/ 0
 
     def start(self):
         """ Start all unstarted commands. """
@@ -131,7 +161,7 @@ class ParallelShell(object):
         for c in self.pcmds:
             status = 0
             if c.subproc != None:
-                status = c.wait()
+                status = c.wait() # Returns right away if command has timed out
             ret.append(status)
         return ret
 
@@ -140,4 +170,16 @@ class ParallelShell(object):
         process IDs and (if finished) with return codes. """
         for c in self.pcmds: print c
 
-            
+    def getResult(self, job): return self.pcmds[job].getResult()
+
+def main():
+    p = ParallelShell(timeout=5)
+    jobs = []
+    jobs.append(p.add("ls"))
+    jobs.append(p.add("sleep 10"))
+    p.start()
+    p.wait()
+    for job in jobs:
+        print "Job %d: result %s" % (job, p.getResult(job))
+    
+if __name__ == "__main__": main()
