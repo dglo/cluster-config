@@ -107,7 +107,6 @@ class PCmd(object):
         if self.subproc == None and not self.dryRun:
             raise RuntimeError("Attempt to wait for unstarted command!")
 
-        if self.verbose: print "ParallelShell: Waiting for %s" % self
         if self.dryRun:  return
 
         if not self.timeout:
