@@ -4,26 +4,20 @@
 # J. Jacobsen & K. Beattie, for UW-IceCube
 # February, April, June 2007
 
-""" This module implements a means to run multiple shell commands in parallel.
+"""
+This module implements a means to run multiple shell commands in parallel.
 
-Example usage:
-
-----
-import ParallelShell
-ps = ParallelShell(trace=True)
-ps.add("sleep 2; echo f; sleep 2; echo fo; sleep 2; echo foo")
-ps.add("sleep 2; echo b; sleep 2; echo ba; sleep 2; echo bar")
-ps.start()
-ps.wait()
-----
+See 'main' method at bottom for example usage.
 
 Setting trace=True will allow the output of the commands to go to the
 parent's terminal.  Calling ps.wait() will prevent the interpreter
 from returning before the commands finish, otherwise the interpreter
-will return while the commands continue to run.
+will return while the commands continue to run;
 """
 
-import re, subprocess, sys, time, os, os.path
+import re, subprocess, sys, time, os, os.path, datetime, signal
+
+class TimeoutException(Exception): pass
 
 class PCmd(object):
     """ Class for handling individual shell commands to be executed in
@@ -47,7 +41,7 @@ class PCmd(object):
                    False (the default) modifiy command string to redirect
                    stdout & err to /dev/null. 
         timeout  - If not None, number of seconds to wait before killing
-                   process
+                   process and raising a TimeoutException;
         """           
                    
         self.cmd        = cmd
@@ -57,12 +51,14 @@ class PCmd(object):
         self.verbose    = verbose
         self.trace      = trace
         self.timeout    = timeout
+        self.tstart     = None
         self.counter    = PCmd.counter
         self.pid        = os.getpid()
         self.outFile    = os.path.join("/","tmp","__pcmd__%d__%d.txt" % (self.pid,
                                                                          self.counter))
         self.output     = ""
-
+        self.done       = False
+        
         PCmd.counter += 1
         
     def __str__(self):
@@ -102,29 +98,46 @@ class PCmd(object):
         # If not running in parallel, then wait for this command (at
         # least the shell) to return
         if not self.parallel: self.wait()
-
+        self.tstart = datetime.datetime.now()
+        
     def wait(self):
         """ Wait for the this command to return. """
+        if self.done: return
+        
         if self.subproc == None and not self.dryRun:
             raise RuntimeError("Attempt to wait for unstarted command!")
 
         if self.verbose: print "ParallelShell: Waiting for %s" % self
-        if self.dryRun:  return 0
-        
-        self.subproc.wait()
+        if self.dryRun:  return
+
+        if not self.timeout:
+            self.subproc.wait()
+        else: # Handle polling/timeout case
+            status = self.subproc.poll()
+            if status is None:
+                if datetime.datetime.now()-self.tstart > datetime.timedelta(seconds=self.timeout):
+                    # Kill child process - note that this may fail
+                    # to clean up everything if child has spawned more proc's
+                    os.kill(self.subproc.pid, signal.SIGKILL)
+                    self.done = True
+                    self.output += "TIMEOUT exceeded (%d seconds)" % self.timeout
+                else:
+                    return None # Not done yet - check back again        
+            
+        self.done = True
         if self.verbose: print "ParallelShell: %s" % self
 
         # Harvest results
         if self.trace:
-            self.output = "Output not available: went to stdout!"
+            self.output += "Output not available: went to stdout!"
         else:
             try:
                 for l in file(self.outFile): self.output += l
                 os.unlink(self.outFile)
             except Exception, e:
-                self.output = "Could not read or delete result file %s (%s)!" % (self.outFile, e)
+                self.output += "Could not read or delete result file %s (%s)!" % (self.outFile, e)
             
-        return self.subproc.returncode
+        return
 
     def getResult(self): return self.output
 
@@ -154,16 +167,18 @@ class ParallelShell(object):
             if c.subproc == None: c.start()
 
     def wait(self):
-        """ Wait for all started commands to complete.  If the
+        """ Wait for all started commands to complete (or time out).  If the
         commands are backgrounded (or fork then return in their
         parent) then this will return immediately. """
-        ret = []
-        for c in self.pcmds:
-            status = 0
-            if c.subproc != None:
-                status = c.wait() # Returns right away if command has timed out
-            ret.append(status)
-        return ret
+
+        while True:
+            stillWaiting = False
+            for c in self.pcmds:
+                if c.subproc and not c.done:
+                    c.wait() # Can raise TimeoutException
+                    stillWaiting = True
+            if not stillWaiting: break
+            time.sleep(0.3)
 
     def showAll(self):
         """ Show commands and (if running or finished) with their
@@ -177,6 +192,7 @@ def main():
     jobs = []
     jobs.append(p.add("ls"))
     jobs.append(p.add("sleep 10"))
+    jobs.append(p.add("sleep 4; echo done sleeping four"))
     p.start()
     p.wait()
     for job in jobs:
