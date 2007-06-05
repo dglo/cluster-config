@@ -147,3 +147,13 @@ class deployConfig:
                 except: pass
                 thisNode.addComp(deployComponent(compName, compID, logLevel, iceTop))
 
+    def getHubNodes(self):
+        hublist = []
+        for node in self.nodes:
+            for comp in node.comps:
+                if comp.compName == "StringHub":
+                    try:
+                        hublist.index(node.hostName)
+                    except ValueError:
+                        hublist.append(node.hostName)
+        return hublist
