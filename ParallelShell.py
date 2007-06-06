@@ -165,18 +165,30 @@ class ParallelShell(object):
         for c in self.pcmds:
             if c.subproc == None: c.start()
 
-    def wait(self):
+    def wait(self, monitorIval=None):
         """ Wait for all started commands to complete (or time out).  If the
         commands are backgrounded (or fork then return in their
         parent) then this will return immediately. """
 
+        t     = datetime.datetime.now()
+        t0    = t
+        nToDo = len(self.pcmds)
         while True:
             stillWaiting = False
+            nDone = 0
             for c in self.pcmds:
-                if c.subproc and not c.done:
-                    c.wait() # Can raise TimeoutException
-                    stillWaiting = True
+                if c.subproc:
+                    if c.done:
+                        nDone += 1
+                    else:
+                        c.wait() # Can raise TimeoutException
+                        stillWaiting = True
+                        
             if not stillWaiting: break
+            if monitorIval and datetime.datetime.now()-t > datetime.timedelta(seconds=monitorIval):
+                t = datetime.datetime.now()
+                dt = t-t0
+                print "%d of %d done (%s)." % (nDone, nToDo, str(dt))
             time.sleep(0.3)
 
     def showAll(self):
@@ -185,7 +197,22 @@ class ParallelShell(object):
         for c in self.pcmds: print c
 
     def getResult(self, job): return self.pcmds[job].getResult()
-
+    
+    def getAllResults(self):
+        ret = ""
+        for c in self.pcmds:
+            ret += "Job: %s\nResult: %s\n" % (c, c.getResult())
+        return ret
+    
+    def getReturnCodes(self):
+        ret = []
+        for c in self.pcmds:
+            if c.subproc and c.done:
+                ret.append(c.subproc.returncode)
+            else:
+                ret.append(0)
+        return ret
+        
 def main():
     p = ParallelShell(timeout=5)
     jobs = []
