@@ -11,7 +11,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>cluster-config</artifactId>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
   <name>cluster-config</name>
   <description>The cluster configuration sub-system of the Surface Data Acquisition system for the IceCube Project.</description>
 
@@ -50,7 +50,6 @@
           </transformationSets>
         </configuration>
       </plugin>
--->
 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -70,6 +69,7 @@
 
         </executions>
       </plugin>
+-->
     </plugins>
   </build>
 </project>
