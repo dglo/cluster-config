@@ -81,7 +81,7 @@ class PCmd(object):
             # Handle the case where the command ends in an '&' (silly
             # but we shouldn't break)
             if self.cmd.rstrip().endswith("&"):
-                controlop = " "
+                controlop = ""
             else:
                 controlop = ";"
             self.cmd = "{ %s %c } 2>&1 > %s " % (self.cmd, controlop, self.outFile)

@@ -10,10 +10,7 @@ from ClusterConfig import *
 from ParallelShell import *
 from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
-import re
-
-SVN_ID = "$Id: DeployPDAQ.py 2166 2007-10-19 18:14:04Z ksb $"
-SVN_URL = "$URL: http://code.icecube.wisc.edu/daq/projects/cluster-config/releases/Grange/DeployPDAQ.py $"
+from re import search
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -21,10 +18,6 @@ if environ.has_key("PDAQ_HOME"):
 else:
     from locate_pdaq import find_pdaq_trunk
     metaDir = find_pdaq_trunk()
-
-# add 'dash' to Python library search path
-sys.path.append(join(metaDir, 'dash'))
-from SVNVersionInfo import getVersionInfo
 
 def getUniqueHostNames(config):
     # There's probably a much better way to do this
@@ -35,9 +28,8 @@ def getUniqueHostNames(config):
 
 def main():
     "Main program"
-    ver_info = "%(filename)s %(revision)s %(date)s %(time)s %(author)s %(release)s %(repo_rev)s" % getVersionInfo(SVN_ID, SVN_URL)
-    usage = "%prog [options]\nversion: " + ver_info
-    p = optparse.OptionParser(usage=usage, version=ver_info)
+    usage = "%prog [options]"
+    p = optparse.OptionParser()
     p.add_option("-c", "--config-name",  action="store", type="string", dest="configName",
                  help="REQUIRED: Configuration name")
     p.add_option("", "--delete",       action="store_true",           dest="delete",
@@ -56,8 +48,6 @@ def main():
                  help="Run rsyncs serially (overrides parallel)")
     p.add_option("-v", "--verbose",      action="store_true",           dest="verbose",
                  help="Be chatty")
-    p.add_option("", "--undeploy",       action="store_true",           dest="undeploy",
-                 help="Remove entire ~pdaq/.m2 and ~pdaq/pDAQ_current dirs on remote nodes - use with caution!")
     p.set_defaults(configName = None,
                    doParallel = True,
                    doSerial   = False,
@@ -65,7 +55,6 @@ def main():
                    quiet      = False,
                    delete     = False,
                    dryRun     = False,
-                   undeploy   = False,
                    deepDryRun = False)
     opt, args = p.parse_args()
 
@@ -88,23 +77,31 @@ def main():
     if opt.verbose:               traceLevel = 1
     if opt.quiet and opt.verbose: traceLevel = 0
 
-    rsyncCmdStub = "nice rsync -azLC%s%s" % (opt.delete and ' --delete' or '',
+    # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
+    if environ.has_key("PDAQ_HOME"):
+        top = environ["PDAQ_HOME"]
+    else:
+        from locate_pdaq import find_pdaq_trunk
+        top = find_pdaq_trunk()
+
+    rsyncCmdStub = "rsync -azL%s%s" % (opt.delete and ' --delete' or '',
                                        opt.deepDryRun and ' --dry-run' or '')
 
-    targetDir        = abspath(join(metaDir, 'target'))
-    clusterConfigDir = abspath(join(metaDir, 'cluster-config'))
-    runConfigDir     = abspath(join(metaDir, 'config'))
-    dashDir          = abspath(join(metaDir, 'dash'))
+    configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
 
-    try:
-        config = ClusterConfig(metaDir, opt.configName, opt.doList, False)
-    except ConfigNotSpecifiedException:
-        print >>sys.stderr, 'No configuration specified'
-        p.print_help()
-        raise SystemExit
+    if opt.configName == None:
+        opt.configName = getDeployedClusterConfig(join(metaDir,
+                                                       'cluster-config',
+                                                       '.config'))
+
+    if opt.doList: showConfigs(configXMLDir, opt.configName); raise SystemExit
+
+    if opt.configName == None: p.print_help(); raise SystemExit
+
+    config = deployConfig(configXMLDir, opt.configName)
 
     if traceLevel >= 0:
-        print "CONFIG: %s" % config.configName
+        print "CONFIG: %s" % opt.configName
         print "NODES:"
         for node in config.nodes:
             print "  %s(%s)" % (node.hostName, node.locName),
@@ -116,8 +113,12 @@ def main():
                 print " ",
             print
 
+    # Remember this config
+    hereFile = abspath(join(top, 'cluster-config', '.config'))
     if not opt.dryRun:
-        config.writeCacheFile()
+        fd = open(hereFile, 'w')
+        print >>fd, opt.configName
+        fd.close()
 
     m2  = join(environ["HOME"], '.m2')
 
@@ -130,37 +131,17 @@ def main():
     rsyncNodes = getUniqueHostNames(config)
 
     for nodeName in rsyncNodes:
-
-        # Check if targetDir (the result of a build) is present
-        if not isdir(targetDir):
-            print >>sys.stderr, "ERROR: Target dir (%s) does not exist." % (targetDir)
-            print >>sys.stderr, "ERROR: Did you run 'mvn clean install assembly:assembly'?"
-            raise SystemExit
-        
         # Ignore localhost - already "deployed"
         if nodeName == "localhost": continue
         if not done and traceLevel >= 0:
             print "COMMANDS:"
             done = True
 
-        if opt.undeploy:
-            cmd = 'ssh %s "\\rm -rf %s %s"' % (nodeName, m2, metaDir)
-            parallel.add(cmd)
-            continue
-
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, metaDir)
+        rsynccmd = "%s %s %s:" % (rsyncCmdStub, top, nodeName)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, clusterConfigDir, nodeName, metaDir)
-        if traceLevel >= 0: print "  "+rsynccmd
-        parallel.add(rsynccmd)
-
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, runConfigDir, nodeName, metaDir)
-        if traceLevel >= 0: print "  "+rsynccmd
-        parallel.add(rsynccmd)
-
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, dashDir, nodeName, metaDir)
+        rsynccmd = "%s %s %s:" % (rsyncCmdStub, m2, nodeName)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
