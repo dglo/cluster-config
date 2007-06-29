@@ -87,6 +87,12 @@ def main():
     rsyncCmdStub = "rsync -azL%s%s" % (opt.delete and ' --delete' or '',
                                        opt.deepDryRun and ' --dry-run' or '')
 
+    pDAQDistDir      = abspath(join(top, 'target', 'pDAQ-1.0.0-SNAPSHOT-dist.dir', ' '))
+    clusterConfigDir = abspath(join(top, 'cluster-config'))
+    runConfigDir     = abspath(join(top, 'config'))
+    dashDir          = abspath(join(top, 'dash'))
+    jugglerDir       = abspath(join(top, 'juggler'))
+
     configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
 
     if opt.configName == None:
@@ -137,11 +143,23 @@ def main():
             print "COMMANDS:"
             done = True
 
-        rsynccmd = "%s %s %s:" % (rsyncCmdStub, top, nodeName)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, pDAQDistDir, nodeName, top)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
-        rsynccmd = "%s %s %s:" % (rsyncCmdStub, m2, nodeName)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, clusterConfigDir, nodeName, top)
+        if traceLevel >= 0: print "  "+rsynccmd
+        parallel.add(rsynccmd)
+
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, runConfigDir, nodeName, top)
+        if traceLevel >= 0: print "  "+rsynccmd
+        parallel.add(rsynccmd)
+
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, dashDir, nodeName, top)
+        if traceLevel >= 0: print "  "+rsynccmd
+        parallel.add(rsynccmd)
+
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, jugglerDir, nodeName, top)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
