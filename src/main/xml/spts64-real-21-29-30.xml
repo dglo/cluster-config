@@ -1,4 +1,4 @@
-<icecube configName="spts64-xxxxxxxhhh" remarks="SPTS64 with real DOMs on 21 and 29">
+<icecube configName="spts64-xxxxxxxhhh" remarks="SPTS64 with real DOMs on 21, 29 and 30">
 
   <cluster name="spts64">
 
@@ -34,9 +34,9 @@
       </module>
     </location>
 
-    <location name="ichub99">
+    <location name="ichub30">
       <address>
-        <host>spts64-ichub99</host>
+        <host>spts64-ichub30</host>
       </address>
 
       <module>
