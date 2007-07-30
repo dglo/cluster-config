@@ -445,17 +445,6 @@
       </module>
     </location>
 
-    <location name="ittrigger">
-      <address>
-        <host>spts64-ittrigger</host>
-      </address>
-
-      <module>
-        <name>iceTopTrigger</name>
-        <id>0</id>
-      </module>
-    </location>
-
     <location name="gtrigger">
       <address>
         <host>spts64-gtrigger</host>
@@ -478,19 +467,6 @@
         <host>spts64-dbs</host>
       </address>
     </location>
-
-    <location name="ittrigger">
-      <address>
-        <host>spts64-ittrigger</host>
-      </address>
-
-      <module>
-        <name>amandaTrigger</name>
-        <id>0</id>
-	<logLevel>DEBUG</logLevel>
-      </module>
-    </location>
-
 
   </cluster>
 

@@ -312,115 +312,7 @@
         <name>StringHub</name>
         <id>1060</id>
       </module>
-      <module>
-        <name>StringHub</name>
-        <id>1061</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1062</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1063</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1064</id>
-      </module>
     
-
-    </location>
-
-    <location name="fpslave04">
-      <address>
-        <host>spts64-fpslave04</host>
-      </address>
-      
-      <module>
-        <name>StringHub</name>
-        <id>1065</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1066</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1067</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1068</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1069</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1070</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1071</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1072</id>
-      </module>
-    
-    </location>
-
-    <location name="fpslave05">
-      <address>
-        <host>spts64-fpslave05</host>
-      </address>
-      
-      <module>
-        <name>StringHub</name>
-        <id>1073</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1074</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1075</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1076</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1077</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1078</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1079</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1080</id>
-      </module>
-    
-    </location>
-
-    <location name="cvmaster">
-      <address>
-        <host>spts64-cvmaster</host>
-      </address>
-      
-      <module>
-        <name>StringHub</name>
-        <id>1000</id>
-      </module>
     </location>
 
 
@@ -479,19 +371,6 @@
         <host>spts64-dbs</host>
       </address>
     </location>
-
-    <location name="ittrigger">
-      <address>
-        <host>spts64-ittrigger</host>
-      </address>
-
-      <module>
-        <name>amandaTrigger</name>
-        <id>0</id>
-	<logLevel>DEBUG</logLevel>
-      </module>
-    </location>
-
 
   </cluster>
 
