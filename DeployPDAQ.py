@@ -84,10 +84,10 @@ def main():
         from locate_pdaq import find_pdaq_trunk
         top = find_pdaq_trunk()
 
-    rsyncCmdStub = "rsync -azL%s%s" % (opt.delete and ' --delete' or '',
+    rsyncCmdStub = "rsync -azLC%s%s" % (opt.delete and ' --delete' or '',
                                        opt.deepDryRun and ' --dry-run' or '')
 
-    pDAQDistDir      = abspath(join(top, 'target', 'pDAQ-1.0.0-SNAPSHOT-dist.dir', ' '))
+    targetDir        = abspath(join(top, 'target'))
     clusterConfigDir = abspath(join(top, 'cluster-config'))
     runConfigDir     = abspath(join(top, 'config'))
     dashDir          = abspath(join(top, 'dash'))
@@ -143,7 +143,7 @@ def main():
             print "COMMANDS:"
             done = True
 
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, pDAQDistDir, nodeName, top)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, top)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
