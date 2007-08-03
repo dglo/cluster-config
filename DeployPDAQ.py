@@ -48,6 +48,8 @@ def main():
                  help="Run rsyncs serially (overrides parallel)")
     p.add_option("-v", "--verbose",      action="store_true",           dest="verbose",
                  help="Be chatty")
+    p.add_option("", "--undeploy",       action="store_true",           dest="undeploy",
+                 help="Remove entire ~pdaq/.m2 and ~pdaq/pDAQ_current dirs on remote nodes - use with caution!")
     p.set_defaults(configName = None,
                    doParallel = True,
                    doSerial   = False,
@@ -55,6 +57,7 @@ def main():
                    quiet      = False,
                    delete     = False,
                    dryRun     = False,
+                   undeploy   = False,
                    deepDryRun = False)
     opt, args = p.parse_args()
 
@@ -142,6 +145,11 @@ def main():
         if not done and traceLevel >= 0:
             print "COMMANDS:"
             done = True
+
+        if opt.undeploy:
+            cmd = 'ssh %s "\\rm -rf %s %s"' % (nodeName, m2, top)
+            parallel.add(cmd)
+            continue
 
         rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, top)
         if traceLevel >= 0: print "  "+rsynccmd
