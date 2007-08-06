@@ -48,6 +48,8 @@ def main():
                  help="Run rsyncs serially (overrides parallel)")
     p.add_option("-v", "--verbose",      action="store_true",           dest="verbose",
                  help="Be chatty")
+    p.add_option("", "--undeploy",       action="store_true",           dest="undeploy",
+                 help="Remove entire ~pdaq/.m2 and ~pdaq/pDAQ_current dirs on remote nodes - use with caution!")
     p.set_defaults(configName = None,
                    doParallel = True,
                    doSerial   = False,
@@ -55,6 +57,7 @@ def main():
                    quiet      = False,
                    delete     = False,
                    dryRun     = False,
+                   undeploy   = False,
                    deepDryRun = False)
     opt, args = p.parse_args()
 
@@ -84,8 +87,14 @@ def main():
         from locate_pdaq import find_pdaq_trunk
         top = find_pdaq_trunk()
 
-    rsyncCmdStub = "rsync -azL%s%s" % (opt.delete and ' --delete' or '',
+    rsyncCmdStub = "rsync -azLC%s%s" % (opt.delete and ' --delete' or '',
                                        opt.deepDryRun and ' --dry-run' or '')
+
+    targetDir        = abspath(join(top, 'target'))
+    clusterConfigDir = abspath(join(top, 'cluster-config'))
+    runConfigDir     = abspath(join(top, 'config'))
+    dashDir          = abspath(join(top, 'dash'))
+    jugglerDir       = abspath(join(top, 'juggler'))
 
     configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
 
@@ -137,11 +146,28 @@ def main():
             print "COMMANDS:"
             done = True
 
-        rsynccmd = "%s %s %s:" % (rsyncCmdStub, top, nodeName)
+        if opt.undeploy:
+            cmd = 'ssh %s "\\rm -rf %s %s"' % (nodeName, m2, top)
+            parallel.add(cmd)
+            continue
+
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, top)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
-        rsynccmd = "%s %s %s:" % (rsyncCmdStub, m2, nodeName)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, clusterConfigDir, nodeName, top)
+        if traceLevel >= 0: print "  "+rsynccmd
+        parallel.add(rsynccmd)
+
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, runConfigDir, nodeName, top)
+        if traceLevel >= 0: print "  "+rsynccmd
+        parallel.add(rsynccmd)
+
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, dashDir, nodeName, top)
+        if traceLevel >= 0: print "  "+rsynccmd
+        parallel.add(rsynccmd)
+
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, jugglerDir, nodeName, top)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
