@@ -80,37 +80,24 @@ def main():
     if opt.verbose:               traceLevel = 1
     if opt.quiet and opt.verbose: traceLevel = 0
 
-    # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
-    if environ.has_key("PDAQ_HOME"):
-        top = environ["PDAQ_HOME"]
-    else:
-        from locate_pdaq import find_pdaq_trunk
-        top = find_pdaq_trunk()
-
     rsyncCmdStub = "rsync -azLC%s%s" % (opt.delete and ' --delete' or '',
                                        opt.deepDryRun and ' --dry-run' or '')
 
-    targetDir        = abspath(join(top, 'target'))
-    clusterConfigDir = abspath(join(top, 'cluster-config'))
-    runConfigDir     = abspath(join(top, 'config'))
-    dashDir          = abspath(join(top, 'dash'))
-    jugglerDir       = abspath(join(top, 'juggler'))
+    targetDir        = abspath(join(metaDir, 'target'))
+    clusterConfigDir = abspath(join(metaDir, 'cluster-config'))
+    runConfigDir     = abspath(join(metaDir, 'config'))
+    dashDir          = abspath(join(metaDir, 'dash'))
+    jugglerDir       = abspath(join(metaDir, 'juggler'))
 
-    configXMLDir = abspath(join(top, 'cluster-config', 'src', 'main', 'xml'))
-
-    if opt.configName == None:
-        opt.configName = getDeployedClusterConfig(join(metaDir,
-                                                       'cluster-config',
-                                                       '.config'))
-
-    if opt.doList: showConfigs(configXMLDir, opt.configName); raise SystemExit
-
-    if opt.configName == None: p.print_help(); raise SystemExit
-
-    config = deployConfig(configXMLDir, opt.configName)
+    try:
+        config = ClusterConfig(metaDir, opt.configName, opt.doList, False)
+    except ConfigNotSpecifiedException:
+        print >>sys.stderr, 'No configuration specified'
+        p.print_help()
+        raise SystemExit
 
     if traceLevel >= 0:
-        print "CONFIG: %s" % opt.configName
+        print "CONFIG: %s" % config.configName
         print "NODES:"
         for node in config.nodes:
             print "  %s(%s)" % (node.hostName, node.locName),
@@ -122,12 +109,8 @@ def main():
                 print " ",
             print
 
-    # Remember this config
-    hereFile = abspath(join(top, 'cluster-config', '.config'))
     if not opt.dryRun:
-        fd = open(hereFile, 'w')
-        print >>fd, opt.configName
-        fd.close()
+        config.writeCacheFile()
 
     m2  = join(environ["HOME"], '.m2')
 
@@ -147,27 +130,27 @@ def main():
             done = True
 
         if opt.undeploy:
-            cmd = 'ssh %s "\\rm -rf %s %s"' % (nodeName, m2, top)
+            cmd = 'ssh %s "\\rm -rf %s %s"' % (nodeName, m2, metaDir)
             parallel.add(cmd)
             continue
 
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, top)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, clusterConfigDir, nodeName, top)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, clusterConfigDir, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, runConfigDir, nodeName, top)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, runConfigDir, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, dashDir, nodeName, top)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, dashDir, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, jugglerDir, nodeName, top)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, jugglerDir, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
