@@ -122,6 +122,13 @@ def main():
     rsyncNodes = getUniqueHostNames(config)
 
     for nodeName in rsyncNodes:
+
+        # Check if targetDir (the result of a build) is present
+        if not isdir(targetDir):
+            print >>sys.stderr, "ERROR: Target dir (%s) does not exist." % (targetDir)
+            print >>sys.stderr, "ERROR: Did you run 'mvn clean install assembly:assembly'?"
+            raise SystemExit
+        
         # Ignore localhost - already "deployed"
         if nodeName == "localhost": continue
         if not done and traceLevel >= 0:
@@ -133,11 +140,6 @@ def main():
             parallel.add(cmd)
             continue
 
-        if not isdir(targetDir):
-            print >>sys.stderr, "ERROR: Target dir (%s) does not exist." % (targetDir)
-            print >>sys.stderr, "       Did you run 'mvn clean install assembly:assembly'?"
-            raise SystemExit
-        
         rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
