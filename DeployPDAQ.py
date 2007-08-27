@@ -87,7 +87,6 @@ def main():
     clusterConfigDir = abspath(join(metaDir, 'cluster-config'))
     runConfigDir     = abspath(join(metaDir, 'config'))
     dashDir          = abspath(join(metaDir, 'dash'))
-    jugglerDir       = abspath(join(metaDir, 'juggler'))
 
     try:
         config = ClusterConfig(metaDir, opt.configName, opt.doList, False)
@@ -134,6 +133,11 @@ def main():
             parallel.add(cmd)
             continue
 
+        if not isdir(targetDir):
+            print >>sys.stderr, "ERROR: Target dir (%s) does not exist." % (targetDir)
+            print >>sys.stderr, "       Did you run 'mvn clean install assembly:assembly'?"
+            raise SystemExit
+        
         rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
@@ -147,10 +151,6 @@ def main():
         parallel.add(rsynccmd)
 
         rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, dashDir, nodeName, metaDir)
-        if traceLevel >= 0: print "  "+rsynccmd
-        parallel.add(rsynccmd)
-
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, jugglerDir, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
