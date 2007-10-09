@@ -29,7 +29,8 @@ def getUniqueHostNames(config):
 def main():
     "Main program"
     usage = "%prog [options]"
-    p = optparse.OptionParser()
+    version = "%prog:\n  $Id$\n  $URL$"
+    p = optparse.OptionParser(usage=usage, version=version)
     p.add_option("-c", "--config-name",  action="store", type="string", dest="configName",
                  help="REQUIRED: Configuration name")
     p.add_option("", "--delete",       action="store_true",           dest="delete",
