@@ -29,7 +29,7 @@ def getUniqueHostNames(config):
 def main():
     "Main program"
     usage = "%prog [options]"
-    version = "%prog:\n  $Id$\n  $URL$"
+    version = "%prog:\n  $Id: DeployPDAQ.py 2100 2007-10-10 01:42:34Z ksb $\n  $URL: http://code.icecube.wisc.edu/daq/projects/cluster-config/trunk/DeployPDAQ.py $"
     p = optparse.OptionParser(usage=usage, version=version)
     p.add_option("-c", "--config-name",  action="store", type="string", dest="configName",
                  help="REQUIRED: Configuration name")
