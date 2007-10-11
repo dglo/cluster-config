@@ -29,7 +29,7 @@ def getUniqueHostNames(config):
 def main():
     "Main program"
     usage = "%prog [options]"
-    version = "%prog:\n  $Id: DeployPDAQ.py 2100 2007-10-10 01:42:34Z ksb $\n  $URL: http://code.icecube.wisc.edu/daq/projects/cluster-config/trunk/DeployPDAQ.py $"
+    version = "%prog:\n  $Id: DeployPDAQ.py 2103 2007-10-11 17:51:34Z dglo $\n  $URL: http://code.icecube.wisc.edu/daq/projects/cluster-config/trunk/DeployPDAQ.py $"
     p = optparse.OptionParser(usage=usage, version=version)
     p.add_option("-c", "--config-name",  action="store", type="string", dest="configName",
                  help="REQUIRED: Configuration name")
@@ -81,7 +81,7 @@ def main():
     if opt.verbose:               traceLevel = 1
     if opt.quiet and opt.verbose: traceLevel = 0
 
-    rsyncCmdStub = "rsync -azLC%s%s" % (opt.delete and ' --delete' or '',
+    rsyncCmdStub = "nice rsync -azLC%s%s" % (opt.delete and ' --delete' or '',
                                        opt.deepDryRun and ' --dry-run' or '')
 
     targetDir        = abspath(join(metaDir, 'target'))
