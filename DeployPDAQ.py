@@ -10,7 +10,10 @@ from ClusterConfig import *
 from ParallelShell import *
 from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
-from re import search
+import re
+
+svn_id = "$Id: DeployPDAQ.py 2116 2007-10-11 22:47:55Z ksb $"
+svn_url = "$URL: http://code.icecube.wisc.edu/daq/projects/cluster-config/trunk/DeployPDAQ.py $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -18,6 +21,10 @@ if environ.has_key("PDAQ_HOME"):
 else:
     from locate_pdaq import find_pdaq_trunk
     metaDir = find_pdaq_trunk()
+
+# add 'dash' to Python library search path
+sys.path.append(join(metaDir, 'dash'))
+from SVNRelease import getReleaseInfo
 
 def getUniqueHostNames(config):
     # There's probably a much better way to do this
@@ -28,8 +35,9 @@ def getUniqueHostNames(config):
 
 def main():
     "Main program"
-    usage = "%prog [options]"
-    version = "%prog:\n  $Id: DeployPDAQ.py 2103 2007-10-11 17:51:34Z dglo $\n  $URL: http://code.icecube.wisc.edu/daq/projects/cluster-config/trunk/DeployPDAQ.py $"
+    rel_info = "%s %s %s %s %s" % getReleaseInfo(svn_id, svn_url)
+    usage = "%prog [options]\nrelease: " + rel_info
+    version = "%prog: " + rel_info
     p = optparse.OptionParser(usage=usage, version=version)
     p.add_option("-c", "--config-name",  action="store", type="string", dest="configName",
                  help="REQUIRED: Configuration name")
