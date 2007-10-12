@@ -12,7 +12,7 @@ from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 import re
 
-svn_id = "$Id: DeployPDAQ.py 2116 2007-10-11 22:47:55Z ksb $"
+svn_id = "$Id: DeployPDAQ.py 2125 2007-10-12 18:27:05Z ksb $"
 svn_url = "$URL: http://code.icecube.wisc.edu/daq/projects/cluster-config/trunk/DeployPDAQ.py $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
