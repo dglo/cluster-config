@@ -4,6 +4,7 @@
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
     <logDirForSpade>spade</logDirForSpade>
+    <defaultLogLevel>INFO</defaultLogLevel>
 
     <!-- Each location element corresponds to a host (and the iceboss
       instance on it) and lists the services and ejbs on that
