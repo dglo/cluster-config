@@ -12,8 +12,8 @@ from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 import re
 
-svn_id = "$Id: DeployPDAQ.py 2125 2007-10-12 18:27:05Z ksb $"
-svn_url = "$URL: http://code.icecube.wisc.edu/daq/projects/cluster-config/trunk/DeployPDAQ.py $"
+SVN_ID = "$Id: DeployPDAQ.py 2167 2007-10-19 18:34:14Z ksb $"
+SVN_URL = "$URL: http://code.icecube.wisc.edu/daq/projects/cluster-config/trunk/DeployPDAQ.py $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -24,7 +24,7 @@ else:
 
 # add 'dash' to Python library search path
 sys.path.append(join(metaDir, 'dash'))
-from SVNRelease import getReleaseInfo
+from SVNVersionInfo import getVersionInfo
 
 def getUniqueHostNames(config):
     # There's probably a much better way to do this
@@ -35,10 +35,9 @@ def getUniqueHostNames(config):
 
 def main():
     "Main program"
-    rel_info = "%s %s %s %s %s" % getReleaseInfo(svn_id, svn_url)
-    usage = "%prog [options]\nrelease: " + rel_info
-    version = "%prog: " + rel_info
-    p = optparse.OptionParser(usage=usage, version=version)
+    ver_info = "%(filename)s %(revision)s %(date)s %(time)s %(author)s %(release)s %(repo_rev)s" % getVersionInfo(SVN_ID, SVN_URL)
+    usage = "%prog [options]\nversion: " + ver_info
+    p = optparse.OptionParser(usage=usage, version=ver_info)
     p.add_option("-c", "--config-name",  action="store", type="string", dest="configName",
                  help="REQUIRED: Configuration name")
     p.add_option("", "--delete",       action="store_true",           dest="delete",
