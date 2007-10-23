@@ -12,7 +12,7 @@ from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 import re
 
-SVN_ID = "$Id: DeployPDAQ.py 2168 2007-10-20 01:15:02Z ksb $"
+SVN_ID = "$Id: DeployPDAQ.py 2178 2007-10-23 20:00:51Z ksb $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -132,7 +132,7 @@ def main():
     for nodeName in rsyncNodes:
 
         # Check if targetDir (the result of a build) is present
-        if not isdir(targetDir):
+        if not opt.undeploy and not isdir(targetDir):
             print >>sys.stderr, "ERROR: Target dir (%s) does not exist." % (targetDir)
             print >>sys.stderr, "ERROR: Did you run 'mvn clean install assembly:assembly'?"
             raise SystemExit
