@@ -38,9 +38,9 @@
 
     </location>
 
-    <location name="spts64-ichub29">
+    <location name="spts64-ichub21">
       <address>
-        <host>spts64-ichub29</host>
+        <host>spts64-ichub21</host>
       </address>
       <module>
         <name>StringHub</name>
