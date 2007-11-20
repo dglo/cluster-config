@@ -11,37 +11,32 @@
       host. The rank attribute orders locations, for example the DB or
       ExpCont node might need to be handled differently within the
       cluster. -->
-    <location name="localhost">
+    <location name="remotehost">
       <address>
-        <host>localhost</host>
+        <host>spts64-ichub29</host>
       </address>
+    </location>
 
+    <location name="spts64-ichub29">
+      <address>
+        <host>spts64-ichub29</host>
+      </address>
       <module>
         <name>SecondaryBuilders</name>
         <id>0</id>
       </module>
-
       <module>
         <name>eventBuilder</name>
         <id>0</id>
       </module>
-
-      <module>
-        <name>globalTrigger</name>
-        <id>0</id>
-      </module>
-
       <module>
         <name>inIceTrigger</name>
         <id>0</id>
       </module>
-
-    </location>
-
-    <location name="spts64-ichub21">
-      <address>
-        <host>spts64-ichub21</host>
-      </address>
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+      </module>
       <module>
         <name>StringHub</name>
         <id>1001</id>
