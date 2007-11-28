@@ -11,7 +11,7 @@ from ParallelShell import *
 from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 
-SVN_ID = "$Id: DeployPDAQ.py 2312 2007-11-26 23:03:57Z ksb $"
+SVN_ID = "$Id: DeployPDAQ.py 2327 2007-11-28 16:09:59Z ksb $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -94,6 +94,7 @@ def main():
     clusterConfigDir = abspath(join(metaDir, 'cluster-config'))
     runConfigDir     = abspath(join(metaDir, 'config'))
     dashDir          = abspath(join(metaDir, 'dash'))
+    srcDir           = abspath(join(metaDir, 'src'))
 
     try:
         config = ClusterConfig(metaDir, opt.configName, opt.doList, False)
@@ -148,6 +149,10 @@ def main():
             continue
 
         rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, metaDir)
+        if traceLevel >= 0: print "  "+rsynccmd
+        parallel.add(rsynccmd)
+
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, srcDir, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
