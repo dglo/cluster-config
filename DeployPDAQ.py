@@ -11,7 +11,7 @@ from ParallelShell import *
 from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 
-SVN_ID = "$Id: DeployPDAQ.py 2327 2007-11-28 16:09:59Z ksb $"
+SVN_ID = "$Id: DeployPDAQ.py 2401 2007-12-11 00:40:03Z ksb $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -22,7 +22,7 @@ else:
 
 # add meta-project python dir to Python library search path
 sys.path.append(join(metaDir, 'src', 'main', 'python'))
-from SVNVersionInfo import get_version_info
+from SVNVersionInfo import get_version_info, store_svnversion
 
 def getUniqueHostNames(config):
     # There's probably a much better way to do this
@@ -118,6 +118,7 @@ def main():
 
     if not opt.dryRun:
         config.writeCacheFile()
+        store_svnversion()
 
     m2  = join(environ["HOME"], '.m2')
 
