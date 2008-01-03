@@ -1,4 +1,4 @@
-<icecube configName="sps-config" remarks="IC22 with IceTop and AMANDA">
+<icecube configName="sps-config" remarks="IC40 with IceTop and AMANDA">
 
   <cluster name="sps">
 
