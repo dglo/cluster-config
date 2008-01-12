@@ -36,6 +36,16 @@
       </module>
     </location>
     
+    <location name="ichub64">
+      <address>
+        <host>sps-ichub64</host>
+      </address>
+      <module>
+        <name>StringHub</name>
+        <id>64</id>
+      </module>
+    </location>
+    
     <location name="ichub70">
       <address>
         <host>sps-ichub70</host>
