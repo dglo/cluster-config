@@ -11,7 +11,7 @@ from ParallelShell import *
 from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 
-SVN_ID = "$Id: DeployPDAQ.py 2401 2007-12-11 00:40:03Z ksb $"
+SVN_ID = "$Id: DeployPDAQ.py 2562 2008-01-28 23:07:34Z ksb $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -90,11 +90,13 @@ def main():
     rsyncCmdStub = "nice rsync -azLC%s%s" % (opt.delete and ' --delete' or '',
                                        opt.deepDryRun and ' --dry-run' or '')
 
+    # The 'SRC' arg for the rsync command.  The sh "{}" syntax is used
+    # here so that only one rsync is required for each node. (Running
+    # multiple rsync's in parallel appeared to give rise to race
+    # conditions and errors.)
+    rsyncDeploySrc = abspath(join(metaDir, '{target,cluster-config,config,dash,src}'))
+
     targetDir        = abspath(join(metaDir, 'target'))
-    clusterConfigDir = abspath(join(metaDir, 'cluster-config'))
-    runConfigDir     = abspath(join(metaDir, 'config'))
-    dashDir          = abspath(join(metaDir, 'dash'))
-    srcDir           = abspath(join(metaDir, 'src'))
 
     try:
         config = ClusterConfig(metaDir, opt.configName, opt.doList, False)
@@ -149,23 +151,7 @@ def main():
             parallel.add(cmd)
             continue
 
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, targetDir, nodeName, metaDir)
-        if traceLevel >= 0: print "  "+rsynccmd
-        parallel.add(rsynccmd)
-
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, srcDir, nodeName, metaDir)
-        if traceLevel >= 0: print "  "+rsynccmd
-        parallel.add(rsynccmd)
-
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, clusterConfigDir, nodeName, metaDir)
-        if traceLevel >= 0: print "  "+rsynccmd
-        parallel.add(rsynccmd)
-
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, runConfigDir, nodeName, metaDir)
-        if traceLevel >= 0: print "  "+rsynccmd
-        parallel.add(rsynccmd)
-
-        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, dashDir, nodeName, metaDir)
+        rsynccmd = "%s %s %s:%s" % (rsyncCmdStub, rsyncDeploySrc, nodeName, metaDir)
         if traceLevel >= 0: print "  "+rsynccmd
         parallel.add(rsynccmd)
 
