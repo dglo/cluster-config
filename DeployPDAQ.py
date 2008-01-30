@@ -11,7 +11,7 @@ from ParallelShell import *
 from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 
-SVN_ID = "$Id: DeployPDAQ.py 2562 2008-01-28 23:07:34Z ksb $"
+SVN_ID = "$Id: DeployPDAQ.py 2571 2008-01-31 01:45:24Z ksb $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -120,7 +120,9 @@ def main():
 
     if not opt.dryRun:
         config.writeCacheFile()
-        store_svnversion()
+        ver = store_svnversion()
+        if traceLevel >= 0:
+            print "VERSION: %s" % ver
 
     m2  = join(environ["HOME"], '.m2')
 
