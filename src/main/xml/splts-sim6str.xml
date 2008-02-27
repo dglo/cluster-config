@@ -1,0 +1,106 @@
+<icecube configName="splts-010" remarks="SPLTS: 10 string simulation">
+
+  <cluster name="splts">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <!-- Each location element corresponds to a host and lists the
+      components on that host. The rank attribute orders locations,
+      for example the DB or ExpCont node might need to be handled
+      differently within the cluster. -->
+    <location name="stringproc01">
+      <address>
+        <host>splts-stringproc01</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>1001</id>
+      </module>
+      <module>
+        <name>StringHub</name>
+        <id>1003</id>
+      </module>
+      <module>
+        <name>StringHub</name>
+        <id>1005</id>
+      </module>
+    </location>
+
+    <location name="stringproc02">
+      <address>
+        <host>splts-stringproc02</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>1002</id>
+      </module>
+      <module>
+        <name>StringHub</name>
+        <id>1004</id>
+      </module>
+      <module>
+        <name>StringHub</name>
+        <id>1006</id>
+      </module>
+    </location>
+
+    <location name="dbs">
+      <address>
+        <host>splts-dbs</host>
+      </address>
+
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+	<logLevel>ERROR</logLevel>
+      </module>
+
+      <module>
+        <name>iceTopTrigger</name>
+        <id>0</id>
+	<logLevel>ERROR</logLevel>
+      </module>
+
+      <module>
+        <name>amandaTrigger</name>
+        <id>0</id>
+	<logLevel>ERROR</logLevel>
+      </module>
+
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+	<logLevel>ERROR</logLevel>
+      </module>
+    </location>
+
+    <location name="evbuilder">
+      <address>
+        <host>splts-evbuilder</host>
+      </address>
+
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+      </module>
+    </location>
+
+    <location name="expcont">
+      <address>
+        <host>splts-expcont</host>
+      </address>
+    </location>
+
+  </cluster>
+
+</icecube>
