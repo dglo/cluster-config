@@ -227,6 +227,10 @@
         <name>inIceTrigger</name>
         <id>0</id>
       </module>
+      <module>
+        <name>iceTopTrigger</name>
+        <id>0</id>
+      </module>
     </location>
 
   </cluster>
