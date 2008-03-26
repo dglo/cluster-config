@@ -186,6 +186,27 @@
       </module>
     </location>
     
+    <location name="ithub05">
+      <address>
+        <host>sps-ithub05</host>
+      </address>
+      <module>
+        <name>StringHub</name>
+        <id>85</id>
+      </module>
+    </location>
+    
+    <location name="ithub06">
+      <address>
+        <host>sps-ithub06</host>
+      </address>
+      <module>
+        <name>StringHub</name>
+        <id>86</id>
+      </module>
+    </location>
+    
+    
     <location name="daq-central">
       <address>
         <host>sps-fpslave13</host>
