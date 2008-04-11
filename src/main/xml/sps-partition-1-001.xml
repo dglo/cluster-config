@@ -1,0 +1,180 @@
+<icecube configName="sps-config" remarks="Special flasher run - primary partition.">
+
+  <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <!-- Each location element corresponds to a host (and the iceboss
+      instance on it) and lists the services and ejbs on that
+      host. The rank attribute orders locations, for example the DB or
+      ExpCont node might need to be handled differently within the
+      cluster. -->
+
+    <location name="ichub45">
+      <address>
+        <host>sps-ichub45</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>45</id>
+	<logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub46">
+      <address>
+        <host>sps-ichub46</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>46</id>
+	<logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub47">
+      <address>
+        <host>sps-ichub47</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>47</id>
+	<logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub52">
+      <address>
+        <host>sps-ichub52</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>52</id>
+	<logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub54">
+      <address>
+        <host>sps-ichub54</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>54</id>
+	<logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub56">
+      <address>
+        <host>sps-ichub56</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>56</id>
+	<logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub59">
+      <address>
+        <host>sps-ichub59</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>59</id>
+	<logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub64">
+      <address>
+        <host>sps-ichub64</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>64</id>
+	<logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub75">
+      <address>
+        <host>sps-ichub75</host>
+      </address>
+
+      <module>
+        <name>StringHub</name>
+        <id>75</id>
+	<logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="2ndbuild">
+      <address>
+        <host>sps-2ndbuild</host>
+      </address>
+
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+	<logLevel>INFO</logLevel>
+      </module><module><name>inIceTrigger</name><id>0</id><logLevel>INFO</logLevel></module>
+    </location>
+
+    <location name="evbuilder">
+      <address>
+        <host>sps-evbuilder</host>
+      </address>
+
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+	<logLevel>INFO</logLevel>
+      </module><module><name>globalTrigger</name><id>0</id><logLevel>INFO</logLevel></module>
+    </location>
+
+    <location name="iitrigger">
+      <address>
+        <host>sps-iitrigger</host>
+      </address>
+
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+      </module>
+    </location>
+
+    <location name="ittrigger">
+      <address>
+        <host>sps-ittrigger</host>
+      </address>
+
+      <module>
+        <name>iceTopTrigger</name>
+        <id>0</id>
+      </module>
+
+    </location>
+
+    <location name="expcont">
+      <address>
+        <host>sps-expcont</host>
+      </address>
+    </location>
+
+  </cluster>
+
+</icecube>
