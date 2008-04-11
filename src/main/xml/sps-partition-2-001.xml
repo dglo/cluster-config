@@ -75,17 +75,7 @@
       </module>
     </location>
 
-    <location name="ichub40">
-      <address>
-        <host>sps-ichub40</host>
-      </address>
-
-      <module>
-        <name>StringHub</name>
-        <id>40</id>
-        <logLevel>INFO</logLevel>
-      </module>
-    </location>
+    
 
     <location name="ichub44">
       <address>
@@ -260,17 +250,7 @@
       </module>
     </location>
 
-    <location name="ichub66">
-      <address>
-        <host>sps-ichub66</host>
-      </address>
-
-      <module>
-        <name>StringHub</name>
-        <id>66</id>
-        <logLevel>INFO</logLevel>
-      </module>
-    </location>
+    
 
     <location name="ichub67">
       <address>
