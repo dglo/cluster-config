@@ -412,9 +412,9 @@
     
     </location>
 
-    <location name="cvmaster">
+    <location name="amandaHub">
       <address>
-        <host>spts64-cvmaster</host>
+        <host>spts64-gtrigger</host>
       </address>
       
       <module>
