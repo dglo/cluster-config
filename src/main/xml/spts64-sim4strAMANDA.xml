@@ -1,0 +1,116 @@
+<icecube configName="spts64-sim4strAMANDA"
+         remarks="4 simulated strings plus simulated AMANDA hub and trigger">
+
+  <cluster name="spts64">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <location name="sp01">
+      <address>
+        <host>spts64-stringproc01</host>
+      </address>
+      <module>
+        <name>StringHub</name>
+        <id>1001</id>
+      </module>
+    </location>
+
+    <location name="sp02">
+      <address>
+        <host>spts64-stringproc02</host>
+      </address>
+      <module>
+        <name>StringHub</name>
+        <id>1002</id>
+      </module>
+    </location>
+
+    <location name="sp03">
+      <address>
+        <host>spts64-stringproc03</host>
+      </address>
+      <module>
+        <name>StringHub</name>
+        <id>1003</id>
+      </module>
+    </location>
+
+    <location name="sp04">
+      <address>
+        <host>spts64-stringproc04</host>
+      </address>
+      <module>
+        <name>StringHub</name>
+        <id>1004</id>
+      </module>
+    </location>
+
+    <location name="sp05">
+      <address>
+        <host>spts64-stringproc05</host>
+      </address>
+      <module>
+        <name>StringHub</name>
+        <id>1000</id>
+        <!-- <logLevel>DEBUG</logLevel> -->
+      </module>
+    </location>
+
+
+    <location name="2ndbuild">
+      <address>
+        <host>spts64-expcont</host>
+      </address>
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+      </module>
+    </location>
+
+    <location name="evbuilder">
+      <address>
+        <host>spts64-evbuilder</host>
+      </address>
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+      </module>
+    </location>
+
+    <location name="iitrigger">
+      <address>
+        <host>spts64-iitrigger</host>
+      </address>
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+      </module>
+    </location>
+
+    <location name="gtrigger">
+      <address>
+        <host>spts64-gtrigger</host>
+      </address>
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+      </module>
+    </location>
+
+    <location name="ittrigger">
+      <address>
+        <host>spts64-ittrigger</host>
+      </address>
+      <module>
+        <name>amandaTrigger</name>
+        <id>0</id>
+        <logLevel>DEBUG</logLevel>
+      </module>
+    </location>
+
+  </cluster>
+
+</icecube>
