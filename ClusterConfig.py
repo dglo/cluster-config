@@ -45,40 +45,41 @@ class deployConfig(object):
         try:
             parsed = minidom.parse(self.configFile)
         except:
+            import sys,traceback
+            traceback.print_exc(file=sys.stdout)
             raise MalformedDeployConfigException(self.configFile)
         icecube = parsed.getElementsByTagName("icecube")
         if len(icecube) != 1: raise MalformedDeployConfigException(self.configFile)
 
         # Get "remarks" string if available
-        try:
-            self.remarks = icecube[0].attributes["remarks"].value
-        except Exception, e: self.remarks = None
+        self.remarks = self.getValue(icecube[0], "remarks")
         
         cluster = icecube[0].getElementsByTagName("cluster")
         if len(cluster) != 1: raise MalformedDeployConfigException(self.configFile)
-        self.clusterName = cluster[0].attributes[ "name" ].value
+        self.clusterName = self.getValue(cluster[0], "name")
 
         # Get location of SPADE output
-        self.logDirForSpade = self.getElementSingleTagName(cluster[0], "logDirForSpade")
+        self.logDirForSpade = self.getValue(cluster[0], "logDirForSpade")
 
         # Get location of SPADE/logs copies
-        try:
-            self.logDirCopies = self.getElementSingleTagName(cluster[0], "logDirCopies")
-        except:
-            self.logDirCopies = None
+        self.logDirCopies = self.getValue(cluster[0], "logDirCopies")
             
         # Get default log level
-        try:
-            self.defaultLogLevel = self.getElementSingleTagName(cluster[0], "defaultLogLevel")
-        except:
-            self.defaultLogLevel = GLOBAL_DEFAULT_LOG_LEVEL
+        self.defaultLogLevel = self.getValue(cluster[0], "defaultLogLevel",
+                                             GLOBAL_DEFAULT_LOG_LEVEL)
         
         locations = cluster[0].getElementsByTagName("location")
         for nodeXML in locations:
-            name = nodeXML.attributes["name"].value
+            name = self.getValue(nodeXML, "name")
+            if name is None:
+                raise MalformedDeployConfigException("<location> is missing 'name' attribute")
+
             # Get address
-            address = nodeXML.getElementsByTagName("address")
-            hostname = self.getElementSingleTagName(address[0], "host")
+            if nodeXML.attributes.has_key("host"):
+                hostname = nodeXML.attributes["host"].value
+            else:
+                address = nodeXML.getElementsByTagName("address")
+                hostname = self.getElementSingleTagName(address[0], "host")
 
             thisNode = deployNode(name, hostname)
             self.nodes.append(thisNode)
@@ -87,18 +88,24 @@ class deployConfig(object):
             components = []
             modules = nodeXML.getElementsByTagName("module")
             for compXML in modules:
-                compName = self.getElementSingleTagName(compXML, "name")
-                compID   = int(self.getElementSingleTagName(compXML, "id"))
+                compName = self.getValue(compXML, "name")
+                if compName is None:
+                    raise MalformedDeployConfigException("Found module without 'name'")
+
+                idStr = self.getValue(compXML, "id", "0")
                 try:
-                    logLevel = self.getElementSingleTagName(compXML, "logLevel")
+                    compID = int(idStr)
                 except:
-                    logLevel = self.defaultLogLevel
-                iceTop = False
-                try:
-                    itElems = compXML.getElementsByTagName("isIcetop")
-                    if len(itElems) > 0: iceTop = True
-                except: pass
-                thisNode.addComp(deployComponent(compName, compID, logLevel, iceTop))
+                    raise MalformedDeployConfigException("Bad id '%s' for module '%d'" %
+                                                         (idStr, compName))
+
+                logLevel = self.getValue(compXML, "logLevel",
+                                         self.defaultLogLevel)
+
+                iceTop = self.getValue(compXML, "isIcetop") is not None
+
+                thisNode.addComp(deployComponent(compName, compID, logLevel,
+                                                 iceTop))
 
     def getElementSingleTagName(root, name):
         "Fetch a single element tag name of form <tagName>yowsa!</tagName>"
@@ -120,6 +127,15 @@ class deployConfig(object):
                     except ValueError:
                         hublist.append(node.hostName)
         return hublist
+
+    def getValue(self, node, name, defaultVal=None):
+        if node.attributes is not None and node.attributes.has_key(name):
+            return node.attributes[name].value
+
+        try:
+            return self.getElementSingleTagName(node, name)
+        except:
+            return defaultVal
 
     def xmlOf(self, name):
         if not name.endswith(".xml"): return name+".xml"
