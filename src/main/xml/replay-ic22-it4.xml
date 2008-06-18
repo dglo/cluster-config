@@ -1,0 +1,100 @@
+<icecube configName="replay-ic22-it4"
+         remarks="SPTS64 config for replaying IC22/IT4 hit files">
+
+  <cluster name="spts64">
+
+    <!-- Non-fully-qualified paths are relative to pdaq on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <!-- Each location element corresponds to a host
+         and lists the component on that host.  -->
+
+    <location name="sp01" host="spts64-stringproc01">
+      <module name="replayHub" id="21"/>
+      <module name="replayHub" id="29"/>
+      <module name="replayHub" id="30"/>
+    </location>
+
+    <location name="fp01" host="spts64-fpslave01">
+      <module name="replayHub" id="38"/>
+      <module name="replayHub" id="39"/>
+      <module name="replayHub" id="40"/>
+    </location>
+
+    <location name="sp03" host="spts64-stringproc02">
+      <module name="replayHub" id="46"/>
+      <module name="replayHub" id="47"/>
+      <module name="replayHub" id="48"/>
+    </location>
+
+    <location name="fp02" host="spts64-fpslave02">
+      <module name="replayHub" id="49"/>
+      <module name="replayHub" id="50"/>
+      <module name="replayHub" id="56"/>
+    </location>
+
+    <location name="sp03" host="spts64-stringproc03">
+      <module name="replayHub" id="57"/>
+      <module name="replayHub" id="58"/>
+      <module name="replayHub" id="59"/>
+    </location>
+
+    <location name="fp03" host="spts64-fpslave03">
+      <module name="replayHub" id="65"/>
+      <module name="replayHub" id="66"/>
+      <module name="replayHub" id="67"/>
+    </location>
+
+    <location name="sp04" host="spts64-stringproc04">
+      <module name="replayHub" id="72"/>
+      <module name="replayHub" id="73"/>
+    </location>
+
+    <location name="fp04" host="spts64-fpslave04">
+      <module name="replayHub" id="74"/>
+      <module name="replayHub" id="78"/>
+    </location>
+
+    <location name="sp05" host="spts64-stringproc05">
+      <module name="replayHub" id="81"/>
+      <module name="replayHub" id="82"/>
+    </location>
+
+    <location name="fp05" host="spts64-fpslave05">
+      <module name="replayHub" id="83"/>
+      <module name="replayHub" id="84"/>
+      <module name="replayHub" id="0"/>
+    </location>
+
+    <location name="2ndbuild" host="spts64-expcont">
+      <module name="SecondaryBuilders"/>
+    </location>
+
+    <location name="evbuilder" host="spts64-evbuilder">
+      <module name="eventBuilder"/>
+    </location>
+
+    <location name="iitrigger" host="spts64-iitrigger">
+      <module name="inIceTrigger"/>
+    </location>
+
+    <location name="ittrigger" host="spts64-ittrigger">
+      <module name="iceTopTrigger"/>
+    </location>
+
+    <location name="gtrigger" host="spts64-gtrigger">
+      <module name="globalTrigger"/>
+    </location>
+
+    <location name="expcont" host="spts64-expcont"/>
+
+    <location name="dbs" host="spts64-dbs"/>
+
+    <location name="ittrigger" host="spts64-ittrigger">
+      <module name="amandaTrigger">
+        <!-- <logLevel>DEBUG</logLevel> -->
+      </module>
+    </location>
+  </cluster>
+</icecube>
