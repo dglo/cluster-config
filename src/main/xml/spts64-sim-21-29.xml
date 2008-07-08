@@ -8,72 +8,28 @@
 
     <defaultLogLevel>INFO</defaultLogLevel>
 
-    <location name="ichub21">
-      <address>
-        <host>spts64-ichub21</host>
-      </address>
-
-      <module>
-        <name>StringHub</name>
-        <id>1021</id>
-      </module>
+    <location name="ichub21" host="spts64-ichub21">
+      <module name="StringHub" id="1021"/>
     </location>
 
-    <location name="ichub29">
-      <address>
-        <host>spts64-ichub29</host>
-      </address>
-
-      <module>
-        <name>StringHub</name>
-        <id>1029</id>
-      </module>
+    <location name="ichub29" host="spts64-ichub29">
+      <module name="StringHub" id="1029"/>
     </location>
 
-    <location name="2ndbuild">
-      <address>
-        <host>spts64-expcont</host>
-      </address>
-
-      <module>
-        <name>SecondaryBuilders</name>
-        <id>0</id>
-      </module>
+    <location name="2ndbuild" host="spts64-expcont">
+      <module name="SecondaryBuilders"/>
     </location>
 
-    <location name="evbuilder">
-      <address>
-        <host>spts64-evbuilder</host>
-      </address>
-
-      <module>
-        <name>eventBuilder</name>
-        <id>0</id>
-      </module>
+    <location name="evbuilder" host="spts64-evbuilder">
+      <module name="eventBuilder"/>
     </location>
 
-    <location name="iitrigger">
-      <address>
-        <host>spts64-iitrigger</host>
-      </address>
-
-      <module>
-        <name>inIceTrigger</name>
-        <id>0</id>
-      </module>
+    <location name="iitrigger" host="spts64-iitrigger">
+      <module name="inIceTrigger"/>
     </location>
 
-    <location name="gtrigger">
-      <address>
-        <host>spts64-gtrigger</host>
-      </address>
-
-      <module>
-        <name>globalTrigger</name>
-        <id>0</id>
-      </module>
+    <location name="gtrigger" host="spts64-gtrigger">
+      <module name="globalTrigger"/>
     </location>
-
   </cluster>
-
 </icecube>

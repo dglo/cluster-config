@@ -1,4 +1,4 @@
-<icecube configName="splts-010" remarks="SPLTS: 10 string simulation">
+<icecube configName="splts-sim6str" remarks="SPLTS: 10 string simulation">
 
   <cluster name="splts">
 
@@ -11,96 +11,39 @@
       components on that host. The rank attribute orders locations,
       for example the DB or ExpCont node might need to be handled
       differently within the cluster. -->
-    <location name="stringproc01">
-      <address>
-        <host>splts-stringproc01</host>
-      </address>
 
-      <module>
-        <name>StringHub</name>
-        <id>1001</id>
+    <location name="stringproc01" host="splts-stringproc01">
+      <module name="StringHub" id="1001"/>
+      <module name="StringHub" id="1003"/>
+      <module name="StringHub" id="1005"/>
+    </location>
+
+    <location name="stringproc02" host="splts-stringproc02">
+      <module name="StringHub" id="1002"/>
+      <module name="StringHub" id="1004"/>
+      <module name="StringHub" id="1006"/>
+    </location>
+
+    <location name="dbs" host="splts-dbs">
+      <module name="inIceTrigger">
+        <logLevel>ERROR</logLevel>
       </module>
-      <module>
-        <name>StringHub</name>
-        <id>1003</id>
+      <module name="iceTopTrigger">
+        <logLevel>ERROR</logLevel>
       </module>
-      <module>
-        <name>StringHub</name>
-        <id>1005</id>
+      <module name="amandaTrigger">
+        <logLevel>ERROR</logLevel>
+      </module>
+      <module name="globalTrigger">
+        <logLevel>ERROR</logLevel>
       </module>
     </location>
 
-    <location name="stringproc02">
-      <address>
-        <host>splts-stringproc02</host>
-      </address>
-
-      <module>
-        <name>StringHub</name>
-        <id>1002</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1004</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1006</id>
-      </module>
+    <location name="evbuilder" host="splts-evbuilder">
+      <module name="SecondaryBuilders"/>
+      <module name="eventBuilder"/>
     </location>
 
-    <location name="dbs">
-      <address>
-        <host>splts-dbs</host>
-      </address>
-
-      <module>
-        <name>inIceTrigger</name>
-        <id>0</id>
-	<logLevel>ERROR</logLevel>
-      </module>
-
-      <module>
-        <name>iceTopTrigger</name>
-        <id>0</id>
-	<logLevel>ERROR</logLevel>
-      </module>
-
-      <module>
-        <name>amandaTrigger</name>
-        <id>0</id>
-	<logLevel>ERROR</logLevel>
-      </module>
-
-      <module>
-        <name>globalTrigger</name>
-        <id>0</id>
-	<logLevel>ERROR</logLevel>
-      </module>
-    </location>
-
-    <location name="evbuilder">
-      <address>
-        <host>splts-evbuilder</host>
-      </address>
-
-      <module>
-        <name>SecondaryBuilders</name>
-        <id>0</id>
-      </module>
-
-      <module>
-        <name>eventBuilder</name>
-        <id>0</id>
-      </module>
-    </location>
-
-    <location name="expcont">
-      <address>
-        <host>splts-expcont</host>
-      </address>
-    </location>
-
+    <location name="expcont" host="splts-expcont"/>
   </cluster>
-
 </icecube>

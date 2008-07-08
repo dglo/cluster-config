@@ -1,109 +1,41 @@
-<icecube remarks="SPS 3 string sim. config, evbuilder running local">
+<icecube configName="sps-sim-config-reduced-local-evbuilder"
+         remarks="SPS 3 string sim. config, evbuilder running local">
 
   <cluster name="sps">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
     <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
 
-    <!-- Each location element corresponds to a host (and the iceboss
-      instance on it) and lists the services and ejbs on that
-      host. The rank attribute orders locations, for example the DB or
-      ExpCont node might need to be handled differently within the
-      cluster. -->
-    <location name="ichub21">
-      <address>
-        <host>sps-ichub21</host>
-      </address>
-
-      <module>
-        <name>StringHub</name>
-        <id>1001</id>
-      </module>
+    <location name="ichub21" host="sps-ichub21">
+      <module name="StringHub" id="1001"/>
     </location>
 
-    <location name="ichub29">
-      <address>
-        <host>sps-ichub29</host>
-      </address>
-
-      <module>
-        <name>StringHub</name>
-        <id>1002</id>
-      </module>
+    <location name="ichub29" host="sps-ichub29">
+      <module name="StringHub" id="1002"/>
     </location>
 
-    <location name="ichub30">
-      <address>
-        <host>sps-ichub30</host>
-      </address>
-
-      <module>
-        <name>StringHub</name>
-        <id>1003</id>
-      </module>
+    <location name="ichub30" host="sps-ichub30">
+      <module name="StringHub" id="1003"/>
     </location>
 
-    <location name="2ndbuild">
-      <address>
-        <host>sps-2ndbuild</host>
-      </address>
-
-      <module>
-        <name>SecondaryBuilders</name>
-        <id>0</id>
-      </module>
-
+    <location name="2ndbuild" host="sps-2ndbuild">
+      <module name="SecondaryBuilders"/>
     </location>
 
-    <location name="evbuilder">
-      <address>
-        <host>localhost</host>
-      </address>
-
-      <module>
-        <name>eventBuilder</name>
-        <id>0</id>
-      </module>
-
+    <location name="evbuilder" host="localhost">
+      <module name="eventBuilder"/>
     </location>
 
-    <location name="expcont">
-      <address>
-        <host>sps-expcont</host>
-      </address>
+    <location name="expcont" host="sps-expcont"/>
 
+    <location name="gtrigger" host="sps-gtrigger">
+      <module name="globalTrigger"/>
     </location>
 
-    <location name="gtrigger">
-      <address>
-        <host>sps-gtrigger</host>
-      </address>
-
-      <module>
-        <name>globalTrigger</name>
-        <id>0</id>
-      </module>
-
+    <location name="iitrigger" host="sps-iitrigger">
+      <module name="inIceTrigger"/>
     </location>
 
-    <location name="iitrigger">
-      <address>
-        <host>sps-iitrigger</host>
-      </address>
-
-      <module>
-        <name>inIceTrigger</name>
-        <id>0</id>
-      </module>
-
-    </location>
-
-    <location name="dbs">
-      <address>
-        <host>sps-dbs</host>
-      </address>
-    </location>
-
+    <location name="dbs" host="sps-dbs"/>
   </cluster>
-
 </icecube>

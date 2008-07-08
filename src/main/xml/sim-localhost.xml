@@ -1,64 +1,23 @@
-<icecube remarks="Localhost [laptop or standalone] configuration">
+<icecube configName="sim-localhost"
+         remarks="Localhost [laptop or standalone] configuration">
 
   <cluster name="localhost">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
     <logDirForSpade>spade</logDirForSpade>
+
     <defaultLogLevel>INFO</defaultLogLevel>
 
-    <!-- Each location element corresponds to a host (and the iceboss
-      instance on it) and lists the services and ejbs on that
-      host. The rank attribute orders locations, for example the DB or
-      ExpCont node might need to be handled differently within the
-      cluster. -->
-    <location name="localhost">
-      <address>
-        <host>localhost</host>
-      </address>
-
-      <module>
-        <name>StringHub</name>
-        <id>1001</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1002</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1003</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1004</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1005</id>
-      </module>
-
-      <module>
-        <name>SecondaryBuilders</name>
-        <id>0</id>
-      </module>
-
-      <module>
-        <name>eventBuilder</name>
-        <id>0</id>
-      </module>
-
-      <module>
-        <name>globalTrigger</name>
-        <id>0</id>
-      </module>
-
-      <module>
-        <name>inIceTrigger</name>
-        <id>0</id>
-      </module>
-
+    <location name="localhost" host="localhost">
+      <module name="StringHub" id="1001"/>
+      <module name="StringHub" id="1002"/>
+      <module name="StringHub" id="1003"/>
+      <module name="StringHub" id="1004"/>
+      <module name="StringHub" id="1005"/>
+      <module name="SecondaryBuilders"/>
+      <module name="eventBuilder"/>
+      <module name="globalTrigger"/>
+      <module name="inIceTrigger"/>
     </location>
-
   </cluster>
-
 </icecube>

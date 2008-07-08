@@ -8,109 +8,48 @@
 
     <defaultLogLevel>INFO</defaultLogLevel>
 
-    <location name="sp01">
-      <address>
-        <host>spts64-stringproc01</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>1001</id>
-      </module>
+    <location name="sp01" host="spts64-stringproc01">
+      <module name="StringHub" id="1001"/>
     </location>
 
-    <location name="sp02">
-      <address>
-        <host>spts64-stringproc02</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>1002</id>
-      </module>
+    <location name="sp02" host="spts64-stringproc02">
+      <module name="StringHub" id="1002"/>
     </location>
 
-    <location name="sp03">
-      <address>
-        <host>spts64-stringproc03</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>1003</id>
-      </module>
+    <location name="sp03" host="spts64-stringproc03">
+      <module name="StringHub" id="1003"/>
     </location>
 
-    <location name="sp04">
-      <address>
-        <host>spts64-stringproc04</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>1004</id>
-      </module>
+    <location name="sp04" host="spts64-stringproc04">
+      <module name="StringHub" id="1004"/>
     </location>
 
-    <location name="sp05">
-      <address>
-        <host>spts64-stringproc05</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>1000</id>
+    <location name="sp05" host="spts64-stringproc05">
+      <module name="StringHub" id="1000">
         <!-- <logLevel>DEBUG</logLevel> -->
       </module>
     </location>
 
-
-    <location name="2ndbuild">
-      <address>
-        <host>spts64-expcont</host>
-      </address>
-      <module>
-        <name>SecondaryBuilders</name>
-        <id>0</id>
-      </module>
+    <location name="2ndbuild" host="spts64-expcont">
+      <module name="SecondaryBuilders"/>
     </location>
 
-    <location name="evbuilder">
-      <address>
-        <host>spts64-evbuilder</host>
-      </address>
-      <module>
-        <name>eventBuilder</name>
-        <id>0</id>
-      </module>
+    <location name="evbuilder" host="spts64-evbuilder">
+      <module name="eventBuilder"/>
     </location>
 
-    <location name="iitrigger">
-      <address>
-        <host>spts64-iitrigger</host>
-      </address>
-      <module>
-        <name>inIceTrigger</name>
-        <id>0</id>
-      </module>
+    <location name="iitrigger" host="spts64-iitrigger">
+      <module name="inIceTrigger"/>
     </location>
 
-    <location name="gtrigger">
-      <address>
-        <host>spts64-gtrigger</host>
-      </address>
-      <module>
-        <name>globalTrigger</name>
-        <id>0</id>
-      </module>
+    <location name="gtrigger" host="spts64-gtrigger">
+      <module name="globalTrigger"/>
     </location>
 
-    <location name="ittrigger">
-      <address>
-        <host>spts64-ittrigger</host>
-      </address>
-      <module>
-        <name>amandaTrigger</name>
-        <id>0</id>
+    <location name="ittrigger" host="spts64-ittrigger">
+      <module name="amandaTrigger">
         <logLevel>DEBUG</logLevel>
       </module>
     </location>
-
   </cluster>
-
 </icecube>

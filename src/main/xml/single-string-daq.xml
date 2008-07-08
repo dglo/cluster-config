@@ -1,48 +1,21 @@
-<icecube remarks="Standalone config + one remote stringHub">
+<icecube configName="single-string-daq"
+         remarks="Standalone config + one remote stringHub">
 
   <cluster name="single-string-daq">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
     <logDirForSpade>/mnt/data/pdaq/log</logDirForSpade>
+
     <defaultLogLevel>WARN</defaultLogLevel>
 
-    <!-- Each location element corresponds to a host (and the iceboss
-      instance on it) and lists the services and ejbs on that
-      host. The rank attribute orders locations, for example the DB or
-      ExpCont node might need to be handled differently within the
-      cluster. -->
-    <location name="remotehost">
-      <address>
-        <host>spts64-ichub29</host>
-      </address>
-    </location>
+    <location name="remotehost" host="spts64-ichub29"/>
 
-    <location name="spts64-ichub29">
-      <address>
-        <host>spts64-ichub29</host>
-      </address>
-      <module>
-        <name>SecondaryBuilders</name>
-        <id>0</id>
-      </module>
-      <module>
-        <name>eventBuilder</name>
-        <id>0</id>
-      </module>
-      <module>
-        <name>inIceTrigger</name>
-        <id>0</id>
-      </module>
-      <module>
-        <name>globalTrigger</name>
-        <id>0</id>
-      </module>
-      <module>
-        <name>StringHub</name>
-        <id>1001</id>
-      </module>
+    <location name="spts64-ichub29" host="spts64-ichub29">
+      <module name="SecondaryBuilders"/>
+      <module name="eventBuilder"/>
+      <module name="inIceTrigger"/>
+      <module name="globalTrigger"/>
+      <module name="StringHub" id="1001"/>
     </location>
-
   </cluster>
-
 </icecube>

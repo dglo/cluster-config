@@ -1,93 +1,42 @@
-<icecube remarks="CC for Hole Ice Run on Strings 55, 62, 63, 70, 71">
+<icecube configName="holeice-001"
+         remarks="CC for Hole Ice Run on Strings 55, 62, 63, 70, 71">
 
   <cluster name="hole-ice-test-001">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
     <logDirForSpade>/mnt/data/pdaq/log</logDirForSpade>
+
     <defaultLogLevel>INFO</defaultLogLevel>
 
-    <location name="ichub55">
-      <address>
-        <host>sps-ichub55</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>55</id>
-      </module>  
-    </location>
-    
-    <location name="ichub62">
-      <address>
-        <host>sps-ichub62</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>62</id>
-      </module>
+    <location name="ichub55" host="sps-ichub55">
+      <module name="StringHub" id="55"/>
     </location>
 
-    <location name="ichub63">
-      <address>
-        <host>sps-ichub63</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>63</id>
-      </module>
-    </location>
-    
-    <location name="ichub64">
-      <address>
-        <host>sps-ichub64</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>64</id>
-      </module>
-    </location>
-    
-    <location name="ichub70">
-      <address>
-        <host>sps-ichub70</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>70</id>
-      </module>
-    </location>
-    
-    <location name="ichub71">
-      <address>
-        <host>sps-ichub71</host>
-      </address>
-      <module>
-        <name>StringHub</name>
-        <id>71</id>
-      </module>
-    </location>
-    
-    <location name="daq-central">
-      <address>
-        <host>sps-fpslave13</host>
-      </address>
-      <module>
-        <name>SecondaryBuilders</name>
-        <id>0</id>
-      </module>
-      <module>
-        <name>eventBuilder</name>
-        <id>0</id>
-      </module>
-      <module>
-        <name>globalTrigger</name>
-        <id>0</id>
-      </module>
-      <module>
-        <name>inIceTrigger</name>
-        <id>0</id>
-      </module>
+    <location name="ichub62" host="sps-ichub62">
+      <module name="StringHub" id="62"/>
     </location>
 
+    <location name="ichub63" host="sps-ichub63">
+      <module name="StringHub" id="63"/>
+    </location>
+
+    <location name="ichub64" host="sps-ichub64">
+      <module name="StringHub" id="64"/>
+    </location>
+
+    <location name="ichub70" host="sps-ichub70">
+      <module name="StringHub" id="70"/>
+    </location>
+
+    <location name="ichub71" host="sps-ichub71">
+      <module name="StringHub" id="71"/>
+    </location>
+
+    <location name="daq-central" host="sps-fpslave13">
+      <module name="SecondaryBuilders"/>
+      <module name="eventBuilder"/>
+      <module name="globalTrigger"/>
+      <module name="inIceTrigger"/>
+    </location>
   </cluster>
-
 </icecube>

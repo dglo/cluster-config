@@ -1,111 +1,43 @@
-<icecube remarks="Test /w/ AMANDA MB and IceCube string 38 - no AMANDA S/W triggering">
+<icecube configName="sps-amanda-ic3-test"
+         remarks="Test /w/ AMANDA MB and IceCube string 38 - no AMANDA S/W triggering">
 
   <cluster name="sps">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
     <logDirForSpade>spade</logDirForSpade>
 
-    <!-- Each location element corresponds to a host (and the iceboss
-      instance on it) and lists the services and ejbs on that
-      host. The rank attribute orders locations, for example the DB or
-      ExpCont node might need to be handled differently within the
-      cluster. -->
+    <location name="amanda" host="sps-amanda">
+      <module name="StringHub"/>
+    </location>
 
-	<location name="amanda">
-	  <address>
-	    <host>sps-amanda</host>
-	  </address>
-	  
-	  <module>
-	    <name>StringHub</name>
-		<id>0</id>
-	  </module>
-	</location>
+    <location name="ichub38" host="sps-ichub38">
+      <module name="StringHub" id="38"/>
+    </location>
 
-    <location name="ichub38">
-      <address>
-        <host>sps-ichub38</host>
-      </address>
+    <location name="2ndbuild" host="sps-2ndbuild">
+      <module name="SecondaryBuilders"/>
+    </location>
 
-      <module>
-        <name>StringHub</name>
-        <id>38</id>
+    <location name="evbuilder" host="sps-evbuilder">
+      <module name="eventBuilder"/>
+    </location>
+
+    <location name="expcont" host="sps-expcont"/>
+
+    <location name="gtrigger" host="sps-gtrigger">
+      <module name="globalTrigger"/>
+    </location>
+
+    <location name="iitrigger" host="sps-iitrigger">
+      <module name="inIceTrigger"/>
+    </location>
+
+    <location name="ittrigger" host="sps-ittrigger">
+      <module name="amandaTrigger">
+        <logLevel>DEBUG</logLevel>
       </module>
     </location>
 
-    <location name="2ndbuild">
-      <address>
-        <host>sps-2ndbuild</host>
-      </address>
-
-      <module>
-        <name>SecondaryBuilders</name>
-        <id>0</id>
-      </module>
-
-    </location>
-
-    <location name="evbuilder">
-      <address>
-        <host>sps-evbuilder</host>
-      </address>
-
-      <module>
-        <name>eventBuilder</name>
-        <id>0</id>
-      </module>
-
-    </location>
-
-    <location name="expcont">
-      <address>
-        <host>sps-expcont</host>
-      </address>
-
-    </location>
-
-    <location name="gtrigger">
-      <address>
-        <host>sps-gtrigger</host>
-      </address>
-
-      <module>
-        <name>globalTrigger</name>
-        <id>0</id>
-      </module>
-
-    </location>
-
-    <location name="iitrigger">
-      <address>
-        <host>sps-iitrigger</host>
-      </address>
-
-      <module>
-        <name>inIceTrigger</name>
-        <id>0</id>
-      </module>
-
-    </location>
-
-    <location name="ittrigger">
-      <address>
-        <host>sps-ittrigger</host>
-      </address>
-
-      <module>
-        <name>amandaTrigger</name>
-        <id>0</id>
-	<logLevel>DEBUG</logLevel>
-      </module>
-    </location>
-
-    <location name="dbs">
-      <address>
-        <host>sps-dbs</host>
-      </address>
-    </location>
-
+    <location name="dbs" host="sps-dbs"/>
   </cluster>
-
 </icecube>

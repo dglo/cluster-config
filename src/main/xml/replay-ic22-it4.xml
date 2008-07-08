@@ -5,10 +5,11 @@
 
     <!-- Non-fully-qualified paths are relative to pdaq on expcont -->
     <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
     <defaultLogLevel>INFO</defaultLogLevel>
 
     <!-- Each location element corresponds to a host
-         and lists the component on that host.  -->
+         and lists the component on that host. -->
 
     <location name="sp01" host="spts64-stringproc01">
       <module name="replayHub" id="21"/>
