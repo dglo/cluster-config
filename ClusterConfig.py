@@ -20,11 +20,10 @@ GLOBAL_DEFAULT_LOG_LEVEL = "INFO"
 
 class deployComponent:
     "Record-keeping class for deployed components"
-    def __init__(self, compName, compID, logLevel, iceTop = False):
+    def __init__(self, compName, compID, logLevel):
         self.compName = compName;
         self.compID   = compID;
         self.logLevel = logLevel
-        self.isIcetop = iceTop
         
 class deployNode:
     "Record-keeping class for host targets"
@@ -102,10 +101,7 @@ class deployConfig(object):
                 logLevel = self.getValue(compXML, "logLevel",
                                          self.defaultLogLevel)
 
-                iceTop = self.getValue(compXML, "isIcetop") is not None
-
-                thisNode.addComp(deployComponent(compName, compID, logLevel,
-                                                 iceTop))
+                thisNode.addComp(deployComponent(compName, compID, logLevel)
 
     def getElementSingleTagName(root, name):
         "Fetch a single element tag name of form <tagName>yowsa!</tagName>"
