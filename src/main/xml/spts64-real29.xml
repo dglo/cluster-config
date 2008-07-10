@@ -11,7 +11,7 @@
       <module name="StringHub" id="2029"/>
     </location>
 
-    <location name="2ndbuild" host="spts64-expcont">
+    <location name="expcont" host="spts64-expcont">
       <module name="SecondaryBuilders"/>
     </location>
 
@@ -23,18 +23,8 @@
       <module name="inIceTrigger"/>
     </location>
 
-    <location name="ittrigger" host="spts64-ittrigger">
-      <module name="iceTopTrigger"/>
-    </location>
-
     <location name="gtrigger" host="spts64-gtrigger">
       <module name="globalTrigger"/>
     </location>
-
-    <location name="expcont" host="spts64-expcont"/>
-
-    <location name="dbs" host="spts64-dbs"/>
-
-    <location name="ittrigger" host="spts64-ittrigger"/>
   </cluster>
 </icecube>

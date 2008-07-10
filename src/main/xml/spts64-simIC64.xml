@@ -51,7 +51,7 @@
       <module name="StringHub" id="1032"/>
     </location>
 
-    <location name="sim05" host="spts64-stringproc05">
+    <location name="sim05" host="spts64-fpslave01">
       <module name="StringHub" id="1033"/>
       <module name="StringHub" id="1034"/>
       <module name="StringHub" id="1035"/>
@@ -62,7 +62,7 @@
       <module name="StringHub" id="1040"/>
     </location>
 
-    <location name="sim06" host="spts64-gtrigger">
+    <location name="sim06" host="spts64-fpslave02">
       <module name="StringHub" id="1041"/>
       <module name="StringHub" id="1042"/>
       <module name="StringHub" id="1043"/>
@@ -73,7 +73,7 @@
       <module name="StringHub" id="1048"/>
     </location>
 
-    <location name="sim07" host="spts64-ittrigger">
+    <location name="sim07" host="spts64-fpslave03">
       <module name="StringHub" id="1049"/>
       <module name="StringHub" id="1050"/>
       <module name="StringHub" id="1051"/>
@@ -84,7 +84,7 @@
       <module name="StringHub" id="1056"/>
     </location>
 
-    <location name="sim08" host="spts64-icetop01">
+    <location name="sim08" host="spts64-fpslave04">
       <module name="StringHub" id="1057"/>
       <module name="StringHub" id="1058"/>
       <module name="StringHub" id="1059"/>
@@ -95,10 +95,12 @@
       <module name="StringHub" id="1064"/>
     </location>
 
-    <location name="2ndbuild" host="spts64-2ndbuild">
-      <module name="iceTopTrigger"/>
-      <module name="globalTrigger"/>
+    <location name="expcont" host="spts64-expcont">
       <module name="SecondaryBuilders"/>
+    </location>
+
+    <location name="gtrigger" host="spts64-gtrigger">
+      <module name="globalTrigger"/>
     </location>
 
     <location name="evbuilder" host="spts64-evbuilder">
@@ -108,9 +110,5 @@
     <location name="iitrigger" host="spts64-iitrigger">
       <module name="inIceTrigger"/>
     </location>
-
-    <location name="expcont" host="spts64-expcont"/>
-
-    <location name="dbs" host="spts64-dbs"/>
   </cluster>
 </icecube>

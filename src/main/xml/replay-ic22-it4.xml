@@ -50,14 +50,11 @@
     <location name="sp04" host="spts64-stringproc04">
       <module name="replayHub" id="72"/>
       <module name="replayHub" id="73"/>
+      <module name="replayHub" id="74"/>
     </location>
 
     <location name="fp04" host="spts64-fpslave04">
-      <module name="replayHub" id="74"/>
       <module name="replayHub" id="78"/>
-    </location>
-
-    <location name="sp05" host="spts64-stringproc05">
       <module name="replayHub" id="81"/>
       <module name="replayHub" id="82"/>
     </location>
@@ -68,7 +65,7 @@
       <module name="replayHub" id="0"/>
     </location>
 
-    <location name="2ndbuild" host="spts64-expcont">
+    <location name="expcont" host="spts64-expcont">
       <module name="SecondaryBuilders"/>
     </location>
 
@@ -82,20 +79,13 @@
 
     <location name="ittrigger" host="spts64-ittrigger">
       <module name="iceTopTrigger"/>
+      <module name="amandaTrigger">
+        <!-- <logLevel>DEBUG</logLevel> -->
+      </module>
     </location>
 
     <location name="gtrigger" host="spts64-gtrigger">
       <module name="globalTrigger"/>
-    </location>
-
-    <location name="expcont" host="spts64-expcont"/>
-
-    <location name="dbs" host="spts64-dbs"/>
-
-    <location name="ittrigger" host="spts64-ittrigger">
-      <module name="amandaTrigger">
-        <!-- <logLevel>DEBUG</logLevel> -->
-      </module>
     </location>
   </cluster>
 </icecube>

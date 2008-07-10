@@ -16,7 +16,7 @@
       <module name="StringHub" id="1029"/>
     </location>
 
-    <location name="2ndbuild" host="spts64-expcont">
+    <location name="expcont" host="spts64-expcont">
       <module name="SecondaryBuilders"/>
     </location>
 

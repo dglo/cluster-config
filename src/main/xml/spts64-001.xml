@@ -8,18 +8,18 @@
     <defaultLogLevel>INFO</defaultLogLevel>
 
     <location name="ichub21" host="spts64-ichub21">
-      <module name="StringHub" id="21"/>
+      <module name="StringHub" id="2021"/>
     </location>
 
     <location name="ichub29" host="spts64-ichub29">
-      <module name="StringHub" id="29"/>
+      <module name="StringHub" id="2029"/>
     </location>
 
     <location name="ithub01" host="spts64-ithub01">
-      <module name="StringHub" id="81"/>
+      <module name="StringHub" id="2081"/>
     </location>
 
-    <location name="2ndbuild" host="spts64-expcont">
+    <location name="expcont" host="spts64-expcont">
       <module name="SecondaryBuilders"/>
     </location>
 
@@ -37,16 +37,6 @@
 
     <location name="gtrigger" host="spts64-gtrigger">
       <module name="globalTrigger"/>
-    </location>
-
-    <location name="expcont" host="spts64-expcont"/>
-
-    <location name="dbs" host="spts64-dbs"/>
-
-    <location name="ittrigger" host="spts64-ittrigger">
-      <module name="amandaTrigger">
-        <logLevel>DEBUG</logLevel>
-      </module>
     </location>
   </cluster>
 </icecube>

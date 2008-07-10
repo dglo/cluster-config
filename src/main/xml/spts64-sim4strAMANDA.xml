@@ -9,28 +9,28 @@
     <defaultLogLevel>INFO</defaultLogLevel>
 
     <location name="sp01" host="spts64-stringproc01">
-      <module name="StringHub" id="1001"/>
-    </location>
-
-    <location name="sp02" host="spts64-stringproc02">
-      <module name="StringHub" id="1002"/>
-    </location>
-
-    <location name="sp03" host="spts64-stringproc03">
-      <module name="StringHub" id="1003"/>
-    </location>
-
-    <location name="sp04" host="spts64-stringproc04">
-      <module name="StringHub" id="1004"/>
-    </location>
-
-    <location name="sp05" host="spts64-stringproc05">
       <module name="StringHub" id="1000">
         <!-- <logLevel>DEBUG</logLevel> -->
       </module>
     </location>
 
-    <location name="2ndbuild" host="spts64-expcont">
+    <location name="sp02" host="spts64-stringproc02">
+      <module name="StringHub" id="1001"/>
+    </location>
+
+    <location name="sp03" host="spts64-stringproc03">
+      <module name="StringHub" id="1002"/>
+    </location>
+
+    <location name="stringproc06" host="spts64-stringproc06">
+      <module name="StringHub" id="1003"/>
+    </location>
+
+    <location name="stringproc07" host="spts64-stringproc07">
+      <module name="StringHub" id="1004"/>
+    </location>
+
+    <location name="expcont" host="spts64-expcont">
       <module name="SecondaryBuilders"/>
     </location>
 

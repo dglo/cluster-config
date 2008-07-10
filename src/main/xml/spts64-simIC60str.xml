@@ -52,7 +52,7 @@
       <module name="StringHub" id="1032"/>
     </location>
 
-    <location name="sp05" host="spts64-stringproc05">
+    <location name="fpslave01" host="spts64-fpslave01">
       <module name="StringHub" id="1033"/>
       <module name="StringHub" id="1034"/>
       <module name="StringHub" id="1035"/>
@@ -63,7 +63,7 @@
       <module name="StringHub" id="1040"/>
     </location>
 
-    <location name="fpslave01" host="spts64-fpslave01">
+    <location name="fpslave02" host="spts64-fpslave02">
       <module name="StringHub" id="1041"/>
       <module name="StringHub" id="1042"/>
       <module name="StringHub" id="1043"/>
@@ -74,7 +74,7 @@
       <module name="StringHub" id="1048"/>
     </location>
 
-    <location name="fpslave02" host="spts64-fpslave02">
+    <location name="fpslave03" host="spts64-fpslave03">
       <module name="StringHub" id="1049"/>
       <module name="StringHub" id="1050"/>
       <module name="StringHub" id="1051"/>
@@ -85,14 +85,14 @@
       <module name="StringHub" id="1056"/>
     </location>
 
-    <location name="fpslave03" host="spts64-fpslave03">
+    <location name="fpslave04" host="spts64-fpslave04">
       <module name="StringHub" id="1057"/>
       <module name="StringHub" id="1058"/>
       <module name="StringHub" id="1059"/>
       <module name="StringHub" id="1060"/>
     </location>
 
-    <location name="2ndbuild" host="spts64-expcont">
+    <location name="expcont" host="spts64-expcont">
       <module name="SecondaryBuilders"/>
     </location>
 
@@ -107,9 +107,5 @@
     <location name="gtrigger" host="spts64-gtrigger">
       <module name="globalTrigger"/>
     </location>
-
-    <location name="expcont" host="spts64-expcont"/>
-
-    <location name="dbs" host="spts64-dbs"/>
   </cluster>
 </icecube>
