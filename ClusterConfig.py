@@ -101,7 +101,7 @@ class deployConfig(object):
                 logLevel = self.getValue(compXML, "logLevel",
                                          self.defaultLogLevel)
 
-                thisNode.addComp(deployComponent(compName, compID, logLevel)
+                thisNode.addComp(deployComponent(compName, compID, logLevel))
 
     def getElementSingleTagName(root, name):
         "Fetch a single element tag name of form <tagName>yowsa!</tagName>"
