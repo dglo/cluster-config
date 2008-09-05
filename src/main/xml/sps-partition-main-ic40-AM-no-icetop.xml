@@ -179,7 +179,7 @@
     </location>
 
     <location name="evbuilder" host="sps-evbuilder">
-      <module name="eventBuilder"/>
+      <module name="eventBuilder">
         <logLevel>ERROR</logLevel>
       </module>
       <module name="globalTrigger"/>
