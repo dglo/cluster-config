@@ -1,0 +1,53 @@
+<icecube configName="it6-no-ic40-AM" remarks="IceTop without AMANDA or InIce">
+
+  <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
+
+    <defaultLogLevel>WARN</defaultLogLevel>
+
+    <location name="ithub01" host="sps-ithub01">
+      <module name="StringHub" id="81"/>
+    </location>
+
+    <location name="ithub02" host="sps-ithub02">
+      <module name="StringHub" id="82"/>
+    </location>
+
+    <location name="ithub03" host="sps-ithub03">
+      <module name="StringHub" id="83"/>
+    </location>
+
+    <location name="ithub04" host="sps-ithub04">
+      <module name="StringHub" id="84"/>
+    </location>
+
+    <location name="ithub05" host="sps-ithub05">
+      <module name="StringHub" id="85"/>
+    </location>
+
+    <location name="ithub06" host="sps-ithub06">
+      <module name="StringHub" id="86"/>
+    </location>
+
+    <location name="2ndbuild" host="sps-ittrigger">
+      <module name="SecondaryBuilders"/>
+    </location>
+
+    <location name="evbuilder" host="sps-gtrigger">
+      <module name="eventBuilder">
+        <logLevel>ERROR</logLevel>
+      </module>
+    </location>
+
+    <location name="iitrigger" host="sps-iitrigger">
+      <module name="globalTrigger"/>
+      <module name="iceTopTrigger"/>
+    </location>
+
+    <location name="expcont" host="sps-gtrigger"/>
+  </cluster>
+</icecube>
