@@ -24,7 +24,6 @@
 
   <build>
     <plugins>
-
 <!--
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -70,6 +69,19 @@
         </executions>
       </plugin>
 -->
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>.</directory>
+              <includes>
+                <include>*.pyc</include>
+              </includes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
