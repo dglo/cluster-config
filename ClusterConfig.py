@@ -84,7 +84,6 @@ class deployConfig(object):
             self.nodes.append(thisNode)
 
             # Get modules: name and ID
-            components = []
             modules = nodeXML.getElementsByTagName("module")
             for compXML in modules:
                 compName = self.getValue(compXML, "name")
@@ -138,9 +137,9 @@ class deployConfig(object):
         return name
 
 class ClusterConfig(deployConfig):
-    def __init__(self, metaDir, cmdlineConfig, showListAndExit=False,
+    def __init__(self, topDir, cmdlineConfig, showListAndExit=False,
                  useFallbackConfig=True, useActiveConfig=False):
-        self.clusterConfigDir = abspath(join(metaDir, 'cluster-config'))
+        self.clusterConfigDir = abspath(join(topDir, 'cluster-config'))
 
         # Choose configuration
         if cmdlineConfig is not None:
@@ -200,7 +199,7 @@ class ClusterConfig(deployConfig):
                 config = deployConfig(configDir, cname)
                 ok.append(cname)
                 remarks[cname] = config.remarks
-            except Exception, e: pass # print cname+ `e`
+            except Exception: pass
 
         ok.sort()
         for cname in ok:
