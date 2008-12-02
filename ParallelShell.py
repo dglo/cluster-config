@@ -212,7 +212,10 @@ class ParallelShell(object):
             else:
                 ret.append(0)
         return ret
-        
+
+    def system(cmd):
+        return os.system(cmd)
+
 def main():
     p = ParallelShell(timeout=5)
     jobs = []

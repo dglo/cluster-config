@@ -164,7 +164,10 @@ class ClusterConfig(deployConfig):
 
     def clearActiveConfig(self):
         "delete the active cluster name"
-        remove(self.getCachedNamePath(True))
+        try:
+            remove(self.getCachedNamePath(True))
+        except:
+            pass
 
     def getCachedNamePath(self, useActiveConfig):
         "get the active or default cluster configuration"
