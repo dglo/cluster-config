@@ -1,0 +1,266 @@
+<icecube configName="ic31b-info" remarks="IC31b with IceTop and AMANDA (INFO log)">
+
+  <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <location name="ichub44" host="sps-ichub44">
+      <module name="StringHub" id="44">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub45" host="sps-ichub45">
+      <module name="StringHub" id="45">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub46" host="sps-ichub46">
+      <module name="StringHub" id="46">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub47" host="sps-ichub47">
+      <module name="StringHub" id="47">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub52" host="sps-ichub52">
+      <module name="StringHub" id="52">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub53" host="sps-ichub53">
+      <module name="StringHub" id="53">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub54" host="sps-ichub54">
+      <module name="StringHub" id="54">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub55" host="sps-ichub55">
+      <module name="StringHub" id="55">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub56" host="sps-ichub56">
+      <module name="StringHub" id="56">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub57" host="sps-ichub57">
+      <module name="StringHub" id="57">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub58" host="sps-ichub58">
+      <module name="StringHub" id="58">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub59" host="sps-ichub59">
+      <module name="StringHub" id="59">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub60" host="sps-ichub60">
+      <module name="StringHub" id="60">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub61" host="sps-ichub61">
+      <module name="StringHub" id="61">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub62" host="sps-ichub62">
+      <module name="StringHub" id="62">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub63" host="sps-ichub63">
+      <module name="StringHub" id="63">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub64" host="sps-ichub64">
+      <module name="StringHub" id="64">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub65" host="sps-ichub65">
+      <module name="StringHub" id="65">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub66" host="sps-ichub66">
+      <module name="StringHub" id="66">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub67" host="sps-ichub67">
+      <module name="StringHub" id="67">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub68" host="sps-ichub68">
+      <module name="StringHub" id="68">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub69" host="sps-ichub69">
+      <module name="StringHub" id="69">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub70" host="sps-ichub70">
+      <module name="StringHub" id="70">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub71" host="sps-ichub71">
+      <module name="StringHub" id="71">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub72" host="sps-ichub72">
+      <module name="StringHub" id="72">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub73" host="sps-ichub73">
+      <module name="StringHub" id="73">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub74" host="sps-ichub74">
+      <module name="StringHub" id="74">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub75" host="sps-ichub75">
+      <module name="StringHub" id="75">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub76" host="sps-ichub76">
+      <module name="StringHub" id="76">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub77" host="sps-ichub77">
+      <module name="StringHub" id="77">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ichub78" host="sps-ichub78">
+      <module name="StringHub" id="78">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ithub01" host="sps-ithub01">
+      <module name="StringHub" id="81">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ithub02" host="sps-ithub02">
+      <module name="StringHub" id="82">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ithub03" host="sps-ithub03">
+      <module name="StringHub" id="83">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ithub04" host="sps-ithub04">
+      <module name="StringHub" id="84">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ithub05" host="sps-ithub05">
+      <module name="StringHub" id="85">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="ithub06" host="sps-ithub06">
+      <module name="StringHub" id="86">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="2ndbuild" host="sps-2ndbuild">
+      <module name="SecondaryBuilders">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="evbuilder" host="sps-evbuilder">
+      <module name="eventBuilder">
+        <logLevel>ERROR</logLevel>
+      </module>
+    </location>
+
+    <location name="iitrigger" host="sps-iitrigger">
+      <module name="inIceTrigger"/>
+    </location>
+
+    <location name="gtrigger" host="sps-gtrigger">
+      <module name="globalTrigger"/>
+      <module name="iceTopTrigger"/>
+      <module name="amandaTrigger">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+
+    <location name="expcont" host="sps-expcont"/>
+
+    <location name="amanda" host="sps-amanda">
+      <module name="StringHub">
+        <logLevel>INFO</logLevel>
+      </module>
+    </location>
+  </cluster>
+</icecube>
