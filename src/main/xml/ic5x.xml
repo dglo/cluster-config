@@ -4,7 +4,7 @@
     all of the DAQ components including InIce / IceTop / AMANDA.
     The trigger machines are now all merged into a single trigger entity
     called 'sps-trigger'
-    2008-12-22 JK
+    2008-12-22  JK
   -->
 
   <cluster name="sps">
