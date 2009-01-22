@@ -1,0 +1,68 @@
+<icecube configName="spts64-partition-main-sim"
+         remarks="A cluster-config for the main parition of a split detector on SPTS64">
+
+  <cluster name="spts64">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/spade/pdaq/runs</logDirForSpade>
+    <logDirCopies>/mnt/data/pdaqlocal</logDirCopies>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <location name="sp01" host="spts64-stringproc01">
+      <module name="StringHub" id="1001"/>
+      <module name="StringHub" id="1002"/>
+      <module name="StringHub" id="1003"/>
+      <module name="StringHub" id="1004"/>
+    </location>
+
+    <location name="sp02" host="spts64-stringproc02">
+      <module name="StringHub" id="1005"/>
+      <module name="StringHub" id="1006"/>
+      <module name="StringHub" id="1007"/>
+      <module name="StringHub" id="1008"/>
+    </location>
+
+    <location name="sp03" host="spts64-stringproc03">
+      <module name="StringHub" id="1009"/>
+      <module name="StringHub" id="1010"/>
+      <module name="StringHub" id="1011"/>
+      <module name="StringHub" id="1012"/>
+    </location>
+
+    <location name="sp04" host="spts64-stringproc04">
+      <module name="StringHub" id="1013"/>
+      <module name="StringHub" id="1014"/>
+      <module name="StringHub" id="1015"/>
+      <module name="StringHub" id="1016"/>
+    </location>
+
+    <location name="it01" host="spts64-icetop01">
+      <module name="StringHub" id="1081"/>
+      <module name="StringHub" id="1082"/>
+    </location>
+
+    <location name="evbuilder" host="spts64-evbuilder">
+      <module name="eventBuilder"/>
+    </location>
+
+    <location name="2ndbuild" host="spts64-2ndbuild">
+      <module name="SecondaryBuilders"/>
+    </location>
+
+    <location name="iitrigger" host="spts64-iitrigger">
+      <module name="inIceTrigger"/>
+    </location>
+
+    <location name="ittrigger" host="spts64-ittrigger">
+      <module name="iceTopTrigger"/>
+    </location>
+
+    <location name="gtrigger" host="spts64-gtrigger">
+      <module name="globalTrigger"/>
+    </location>
+
+    <location name="expcont" host="spts64-expcont"/>
+
+  </cluster>
+</icecube>
