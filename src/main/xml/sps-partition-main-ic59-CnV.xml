@@ -1,4 +1,4 @@
-<icecube configName="ic59-no-amanda-no-icetop"
+<icecube configName="sps-partition-main-ic59-CnV"
 	 remarks="Main partition for IC59 CnV runs with no AMANDA and no IceTop">
 
   <cluster name="sps">
@@ -10,84 +10,160 @@
 
     <defaultLogLevel>WARN</defaultLogLevel>
 
-    <location name="ichub59" host="sps-ichub59">
-      <module name="StringHub" id="59"/>
+    <location name="ichub2" host="sps-ichub2">
+      <module name="StringHub" id="2"/>
     </location>
 
-    <location name="ichub60" host="sps-ichub60">
-      <module name="StringHub" id="60"/>
+    <location name="ichub3" host="sps-ichub3">
+      <module name="StringHub" id="3"/>
     </location>
 
-    <location name="ichub61" host="sps-ichub61">
-      <module name="StringHub" id="61"/>
+    <location name="ichub4" host="sps-ichub4">
+      <module name="StringHub" id="4"/>
     </location>
 
-    <location name="ichub62" host="sps-ichub62">
-      <module name="StringHub" id="62"/>
+    <location name="ichub5" host="sps-ichub5">
+      <module name="StringHub" id="5"/>
     </location>
 
-    <location name="ichub63" host="sps-ichub63">
-      <module name="StringHub" id="63"/>
+    <location name="ichub6" host="sps-ichub6">
+      <module name="StringHub" id="6"/>
     </location>
 
-    <location name="ichub64" host="sps-ichub64">
-      <module name="StringHub" id="64"/>
+    <location name="ichub10" host="sps-ichub10">
+      <module name="StringHub" id="10"/>
     </location>
 
-    <location name="ichub65" host="sps-ichub65">
-      <module name="StringHub" id="65"/>
+    <location name="ichub11" host="sps-ichub11">
+      <module name="StringHub" id="11"/>
     </location>
 
-    <location name="ichub66" host="sps-ichub66">
-      <module name="StringHub" id="66"/>
+    <location name="ichub12" host="sps-ichub12">
+      <module name="StringHub" id="12"/>
     </location>
 
-    <location name="ichub67" host="sps-ichub67">
-      <module name="StringHub" id="67"/>
+    <location name="ichub13" host="sps-ichub13">
+      <module name="StringHub" id="13"/>
     </location>
 
-    <location name="ichub68" host="sps-ichub68">
-      <module name="StringHub" id="68"/>
+    <location name="ichub17" host="sps-ichub17">
+      <module name="StringHub" id="17"/>
     </location>
 
-    <location name="ichub69" host="sps-ichub69">
-      <module name="StringHub" id="69"/>
+    <location name="ichub18" host="sps-ichub18">
+      <module name="StringHub" id="18"/>
     </location>
 
-    <location name="ichub70" host="sps-ichub70">
-      <module name="StringHub" id="70"/>
+    <location name="ichub19" host="sps-ichub19">
+      <module name="StringHub" id="19"/>
     </location>
 
-    <location name="ichub71" host="sps-ichub71">
-      <module name="StringHub" id="71"/>
+    <location name="ichub20" host="sps-ichub20">
+      <module name="StringHub" id="20"/>
     </location>
 
-    <location name="ichub72" host="sps-ichub72">
-      <module name="StringHub" id="72"/>
+    <location name="ichub21" host="sps-ichub21">
+      <module name="StringHub" id="21"/>
     </location>
 
-    <location name="ichub73" host="sps-ichub73">
-      <module name="StringHub" id="73"/>
+    <location name="ichub26" host="sps-ichub26">
+      <module name="StringHub" id="26"/>
     </location>
 
-    <location name="ichub74" host="sps-ichub74">
-      <module name="StringHub" id="74"/>
+    <location name="ichub27" host="sps-ichub27">
+      <module name="StringHub" id="27"/>
     </location>
 
-    <location name="ichub75" host="sps-ichub75">
-      <module name="StringHub" id="75"/>
+    <location name="ichub28" host="sps-ichub28">
+      <module name="StringHub" id="28"/>
     </location>
 
-    <location name="ichub76" host="sps-ichub76">
-      <module name="StringHub" id="76"/>
+    <location name="ichub29" host="sps-ichub29">
+      <module name="StringHub" id="29"/>
     </location>
 
-    <location name="ichub77" host="sps-ichub77">
-      <module name="StringHub" id="77"/>
+    <location name="ichub30" host="sps-ichub30">
+      <module name="StringHub" id="30"/>
     </location>
 
-    <location name="ichub78" host="sps-ichub78">
-      <module name="StringHub" id="78"/>
+    <location name="ichub36" host="sps-ichub36">
+      <module name="StringHub" id="36"/>
+    </location>
+
+    <location name="ichub37" host="sps-ichub37">
+      <module name="StringHub" id="37"/>
+    </location>
+
+    <location name="ichub38" host="sps-ichub38">
+      <module name="StringHub" id="38"/>
+    </location>
+
+    <location name="ichub39" host="sps-ichub39">
+      <module name="StringHub" id="39"/>
+    </location>
+
+    <location name="ichub40" host="sps-ichub40">
+      <module name="StringHub" id="40"/>
+    </location>
+
+    <location name="ichub44" host="sps-ichub44">
+      <module name="StringHub" id="44"/>
+    </location>
+
+    <location name="ichub45" host="sps-ichub45">
+      <module name="StringHub" id="45"/>
+    </location>
+
+    <location name="ichub46" host="sps-ichub46">
+      <module name="StringHub" id="46"/>
+    </location>
+
+    <location name="ichub47" host="sps-ichub47">
+      <module name="StringHub" id="47"/>
+    </location>
+
+    <location name="ichub48" host="sps-ichub48">
+      <module name="StringHub" id="48"/>
+    </location>
+
+    <location name="ichub49" host="sps-ichub49">
+      <module name="StringHub" id="49"/>
+    </location>
+
+    <location name="ichub50" host="sps-ichub50">
+      <module name="StringHub" id="50"/>
+    </location>
+
+    <location name="ichub52" host="sps-ichub52">
+      <module name="StringHub" id="52"/>
+    </location>
+
+    <location name="ichub53" host="sps-ichub53">
+      <module name="StringHub" id="53"/>
+    </location>
+
+    <location name="ichub54" host="sps-ichub54">
+      <module name="StringHub" id="54"/>
+    </location>
+
+    <location name="ichub55" host="sps-ichub55">
+      <module name="StringHub" id="55"/>
+    </location>
+
+    <location name="ichub56" host="sps-ichub56">
+      <module name="StringHub" id="56"/>
+    </location>
+
+    <location name="ichub57" host="sps-ichub57">
+      <module name="StringHub" id="57"/>
+    </location>
+
+    <location name="ichub58" host="sps-ichub58">
+      <module name="StringHub" id="58"/>
+    </location>
+
+    <location name="ichub83" host="sps-ichub83">
+      <module name="StringHub" id="83"/>
     </location>
 
     <location name="trigger" host="sps-trigger">
