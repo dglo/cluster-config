@@ -10,23 +10,23 @@
 
     <defaultLogLevel>WARN</defaultLogLevel>
 
-    <location name="ichub2" host="sps-ichub2">
+    <location name="ichub02" host="sps-ichub02">
       <module name="StringHub" id="2"/>
     </location>
 
-    <location name="ichub3" host="sps-ichub3">
+    <location name="ichub03" host="sps-ichub03">
       <module name="StringHub" id="3"/>
     </location>
 
-    <location name="ichub4" host="sps-ichub4">
+    <location name="ichub04" host="sps-ichub04">
       <module name="StringHub" id="4"/>
     </location>
 
-    <location name="ichub5" host="sps-ichub5">
+    <location name="ichub05" host="sps-ichub05">
       <module name="StringHub" id="5"/>
     </location>
 
-    <location name="ichub6" host="sps-ichub6">
+    <location name="ichub06" host="sps-ichub06">
       <module name="StringHub" id="6"/>
     </location>
 
