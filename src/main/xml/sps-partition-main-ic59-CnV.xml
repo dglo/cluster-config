@@ -6,8 +6,6 @@
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
     <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
 
-    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
-
     <defaultLogLevel>WARN</defaultLogLevel>
 
     <location name="ichub02" host="sps-ichub02">

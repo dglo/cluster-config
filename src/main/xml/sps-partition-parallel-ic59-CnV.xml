@@ -6,8 +6,6 @@
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
     <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
 
-    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
-
     <defaultLogLevel>WARN</defaultLogLevel>
 
     <location name="ichub59" host="sps-ichub59">
@@ -114,7 +112,7 @@
       <module name="StringHub" id="86"/>
     </location>
 
-    <location name="fpslave13" host="sps-fpslave13">
+    <location name="letrigger" host="sps-letrigger">
       <module name="eventBuilder"/>
       <module name="SecondaryBuilders"/>
       <module name="globalTrigger"/>
@@ -122,6 +120,6 @@
       <module name="iceTopTrigger"/>
     </location>
 
-    <location name="expcont" host="sps-fpslave13"/>
+    <location name="expcont" host="sps-letrigger"/>
   </cluster>
 </icecube>
