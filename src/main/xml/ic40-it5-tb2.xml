@@ -4,7 +4,10 @@
     all of the DAQ components including InIce / IceTop / AMANDA.
     The trigger machines are now all merged into a single trigger entity
     called 'sps-trigger'
-    2008-12-08 kael-hanson-at-icecube-dot-wisc-dot-edu
+      2008-12-08 kael-hanson-at-icecube-dot-wisc-dot-edu
+      
+    I have also made a mod to the hub IDs - now IceTop is mapped to 201, 202, 
+    ... for ithub01, ithub02, ...
   -->
 
   <cluster name="sps">
@@ -177,28 +180,28 @@
     </location>
 
     <location name="ithub01" host="sps-ithub01">
-      <module name="StringHub" id="81"/>
+      <module name="StringHub" id="201"/>
     </location>
 
     <location name="ithub02" host="sps-ithub02">
-      <module name="StringHub" id="82"/>
+      <module name="StringHub" id="202"/>
     </location>
 
     <location name="ithub03" host="sps-ithub03">
-      <module name="StringHub" id="83"/>
+      <module name="StringHub" id="203"/>
     </location>
 
 <!--    <location name="ithub04" host="sps-ithub04">
-      <module name="StringHub" id="84"/>
+      <module name="StringHub" id="204"/>
     </location>
 -->
 
     <location name="ithub05" host="sps-ithub05">
-      <module name="StringHub" id="85"/>
+      <module name="StringHub" id="205"/>
     </location>
 
     <location name="ithub06" host="sps-ithub06">
-      <module name="StringHub" id="86"/>
+      <module name="StringHub" id="206"/>
     </location>
 
     <location name="2ndbuild" host="sps-2ndbuild">
