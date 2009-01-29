@@ -4,7 +4,7 @@
   <cluster name="spts64">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
-    <logDirForSpade>/mnt/data/spade/pdaq/runs</logDirForSpade>
+    <logDirForSpade>/mnt/data/pdaqlocal/spade</logDirForSpade>
     <logDirCopies>/mnt/data/pdaqlocal</logDirCopies>
 
     <defaultLogLevel>INFO</defaultLogLevel>
@@ -23,14 +23,19 @@
       <module name="StringHub" id="1008"/>
     </location>
 
+    <location name="it01" host="spts64-ithub01">
+      <module name="StringHub" id="1081"/>
+    </location>
+
     <location name="evbuilder" host="spts64-evbuilder2">
       <module name="eventBuilder"/>
       <module name="SecondaryBuilders"/>
+      <module name="iceTopTrigger"/>
       <module name="inIceTrigger"/>
       <module name="globalTrigger"/>
     </location>
 
-    <location name="expcont" host="spts64-dbs"/>
+    <location name="expcont" host="spts64-evbuilder2"/>
 
   </cluster>
 </icecube>
