@@ -1,0 +1,44 @@
+
+<icecube remarks="Standalone config + one remote stringHub">
+
+  <cluster name="single-string-21">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaq/log</logDirForSpade>
+    <defaultLogLevel>WARN</defaultLogLevel>
+
+    <location name="sps-ichub21">
+      <address>
+        <host>sps-ichub21</host>
+      </address>
+
+      <module>
+        <name>SecondaryBuilders</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>eventBuilder</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>globalTrigger</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>inIceTrigger</name>
+        <id>0</id>
+      </module>
+
+      <module>
+        <name>StringHub</name>
+        <id>21</id>
+      </module>
+    </location>
+
+  </cluster>
+
+</icecube>
+
