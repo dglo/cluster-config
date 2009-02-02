@@ -1,0 +1,25 @@
+<icecube configName="sps-partition-parallel-single-string-06-slc"
+	 remarks="The parallel partition for string 06 (SLC test)  when CnV is running IC40 on the main partition.">
+
+  <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <defaultLogLevel>WARN</defaultLogLevel>
+
+    <location name="ichub06" host="sps-ichub06">
+      <module name="StringHub" id="06"/>
+    </location>
+
+    <location name="letrigger" host="sps-letrigger">
+      <module name="eventBuilder"/>
+      <module name="SecondaryBuilders"/>
+      <module name="globalTrigger"/>
+      <module name="inIceTrigger"/>
+      <!-- <module name="iceTopTrigger"/> -->
+    </location>
+
+    <location name="expcont" host="sps-letrigger"/>
+  </cluster>
+</icecube>
