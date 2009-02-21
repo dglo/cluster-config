@@ -1,0 +1,70 @@
+<icecube configName="ic40-it6-omit-itt" remarks="IC40 with IceTop and AMANDA">
+  <!--
+    This configuration uses the base configuration of IC40 / IT06 with
+    all of the DAQ components including InIce / IceTop / AMANDA.
+    The trigger machines are now all merged into a single trigger entity
+    called 'sps-trigger'
+      2008-12-08 kael-hanson-at-icecube-dot-wisc-dot-edu
+      
+    I have also made a mod to the hub IDs - now IceTop is mapped to 201, 202, 
+    ... for ithub01, ithub02, ...
+  -->
+
+  <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+
+    <location name="ichub47" host="sps-ichub47">
+      <module name="StringHub" id="47"/>
+    </location>
+
+    <location name="ichub48" host="sps-ichub48">
+      <module name="StringHub" id="48"/>
+    </location>
+
+    <location name="ichub49" host="sps-ichub49">
+      <module name="StringHub" id="49"/>
+    </location>
+
+    <location name="ichub57" host="sps-ichub57">
+      <module name="StringHub" id="57"/>
+    </location>
+
+    <location name="ichub58" host="sps-ichub58">
+      <module name="StringHub" id="58"/>
+    </location>
+
+
+    <location name="ichub66" host="sps-ichub66">
+      <module name="StringHub" id="66"/>
+    </location>
+
+
+    <location name="2ndbuild" host="sps-2ndbuild">
+      <module name="SecondaryBuilders"/>
+    </location>
+
+    <location name="evbuilder" host="sps-evbuilder">
+      <module name="eventBuilder"/>
+    </location>
+    
+    <location name="trigger" host="sps-trigger">
+      <module name="inIceTrigger"/>
+      <module name="globalTrigger"/>
+      <module name="amandaTrigger"/>
+    </location>
+
+    <location name="expcont" host="sps-expcont"/>
+
+    <location name="amanda" host="sps-amanda">
+      <module name="StringHub" id="0"/>
+    </location>
+    
+  </cluster>
+</icecube>
