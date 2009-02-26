@@ -84,7 +84,7 @@ class PCmd(object):
                 controlop = " "
             else:
                 controlop = ";"
-            self.cmd = "{ %s %c } 2>&1 > %s " % (self.cmd, controlop, self.outFile)
+            self.cmd = "{ %s %c } >%s 2>&1" % (self.cmd, controlop, self.outFile)
 
         if self.subproc != None:
             raise RuntimeError("Attempt to start a running command!")
@@ -195,6 +195,8 @@ class ParallelShell(object):
         """ Show commands and (if running or finished) with their
         process IDs and (if finished) with return codes. """
         for c in self.pcmds: print c
+
+    def getCommand(self, job): return self.pcmds[job].cmd
 
     def getResult(self, job): return self.pcmds[job].getResult()
     
