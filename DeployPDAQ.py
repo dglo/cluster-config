@@ -5,13 +5,13 @@
 #
 # Deploy valid pDAQ cluster configurations to any cluster
 
-import optparse
+import optparse, sys
 from ClusterConfig import *
-from ParallelShell import *
+from ParallelShell import ParallelShell
 from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 
-SVN_ID = "$Id: DeployPDAQ.py 3939 2009-02-26 17:53:36Z dglo $"
+SVN_ID = "$Id: DeployPDAQ.py 3941 2009-02-26 20:40:03Z dglo $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -58,6 +58,8 @@ def main():
                  help="Run quietly")
     p.add_option("-s", "--serial",       action="store_true",           dest="doSerial",
                  help="Run rsyncs serially (overrides parallel)")
+    p.add_option("-t", "--timeout",      action="store", type="int",    dest="timeout",
+                 help="Number of seconds before rsync is terminated")
     p.add_option("-v", "--verbose",      action="store_true",           dest="verbose",
                  help="Be chatty")
     p.add_option("", "--undeploy",       action="store_true",           dest="undeploy",
@@ -70,7 +72,8 @@ def main():
                    delete     = False,
                    dryRun     = False,
                    undeploy   = False,
-                   deepDryRun = False)
+                   deepDryRun = False,
+                   timeout    = 60)
     opt, args = p.parse_args()
 
     ## Work through options implications ##
@@ -132,7 +135,7 @@ def main():
 
     parallel = ParallelShell(parallel=opt.doParallel, dryRun=opt.dryRun,
                              verbose=(traceLevel > 0 or opt.dryRun),
-                             trace=(traceLevel > 0))
+                             trace=(traceLevel > 0), timeout=opt.timeout)
 
     done = False
 
