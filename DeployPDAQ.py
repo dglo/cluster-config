@@ -11,7 +11,7 @@ from ParallelShell import *
 from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 
-SVN_ID = "$Id: DeployPDAQ.py 3266 2008-07-10 17:55:05Z dglo $"
+SVN_ID = "$Id: DeployPDAQ.py 3939 2009-02-26 17:53:36Z dglo $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -33,7 +33,7 @@ def getUniqueHostNames(config):
 
 def getHubType(compID):
     if compID % 1000 == 0: return "amanda"
-    elif compID % 1000 <= 80: return "in-ice",
+    elif compID % 1000 <= 200: return "in-ice",
     else: return "icetop",
 
 def main():
