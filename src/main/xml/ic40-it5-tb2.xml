@@ -213,7 +213,9 @@
     </location>
     
     <location name="trigger" host="sps-trigger">
-      <module name="inIceTrigger"/>
+      <module name="inIceTrigger">
+         <logLevel>WARN</logLevel>
+      </module>
       <module name="iceTopTrigger"/>
       <module name="globalTrigger"/>
       <module name="amandaTrigger"/>
