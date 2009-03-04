@@ -11,7 +11,7 @@ from ParallelShell import ParallelShell
 from os import environ, getcwd, listdir, system
 from os.path import abspath, isdir, join, split
 
-SVN_ID = "$Id: DeployPDAQ.py 3942 2009-02-26 20:44:44Z dglo $"
+SVN_ID = "$Id: DeployPDAQ.py 3946 2009-03-04 23:19:56Z dglo $"
 
 # Find install location via $PDAQ_HOME, otherwise use locate_pdaq.py
 if environ.has_key("PDAQ_HOME"):
@@ -178,7 +178,7 @@ def main():
                     print "----------------------------------"
                     needSeparator = False
 
-                print "\"%s\" returned %d:\n%s" % \
-                    (parallel.getCommand(i), rtnCodes[i], result)
+                print "\"%s\" returned %s:\n%s" % \
+                    (parallel.getCommand(i), str(rtnCodes[i]), result)
 
 if __name__ == "__main__": main()
