@@ -40,7 +40,7 @@ class deployConfig(object):
         self.nodes = []
         
         self.configFile = self.xmlOf(join(configDir,configName))
-        if not exists(self.configFile): raise ConfigNotFoundException(self.configFile)
+        if not exists(self.configFile): raise ConfigNotFoundException(configName)
         try:
             parsed = minidom.parse(self.configFile)
         except:
