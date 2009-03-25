@@ -13,7 +13,7 @@
     <location name="ichub02" host="sps-ichub02"> <module name="StringHub" id="02"/> </location>
     <location name="ichub03" host="sps-ichub03"> <module name="StringHub" id="03"/> </location>
     <location name="ichub04" host="sps-ichub04"> <module name="StringHub" id="04"/> </location>
-    <location name="ichub05" host="sps-ichub05"> <module name="StringHub" id="06"/> </location>
+    <location name="ichub05" host="sps-ichub05"> <module name="StringHub" id="05"/> </location>
     <location name="ichub06" host="sps-ichub06"> <module name="StringHub" id="06"/> </location>
     <location name="ichub10" host="sps-ichub10"> <module name="StringHub" id="10"/> </location>
     <location name="ichub11" host="sps-ichub11"> <module name="StringHub" id="11"/> </location>
