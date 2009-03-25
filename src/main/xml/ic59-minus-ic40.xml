@@ -1,0 +1,43 @@
+<icecube configName="ic59-it8-tb2-no-amanda" remarks="IC59 with IceTop and no AMANDA">
+  <!--
+      IC59 minus IC40 and DAQ running on sps-letrigger
+  -->
+
+  <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <location name="ichub02" host="sps-ichub02"> <module name="StringHub" id="02"/> </location>
+    <location name="ichub03" host="sps-ichub02"> <module name="StringHub" id="03"/> </location>
+    <location name="ichub04" host="sps-ichub02"> <module name="StringHub" id="04"/> </location>
+    <location name="ichub05" host="sps-ichub02"> <module name="StringHub" id="06"/> </location>
+    <location name="ichub06" host="sps-ichub02"> <module name="StringHub" id="06"/> </location>
+    <location name="ichub10" host="sps-ichub02"> <module name="StringHub" id="10"/> </location>
+    <location name="ichub11" host="sps-ichub02"> <module name="StringHub" id="11"/> </location>
+    <location name="ichub12" host="sps-ichub02"> <module name="StringHub" id="12"/> </location>
+    <location name="ichub13" host="sps-ichub02"> <module name="StringHub" id="13"/> </location>
+    <location name="ichub17" host="sps-ichub02"> <module name="StringHub" id="17"/> </location>
+    <location name="ichub18" host="sps-ichub02"> <module name="StringHub" id="18"/> </location>
+    <location name="ichub19" host="sps-ichub02"> <module name="StringHub" id="19"/> </location>
+    <location name="ichub20" host="sps-ichub02"> <module name="StringHub" id="20"/> </location>
+    <location name="ichub26" host="sps-ichub02"> <module name="StringHub" id="26"/> </location>
+    <location name="ichub27" host="sps-ichub02"> <module name="StringHub" id="27"/> </location>
+    <location name="ichub28" host="sps-ichub02"> <module name="StringHub" id="28"/> </location>
+    <location name="ichub36" host="sps-ichub02"> <module name="StringHub" id="36"/> </location>
+    <location name="ichub37" host="sps-ichub02"> <module name="StringHub" id="37"/> </location>
+    <location name="ichub83" host="sps-ichub02"> <module name="StringHub" id="83"/> </location>
+    
+    <location name="letrigger" host="sps-letrigger">
+      <module name="eventBuilder"/>
+      <module name="SecondaryBuilders"/>
+      <module name="globalTrigger"/>
+      <module name="inIceTrigger"/>
+      <module name="iceTopTrigger"/>
+    </location>
+
+    <location name="expcont" host="sps-letrigger"/>
+  </cluster>
+</icecube>
