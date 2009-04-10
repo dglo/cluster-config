@@ -29,7 +29,6 @@
     <location name="ichub36" host="sps-ichub36"> <module name="StringHub" id="36"/> </location>
     <location name="ichub37" host="sps-ichub37"> <module name="StringHub" id="37"/> </location>
     <location name="ichub83" host="sps-ichub83"> <module name="StringHub" id="83"/> </location>
-    <location name="ithub04" host="sps-ithub04"> <module name="StringHub" id="204"/> </location>
     <location name="ithub07" host="sps-ithub07"> <module name="StringHub" id="207"/> </location>
     <location name="ithub08" host="sps-ithub08"> <module name="StringHub" id="208"/> </location>
     
