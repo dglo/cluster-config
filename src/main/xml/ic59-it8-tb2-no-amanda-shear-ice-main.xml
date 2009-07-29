@@ -1,0 +1,61 @@
+<icecube configName="ic59-it8-tb2-no-amanda" remarks="IC59 with IceTop and no AMANDA">
+  <!--
+    This configuration uses the base configuration of IC40 / IT06 with
+    all of the DAQ components including InIce / IceTop / AMANDA.
+    The trigger machines are now all merged into a single trigger entity
+    called 'sps-trigger'
+      2008-12-08 kael-hanson-at-icecube-dot-wisc-dot-edu
+      
+    I have also made a mod to the hub IDs - now IceTop is mapped to 201, 202, 
+    ... for ithub01, ithub02, ...
+  -->
+
+  <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <location name="ichub62" host="sps-ichub62">
+      <module name="StringHub" id="62"/>
+    </location>
+
+    <location name="ichub63" host="sps-ichub63">
+      <module name="StringHub" id="63"/>
+    </location>
+
+    <location name="ichub70" host="sps-ichub70">
+      <module name="StringHub" id="70"/>
+    </location>
+
+    <location name="ichub71" host="sps-ichub71">
+      <module name="StringHub" id="71"/>
+    </location>
+
+    <location name="2ndbuild" host="sps-2ndbuild">
+      <module name="SecondaryBuilders"/>
+    </location>
+
+    <location name="evbuilder" host="sps-evbuilder">
+      <module name="eventBuilder"/>
+    </location>
+    
+    <location name="trigger" host="sps-trigger">
+      <module name="inIceTrigger"/>
+<!--      <module name="iceTopTrigger"/> -->
+      <module name="globalTrigger"/>
+<!--      <module name="amandaTrigger"/> -->
+    </location>
+
+    <location name="expcont" host="sps-expcont"/>
+
+<!--    <location name="amanda" host="sps-amanda">
+      <module name="StringHub" id="0"/>
+    </location>
+-->
+    
+  </cluster>
+</icecube>
