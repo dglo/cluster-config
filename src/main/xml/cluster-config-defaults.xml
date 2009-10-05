@@ -1,0 +1,20 @@
+<icecube configName="defaults" remarks="Special fall-back cluster-config for global default values.">
+
+  <cluster name="defaults">
+    <!-- This file is only looked at if corresponding settings are not
+         found in the actual cluster-config file.  And currently, only
+         the defaultJava element tree is looked for. -->
+
+    <!-- Default java settings, hubs get their own separate defaults. -->
+    <defaultJava>
+      <jvm>java</jvm>
+      <jvmArgs>-server -Xms256m -Xmx512m</jvmArgs>
+      <hubs>
+        <jvm>java</jvm>
+        <jvmArgs>-server -Xms256m -Xmx512m -Dicecube.daq.bindery.StreamBinder.prescale=1</jvmArgs>
+      </hubs>
+    </defaultJava>
+
+  </cluster>
+
+</icecube>
