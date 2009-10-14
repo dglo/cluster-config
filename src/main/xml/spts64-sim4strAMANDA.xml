@@ -49,7 +49,7 @@
 
     <location name="ittrigger" host="spts64-ittrigger">
       <module name="amandaTrigger">
-        <logLevel>DEBUG</logLevel>
+        <!-- <logLevel>DEBUG</logLevel> -->
       </module>
     </location>
   </cluster>
