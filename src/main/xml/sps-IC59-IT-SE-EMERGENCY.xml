@@ -1,4 +1,4 @@
-<icecube configName="sps-IC59-SE-EMERGENCY" remarks="rack 5,6,7 without IceTop">
+<icecube configName="sps-IC59-SE-EMERGENCY" remarks="rack 5,6,7 with IceTop">
 
 <cluster name="sps">
 
