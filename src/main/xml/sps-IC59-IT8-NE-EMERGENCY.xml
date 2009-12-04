@@ -1,0 +1,161 @@
+<icecube configName="sps-IC59-NE-EMERGENCY" remarks="rack 8,9,10 with IceTop">
+
+ <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+ 
+    <location name="ichub30" host="sps-ichub30">
+      <module name="StringHub" id="30"/>
+    </location>
+
+    <location name="ichub38" host="sps-ichub38">
+      <module name="StringHub" id="38"/>
+    </location>
+
+    <location name="ichub39" host="sps-ichub39">
+      <module name="StringHub" id="39"/>
+    </location>
+
+    <location name="ichub40" host="sps-ichub40">
+      <module name="StringHub" id="40"/>
+    </location>
+
+    <location name="ichub46" host="sps-ichub46">
+      <module name="StringHub" id="46"/>
+    </location>
+ 
+    <location name="ichub47" host="sps-ichub47">
+      <module name="StringHub" id="47"/>
+    </location>
+
+    <location name="ichub48" host="sps-ichub48">
+      <module name="StringHub" id="48"/>
+    </location>
+
+    <location name="ichub49" host="sps-ichub49">
+      <module name="StringHub" id="49"/>
+    </location>
+
+    <location name="ichub50" host="sps-ichub50">
+      <module name="StringHub" id="50"/>
+    </location>
+
+    <location name="ichub55" host="sps-ichub55">
+      <module name="StringHub" id="55"/>
+    </location>
+
+    <location name="ichub56" host="sps-ichub56">
+      <module name="StringHub" id="56"/>
+    </location>
+
+    <location name="ichub57" host="sps-ichub57">
+      <module name="StringHub" id="57"/>
+    </location>
+
+    <location name="ichub58" host="sps-ichub58">
+      <module name="StringHub" id="58"/>
+    </location>
+
+    <location name="ichub59" host="sps-ichub59">
+      <module name="StringHub" id="59"/>
+    </location>
+
+    <location name="ichub64" host="sps-ichub64">
+      <module name="StringHub" id="64"/>
+    </location>
+    
+    <location name="ichub65" host="sps-ichub65">
+      <module name="StringHub" id="65"/>
+    </location>
+   
+    <location name="ichub66" host="sps-ichub66">
+      <module name="StringHub" id="66"/>
+    </location>
+    
+    <location name="ichub67" host="sps-ichub67">
+      <module name="StringHub" id="67"/>
+    </location>
+
+    <location name="ichub71" host="sps-ichub71">
+      <module name="StringHub" id="71"/>
+    </location>
+    
+    <location name="ichub72" host="sps-ichub72">
+      <module name="StringHub" id="72"/>
+    </location>
+    
+    <location name="ichub73" host="sps-ichub73">
+      <module name="StringHub" id="73"/>
+    </location>
+    
+    <location name="ichub74" host="sps-ichub74">
+      <module name="StringHub" id="74"/>
+    </location>
+    
+    <location name="ichub77" host="sps-ichub77">
+      <module name="StringHub" id="77"/>
+    </location>
+    
+    <location name="ichub78" host="sps-ichub78">
+      <module name="StringHub" id="78"/>
+    </location>
+
+    <location name="ithub01" host="sps-ithub01">
+      <module name="StringHub" id="201"/>
+    </location>
+
+    <location name="ithub02" host="sps-ithub02">
+      <module name="StringHub" id="202"/>
+    </location>
+
+    <location name="ithub03" host="sps-ithub03">
+      <module name="StringHub" id="203"/>
+    </location>
+
+    <location name="ithub04" host="sps-ithub04">
+      <module name="StringHub" id="204"/>
+    </location>
+
+    <location name="ithub05" host="sps-ithub05">
+      <module name="StringHub" id="205"/>
+    </location>
+
+    <location name="ithub06" host="sps-ithub06">
+      <module name="StringHub" id="206"/>
+    </location>
+
+    <location name="ithub07" host="sps-ithub07">
+      <module name="StringHub" id="207"/>
+    </location>
+
+    <location name="ithub08" host="sps-ithub08">
+      <module name="StringHub" id="208"/>
+    </location>
+
+    <location name="2ndbuild" host="sps-2ndbuild">
+      <module name="SecondaryBuilders"/>
+    </location>
+    
+    <location name="evbuilder" host="sps-evbuilder">
+      <module name="eventBuilder"/>
+    </location>
+    
+    <location name="trigger" host="sps-trigger">
+      <module name="inIceTrigger"/>
+      <module name="iceTopTrigger"/>
+      <module name="globalTrigger"/>
+    </location>
+    
+    <location name="expcont" host="sps-expcont"/>
+
+ </cluster>
+</icecube>
+
+
+
+
