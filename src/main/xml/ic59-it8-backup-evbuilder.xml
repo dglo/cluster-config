@@ -290,12 +290,9 @@
     <location name="2ndbuild" host="sps-2ndbuild">
       <module name="SecondaryBuilders"/>
     </location>
-
-    <location name="evbuilder" host="sps-letrigger">
-      <module name="eventBuilder"/>
-    </location>
     
     <location name="trigger" host="sps-trigger">
+      <module name="eventBuilder"/>
       <module name="inIceTrigger"/>
       <module name="iceTopTrigger"/>
       <module name="globalTrigger"/>
