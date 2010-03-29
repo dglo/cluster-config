@@ -4,7 +4,8 @@
   <cluster name="spts64">
 
     <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
-    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+    <logDirForSpade>/mnt/data/spade/pdaq/runs</logDirForSpade>
+    <logDirCopies>/mnt/data/pdaqlocal</logDirCopies>
 
     <defaultLogLevel>INFO</defaultLogLevel>
 
