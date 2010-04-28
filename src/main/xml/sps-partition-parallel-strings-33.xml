@@ -8,10 +8,6 @@
 
     <defaultLogLevel>WARN</defaultLogLevel>
 
-    <location name="ichub16" host="sps-ichub16">
-      <module name="StringHub" id="16"/>
-    </location>
-
     <location name="ichub33" host="sps-ichub33">
       <module name="StringHub" id="33"/>
     </location>

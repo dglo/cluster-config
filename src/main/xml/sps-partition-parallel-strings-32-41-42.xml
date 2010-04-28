@@ -1,5 +1,5 @@
-<icecube configName="sps-partition-parallel-strings-16-33"
-	 remarks="The parallel partition for the new strings 16 and 33 when the main partition is ic59">
+<icecube configName="sps-partition-parallel-strings-32-41-42"
+	 remarks="The parallel partition for the new strings 32,41 and 42 when the main partition is ic59">
 
   <cluster name="sps">
 
@@ -8,17 +8,21 @@
 
     <defaultLogLevel>WARN</defaultLogLevel>
 
-    <location name="ichub16" host="sps-ichub16">
-      <module name="StringHub" id="16"/>
+    <location name="ichub32" host="sps-ichub32">
+      <module name="StringHub" id="32"/>
     </location>
 
-    <location name="ichub33" host="sps-ichub33">
-      <module name="StringHub" id="33"/>
+    <location name="ichub41" host="sps-ichub41">
+      <module name="StringHub" id="41"/>
+    </location>
+
+    <location name="ichub42" host="sps-ichub42">
+      <module name="StringHub" id="42"/>
     </location>
 
     <location name="letrigger" host="sps-letrigger">
       <module name="eventBuilder"/>
-      <module name="secondaryBuilders"/>
+      <module name="SecondaryBuilders"/>
       <module name="globalTrigger"/>
       <module name="inIceTrigger"/>
       <!-- <module name="iceTopTrigger"/> -->

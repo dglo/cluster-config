@@ -12,10 +12,6 @@
       <module name="StringHub" id="16"/>
     </location>
 
-    <location name="ichub33" host="sps-ichub33">
-      <module name="StringHub" id="33"/>
-    </location>
-
     <location name="letrigger" host="sps-letrigger">
       <module name="eventBuilder"/>
       <module name="secondaryBuilders"/>
