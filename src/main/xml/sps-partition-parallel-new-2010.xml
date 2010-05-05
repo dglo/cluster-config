@@ -1,0 +1,99 @@
+<icecube configName="sps-partition-parallel-new-2010" remarks="New 2010 strings run on the parallel DAQ">
+  <cluster name="sps">
+
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <location name="ichub08" host="sps-ichub08">
+      <module name="StringHub" id="08"/>
+    </location>
+
+    <location name="ichub09" host="sps-ichub09">
+      <module name="StringHub" id="09"/>
+    </location>
+
+    <location name="ichub15" host="sps-ichub15">
+      <module name="StringHub" id="15"/>
+    </location>
+
+    <location name="ichub16" host="sps-ichub16">
+      <module name="StringHub" id="16"/>
+    </location>
+
+     <location name="ichub23" host="sps-ichub23">
+      <module name="StringHub" id="23"/>
+    </location>
+
+    <location name="ichub24" host="sps-ichub24">
+      <module name="StringHub" id="24"/>
+    </location>
+
+    <location name="ichub25" host="sps-ichub25">
+      <module name="StringHub" id="25"/>
+    </location>
+
+    <location name="ichub32" host="sps-ichub32">
+      <module name="StringHub" id="32"/>
+    </location>
+
+    <location name="ichub33" host="sps-ichub33">
+      <module name="StringHub" id="33"/>
+    </location>
+
+    <location name="ichub34" host="sps-ichub34">
+      <module name="StringHub" id="34"/>
+    </location>
+ 
+    <location name="ichub35" host="sps-ichub35">
+      <module name="StringHub" id="35"/>
+    </location>
+ 
+    <location name="ichub41" host="sps-ichub41">
+      <module name="StringHub" id="41"/>
+    </location>
+
+    <location name="ichub42" host="sps-ichub42">
+      <module name="StringHub" id="42"/>
+    </location>
+
+    <location name="ichub43" host="sps-ichub43">
+      <module name="StringHub" id="43"/>
+    </location>
+
+    <location name="ichub51" host="sps-ichub51">
+      <module name="StringHub" id="51"/>
+    </location>
+
+    <location name="ichub81" host="sps-ichub81">
+      <module name="StringHub" id="81"/>
+    </location>
+
+    <location name="ichub82" host="sps-ichub82">
+      <module name="StringHub" id="82"/>
+    </location>
+
+    <location name="ichub84" host="sps-ichub84">
+      <module name="StringHub" id="84"/>
+    </location>
+
+    <location name="ichub85" host="sps-ichub85">
+      <module name="StringHub" id="85"/>
+    </location>
+
+    <location name="ichub86" host="sps-ichub86">
+      <module name="StringHub" id="86"/>
+    </location>
+
+    <location name="letrigger" host="sps-letrigger">
+      <module name="eventBuilder"/>
+      <module name="SecondaryBuilders"/>
+      <module name="globalTrigger"/>
+      <module name="inIceTrigger"/>
+    </location>
+
+    <location name="expcont" host="sps-letrigger"/>
+  </cluster>
+</icecube>
