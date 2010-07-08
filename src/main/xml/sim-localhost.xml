@@ -14,10 +14,12 @@
       <module name="StringHub" id="1003"/>
       <module name="StringHub" id="1004"/>
       <module name="StringHub" id="1005"/>
+      <module name="StringHub" id="1201"/>
       <module name="SecondaryBuilders"/>
       <module name="eventBuilder"/>
       <module name="globalTrigger"/>
       <module name="inIceTrigger"/>
+      <module name="iceTopTrigger"/>
     </location>
   </cluster>
 </icecube>
