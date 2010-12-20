@@ -3,7 +3,7 @@
     This configuration uses the base configuration of IC40 / IT06 with
     all of the DAQ components including InIce / IceTop / AMANDA.
     The trigger machines are now all merged into a single trigger entity
-    called 'sps-trigger'
+    called 'trigger'
       2008-12-08 kael-hanson-at-icecube-dot-wisc-dot-edu
       
     I have also made a mod to the hub IDs - now IceTop is mapped to 201, 202, 
@@ -370,27 +370,21 @@
     </location>
 
 
-    <location name="2ndbuild" host="sps-2ndbuild">
+    <location name="2ndbuild" host="2ndbuild">
       <module name="SecondaryBuilders"/>
     </location>
 
-    <location name="evbuilder" host="sps-evbuilder">
+    <location name="evbuilder" host="evbuilder">
       <module name="eventBuilder"/>
     </location>
     
-    <location name="trigger" host="sps-trigger">
+    <location name="trigger" host="trigger">
       <module name="inIceTrigger"/>
       <module name="iceTopTrigger"/>
       <module name="globalTrigger"/>
-<!--      <module name="amandaTrigger"/> -->
     </location>
 
-    <location name="expcont" host="sps-expcont"/>
+    <location name="expcont" host="expcont"/>
 
-<!--    <location name="amanda" host="sps-amanda">
-      <module name="StringHub" id="0"/>
-    </location>
--->
-    
   </cluster>
 </icecube>
