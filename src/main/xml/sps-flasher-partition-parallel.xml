@@ -3,7 +3,7 @@
     This configuration uses the base configuration of IC40 / IT06 with
     all of the DAQ components including InIce / IceTop / AMANDA.
     The trigger machines are now all merged into a single trigger entity
-    called 'sps-trigger'
+    called 'trigger'
       2008-12-08 kael-hanson-at-icecube-dot-wisc-dot-edu
       
     I have also made a mod to the hub IDs - now IceTop is mapped to 201, 202, 
@@ -143,7 +143,7 @@
       <module name="StringHub" id="208"/>
     </location>
 
-    <location name="letrigger" host="sps-letrigger">
+    <location name="pdaq2" host="pdaq2">
       <module name="eventBuilder"/>
       <module name="SecondaryBuilders"/>
       <module name="globalTrigger"/>
@@ -151,7 +151,7 @@
       <module name="iceTopTrigger"/> 
     </location>
 
-    <location name="expcont" host="sps-letrigger"/>
+    <location name="expcont" host="pdaq2"/>
 
   </cluster>
 </icecube>
