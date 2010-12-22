@@ -50,6 +50,55 @@
   </cluster>
 
 
+  <cluster name="spts">
+
+    <module name="default">
+      <jvm>java</jvm>
+      <jvmArgs>-server</jvmArgs>
+    </module>
+
+    <module name="eventBuilder">
+      <jvm>/opt/ibm/java-x86_64-60/jre/bin/java</jvm>
+      <jvmArgs>-server -Xms600m -Xmx1200m -Xcompressedrefs</jvmArgs>
+    </module>
+
+    <module name="SecondaryBuilders">
+      <jvm>/opt/ibm/java-x86_64-60/jre/bin/java</jvm>
+      <jvmArgs>-server -Xms600m -Xmx1200m -Xcompressedrefs</jvmArgs>
+    </module>
+
+    <module name="globalTrigger">
+      <jvm>/opt/ibm/java-x86_64-60/jre/bin/java</jvm>
+      <jvmArgs>-server -Xms256m -Xmx512m -Xcompressedrefs</jvmArgs>
+    </module>
+
+    <module name="iceTopTrigger">
+      <jvm>/opt/ibm/java-x86_64-60/jre/bin/java</jvm>
+      <jvmArgs>-server -Xms256m -Xmx512m -Xcompressedrefs</jvmArgs>
+    </module>
+
+    <module name="inIceTrigger">
+      <jvm>/opt/ibm/java-x86_64-60/jre/bin/java</jvm>
+      <jvmArgs>-server -Xms1000m -Xmx2000m -Xcompressedrefs</jvmArgs>
+    </module>
+
+    <module name="amandaTrigger">
+      <jvm>java</jvm>
+      <jvmArgs>-server -Xms128m -Xmx256m</jvmArgs>
+    </module>
+
+    <module name="StringHub">
+      <jvm>java</jvm>
+      <jvmArgs>-server -Xms256m -Xmx512m -Dicecube.daq.bindery.StreamBinder.prescale=1</jvmArgs>
+    </module>
+
+    <module name="replayHub">
+      <jvm>java</jvm>
+      <jvmArgs>-server -Xms175m -Xmx350m -Dicecube.daq.bindery.StreamBinder.prescale=1</jvmArgs>
+    </module>
+
+  </cluster>
+
   <cluster name="spts64">
 
     <module name="default">
