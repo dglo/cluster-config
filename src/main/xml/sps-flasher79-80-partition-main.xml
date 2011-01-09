@@ -1,0 +1,95 @@
+<icecube configName="sps-flasher79-80-partition-main.xml" remarks="Center of IC79 plus 79 and 80 with no IceTop and no AMANDA">
+  <!--
+    This configuration uses the base center configuration of IC79 plus 79 and 80 with
+    all of the InIce DAQ components.
+	  
+-->
+
+  <cluster name="sps">
+
+    <!-- Non-fully-qualified paths are relative to pdaq metaproject on expcont -->
+    <logDirForSpade>/mnt/data/pdaqlocal</logDirForSpade>
+
+    <logDirCopies>/mnt/data/pdaq/log-copies</logDirCopies>
+
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <location name="ichub26" host="sps-ichub26">
+      <module name="StringHub" id="26"/>
+    </location>
+
+    <location name="ichub27" host="sps-ichub27">
+      <module name="StringHub" id="27"/>
+    </location>
+
+    <location name="ichub35" host="sps-ichub35">
+      <module name="StringHub" id="35"/>
+    </location>
+
+    <location name="ichub36" host="sps-ichub36">
+      <module name="StringHub" id="36"/>
+    </location>
+
+    <location name="ichub37" host="sps-ichub37">
+      <module name="StringHub" id="37"/>
+    </location>
+
+    <location name="ichub45" host="sps-ichub45">
+      <module name="StringHub" id="45"/>
+    </location>
+
+    <location name="ichub46" host="sps-ichub46">
+      <module name="StringHub" id="46"/>
+    </location>
+
+    <location name="ichub79" host="sps-ichub79">
+      <module name="StringHub" id="79"/>
+    </location>
+
+    <location name="ichub80" host="sps-ichub80">
+      <module name="StringHub" id="80"/>
+    </location>
+
+    <location name="ichub81" host="sps-ichub81">
+      <module name="StringHub" id="81"/>
+    </location>
+
+    <location name="ichub82" host="sps-ichub82">
+      <module name="StringHub" id="82"/>
+    </location>
+
+    <location name="ichub83" host="sps-ichub83">
+      <module name="StringHub" id="83"/>
+    </location>
+
+    <location name="ichub84" host="sps-ichub84">
+      <module name="StringHub" id="84"/>
+    </location>
+
+    <location name="ichub85" host="sps-ichub85">
+      <module name="StringHub" id="85"/>
+    </location>
+
+    <location name="ichub86" host="sps-ichub86">
+      <module name="StringHub" id="86"/>
+    </location>
+
+
+    <location name="2ndbuild" host="sps-2ndbuild">
+      <module name="SecondaryBuilders"/>
+    </location>
+
+    <location name="evbuilder" host="sps-evbuilder">
+      <module name="eventBuilder"/>
+    </location>
+    
+    <location name="trigger" host="sps-trigger">
+      <module name="inIceTrigger"/>
+      <module name="globalTrigger"/>
+    </location>
+
+    <location name="expcont" host="expcont"/>
+
+    
+  </cluster>
+</icecube>
