@@ -1,0 +1,19 @@
+<icecube configName="single-string-79" remarks="">
+  <cluster name="sps">
+    <logDirForSpade></logDirForSpade>
+    <logDirCopies></logDirCopies>
+    <defaultLogLevel>INFO</defaultLogLevel>
+
+    <location name="ichub79" host="sps-ichub79">
+      <module name="StringHub" id="79"/>
+      <module name="SecondaryBuilders"/>
+      <module name="eventBuilder"/>
+      <module name="inIceTrigger"/>
+      <module name="iceTopTrigger"/>
+      <module name="globalTrigger"/>
+    </location>
+
+    <location name="expcont" host="sps-ichub79"/>
+
+  </cluster>
+</icecube>
